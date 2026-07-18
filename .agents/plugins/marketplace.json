@@ -1,0 +1,20 @@
+{
+  "name": "kamaal-super-mind",
+  "interface": {
+    "displayName": "Kamaal Super Mind"
+  },
+  "plugins": [
+    {
+      "name": "kamaal-super-mind",
+      "source": {
+        "source": "local",
+        "path": "./plugins/kamaal-super-mind"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

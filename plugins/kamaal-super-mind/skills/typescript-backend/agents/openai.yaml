@@ -1,0 +1,4 @@
+interface:
+  display_name: "TypeScript Backend"
+  short_description: "Build secure TypeScript backend services."
+  default_prompt: "Use $typescript-backend to implement this backend change."

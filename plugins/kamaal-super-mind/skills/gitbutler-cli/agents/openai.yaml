@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitButler CLI"
+  short_description: "Manage virtual branches with GitButler's CLI."
+  default_prompt: "Use $gitbutler-cli to manage this GitButler workspace safely."

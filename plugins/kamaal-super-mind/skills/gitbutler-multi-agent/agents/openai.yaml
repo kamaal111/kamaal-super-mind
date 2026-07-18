@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitButler Multi-Agent"
+  short_description: "Coordinate parallel work in GitButler safely."
+  default_prompt: "Use $gitbutler-multi-agent to coordinate this parallel GitButler work."

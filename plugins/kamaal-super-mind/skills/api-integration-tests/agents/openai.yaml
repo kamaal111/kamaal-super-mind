@@ -1,0 +1,4 @@
+interface:
+  display_name: "API Integration Tests"
+  short_description: "Test API endpoints through real boundaries."
+  default_prompt: "Use $api-integration-tests to add endpoint integration coverage."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Dependency Upgrades"
+  short_description: "Safely upgrade, pin, and audit dependencies."
+  default_prompt: "Use $dependency-upgrades to upgrade this dependency safely."

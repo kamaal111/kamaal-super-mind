@@ -1,0 +1,4 @@
+interface:
+  display_name: "Software Testing"
+  short_description: "Plan and improve reliable software tests."
+  default_prompt: "Use $software-testing to test this change thoroughly."

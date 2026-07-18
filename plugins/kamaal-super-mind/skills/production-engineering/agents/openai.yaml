@@ -1,0 +1,4 @@
+interface:
+  display_name: "Production Engineering"
+  short_description: "Implement, review, test, and verify software changes."
+  default_prompt: "Use $production-engineering to implement this change safely and verify it."

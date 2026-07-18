@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitButler Session Commit"
+  short_description: "Commit intentional session changes with GitButler."
+  default_prompt: "Use $gitbutler-session-commit to commit this session safely."

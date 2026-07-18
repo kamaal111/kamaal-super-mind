@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Commit Messages"
+  short_description: "Write accurate Git commit and pull-request text."
+  default_prompt: "Use $git-commit-message to draft commit text from this diff."

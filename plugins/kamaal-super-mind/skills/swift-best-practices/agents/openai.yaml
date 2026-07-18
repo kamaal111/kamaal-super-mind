@@ -1,0 +1,4 @@
+interface:
+  display_name: "Swift Best Practices"
+  short_description: "Write clear, resilient Swift code."
+  default_prompt: "Use $swift-best-practices to implement this Swift change."
