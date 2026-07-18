@@ -1,0 +1,45 @@
+README.md
+  s_750bdbf142f8a3::t_3f5c64c24d2b95 1-61
+.agents/plugins/marketplace.json
+  s_750bdbf142f8a3::t_3f5c64c24d2b95 1-20
+plugins/kamaal-super-mind/skills/commit-message-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_89a2e1d467afc1 1-4
+plugins/kamaal-super-mind/skills/dependency-upgrade-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_1df7f41080fb66 1-4
+plugins/kamaal-super-mind/skills/endpoint-integration-tests/agents/openai.yaml
+  s_750bdbf142f8a3::t_0a0fa6fec4bd31 1-4
+plugins/kamaal-super-mind/skills/generated-client-endpoint/agents/openai.yaml
+  s_750bdbf142f8a3::t_fa5300a1a54a61 1-4
+plugins/kamaal-super-mind/skills/gh-actions-log-debug/agents/openai.yaml
+  s_750bdbf142f8a3::t_922995071f0b96 1-4
+plugins/kamaal-super-mind/skills/gitbutler-session-commit/agents/openai.yaml
+  s_750bdbf142f8a3::t_2bf0694d98a8ba 1-4
+plugins/kamaal-super-mind/skills/gitbutler-workflows/agents/openai.yaml
+  s_750bdbf142f8a3::t_150553c7156ae7 1-4
+plugins/kamaal-super-mind/skills/production-engineering/agents/openai.yaml
+  s_750bdbf142f8a3::t_7de32844e90b7f 1-4
+plugins/kamaal-super-mind/skills/swift-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_462811df2d135c 1-4
+plugins/kamaal-super-mind/skills/swift-testing/agents/openai.yaml
+  s_750bdbf142f8a3::t_97220e96dcc00c 1-4
+plugins/kamaal-super-mind/skills/testing-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_b77a25dc7f5fa1 1-4
+plugins/kamaal-super-mind/skills/typescript-server-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_99eefb00d8fc9f 1-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "77c34d9b03c375332978a4111d27a4db35f7eb67",
+  "prompts": {},
+  "sessions": {
+    "s_750bdbf142f8a3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f76d3-a469-7673-9e97-7a2ee04c4b09",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": null
+    }
+  }
+}
