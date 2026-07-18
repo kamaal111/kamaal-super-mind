@@ -1,8 +1,8 @@
 # Kamaal Super Mind
 
-Personal Codex marketplace with reusable software-engineering skills for Swift,
-TypeScript services, testing, dependency upgrades, GitHub Actions, GitButler,
-and commit messages.
+Personal Codex and Claude Code marketplace with reusable software-engineering
+skills for Swift, TypeScript services, testing, dependency upgrades, GitHub
+Actions, GitButler, and commit messages.
 
 ## Install
 
@@ -13,13 +13,17 @@ curl -fsSL https://raw.githubusercontent.com/kamaal111/kamaal-super-mind/main/in
 ```
 
 The installer downloads or updates the plugin in `~/.kamaal-super-mind`,
-registers its marketplace, and installs it in Codex. Then start a new Codex
-task. The skills are available in every project on that Mac. Invoke one
-explicitly when useful, for example:
+registers its marketplace, and installs it in whichever of Codex and Claude
+Code are present on the machine (at least one is required). Then start a new
+Codex task or Claude Code session. The skills are available in every project
+on that Mac. Invoke one explicitly when useful, for example:
 
 ```text
 Use $swift-testing to add tests for this change.
 ```
+
+In Claude Code, plugin skills are namespaced, so invoke them as
+`/kamaal-super-mind:swift-testing` or ask Claude to use the skill by name.
 
 ## Update
 
@@ -29,15 +33,18 @@ To receive changes pushed to GitHub, run the same command again:
 curl -fsSL https://raw.githubusercontent.com/kamaal111/kamaal-super-mind/main/install.sh | bash
 ```
 
-Start a new Codex task after updating.
+Start a new Codex task or Claude Code session after updating.
 
-When changing a skill yourself, refresh the plugin version before committing so
-Codex recognizes the update:
+When changing a skill yourself, refresh the Codex plugin version before
+committing so Codex recognizes the update:
 
 ```bash
 python3 ~/.codex/skills/.system/plugin-creator/scripts/update_plugin_cachebuster.py \
   ~/.kamaal-super-mind/plugins/kamaal-super-mind
 ```
+
+Claude Code needs no equivalent step: its `plugin.json` omits `version`, so it
+tracks the git commit SHA and treats every commit as a new version.
 
 ## Included Skills
 

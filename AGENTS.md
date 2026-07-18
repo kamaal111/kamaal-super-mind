@@ -13,7 +13,7 @@ same change. Do not leave it stale.
 
 ## Plugin Version Refresh
 
-When changing any plugin content, refresh the plugin manifest's Codex
+When changing any plugin content, refresh the Codex plugin manifest's
 cache-buster version before committing so installed local copies recognize the
 update:
 
@@ -23,6 +23,11 @@ python3 ~/.codex/skills/.system/plugin-creator/scripts/update_plugin_cachebuster
 ```
 
 The helper preserves the base version and replaces only the `+codex.` suffix.
+This only applies to
+`plugins/kamaal-super-mind/.codex-plugin/plugin.json`. The Claude Code
+manifest, `plugins/kamaal-super-mind/.claude-plugin/plugin.json`, omits
+`version` on purpose so Claude Code tracks the git commit SHA instead; leave
+it without a `version` field.
 
 ## Just Recipes
 
