@@ -1,0 +1,108 @@
+AGENTS.md
+  s_69f453c3c863af::t_1c241bb3996cb2 1-2,4,7,9,11-12,15,21-26
+  s_69f453c3c863af::t_839502d7f0ce8b 3,5-6
+  s_69f453c3c863af::t_4c1ff03fc78aa2 8,10,13-14,16-20
+plugins/kamaal-super-mind/skills/gitbutler-session-commit/agents/openai.yaml
+  s_750bdbf142f8a3::t_2bf0694d98a8ba 1-4
+justfile
+  s_69f453c3c863af::t_260ef62a4e19f5 15-17
+  s_69f453c3c863af::t_bd414d88a3406e 3
+  s_69f453c3c863af::t_c9b7805def1ae7 18
+  s_69f453c3c863af::t_306340976018c1 1-2
+  s_69f453c3c863af::t_4c1ff03fc78aa2 4-14
+plugins/kamaal-super-mind/skills/testing-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_b77a25dc7f5fa1 1-4
+.agents/plugins/marketplace.json
+  s_750bdbf142f8a3::t_3f5c64c24d2b95 1-20
+plugins/kamaal-super-mind/skills/commit-message-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_89a2e1d467afc1 1-4
+plugins/kamaal-super-mind/skills/typescript-server-best-practices/SKILL.md
+  s_750bdbf142f8a3::t_d2dd83a18ffb59 8-28
+  s_750bdbf142f8a3::t_6a639a45e741d8 5-7
+  s_750bdbf142f8a3::t_c5795534e123f7 1-4
+plugins/kamaal-super-mind/skills/gitbutler-workflows/agents/openai.yaml
+  s_750bdbf142f8a3::t_150553c7156ae7 1-4
+plugins/kamaal-super-mind/skills/swift-testing/SKILL.md
+  s_750bdbf142f8a3::t_e5ea4d1bfc50cb 8-25
+  s_750bdbf142f8a3::t_380f6c8fa56a08 5-7
+  s_750bdbf142f8a3::t_16b03983609746 1-4
+plugins/kamaal-super-mind/skills/swift-testing/agents/openai.yaml
+  s_750bdbf142f8a3::t_97220e96dcc00c 1-4
+README.md
+  s_750bdbf142f8a3::t_3f5c64c24d2b95 1-8,10-11,13-14,19-25,27-28,30-53
+  s_750bdbf142f8a3::t_87f3ec30412089 9,12,15-18,26,29
+plugins/kamaal-super-mind/skills/dependency-upgrade-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_1df7f41080fb66 1-4
+plugins/kamaal-super-mind/skills/gitbutler-session-commit/SKILL.md
+  s_750bdbf142f8a3::t_e5ea4d1bfc50cb 8-15
+  s_750bdbf142f8a3::t_3c375a2da4e0f7 5-7
+  s_750bdbf142f8a3::t_ca6c5b67318b38 1-4
+plugins/kamaal-super-mind/skills/swift-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_462811df2d135c 1-4
+install.sh
+  s_750bdbf142f8a3::t_87f3ec30412089 1-45
+plugins/kamaal-super-mind/skills/endpoint-integration-tests/agents/openai.yaml
+  s_750bdbf142f8a3::t_0a0fa6fec4bd31 1-4
+plugins/kamaal-super-mind/skills/typescript-server-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_99eefb00d8fc9f 1-4
+plugins/kamaal-super-mind/skills/dependency-upgrade-best-practices/SKILL.md
+  s_750bdbf142f8a3::t_22cc7c3c6c6f23 3-34
+  s_750bdbf142f8a3::t_6fc045f48d1afa 1-2
+plugins/kamaal-super-mind/skills/generated-client-endpoint/SKILL.md
+  s_750bdbf142f8a3::t_e5ea4d1bfc50cb 8-24
+  s_750bdbf142f8a3::t_c3904dbb75814e 5-7
+  s_750bdbf142f8a3::t_97159d022ee8a3 1-4
+plugins/kamaal-super-mind/skills/testing-best-practices/SKILL.md
+  s_750bdbf142f8a3::t_d2dd83a18ffb59 3-29
+  s_750bdbf142f8a3::t_9f8ea4cf34fedc 1-2
+plugins/kamaal-super-mind/skills/swift-best-practices/SKILL.md
+  s_750bdbf142f8a3::t_22cc7c3c6c6f23 8-31
+  s_750bdbf142f8a3::t_84be9d29d01a84 5-7
+  s_750bdbf142f8a3::t_112633f4728069 1-4
+plugins/kamaal-super-mind/skills/gh-actions-log-debug/agents/openai.yaml
+  s_750bdbf142f8a3::t_922995071f0b96 1-4
+plugins/kamaal-super-mind/skills/endpoint-integration-tests/SKILL.md
+  s_750bdbf142f8a3::t_d2dd83a18ffb59 8-32
+  s_750bdbf142f8a3::t_6e1fc5d15bdb0a 5-7
+  s_750bdbf142f8a3::t_145dc5d655c1a2 1-4
+plugins/kamaal-super-mind/skills/commit-message-best-practices/SKILL.md
+  s_750bdbf142f8a3::t_22cc7c3c6c6f23 3-48
+  s_750bdbf142f8a3::t_bb9afb9a6d618c 1-2
+plugins/kamaal-super-mind/skills/gh-actions-log-debug/SKILL.md
+  s_750bdbf142f8a3::t_22cc7c3c6c6f23 3-23
+  s_750bdbf142f8a3::t_eb277bf5da69b3 1-2
+plugins/kamaal-super-mind/skills/gitbutler-workflows/SKILL.md
+  s_750bdbf142f8a3::t_e5ea4d1bfc50cb 8-23
+  s_750bdbf142f8a3::t_cc7696a9a9c65f 5-7
+  s_750bdbf142f8a3::t_bbf92ff66a810a 1-4
+plugins/kamaal-super-mind/skills/production-engineering/agents/openai.yaml
+  s_750bdbf142f8a3::t_7de32844e90b7f 1-4
+plugins/kamaal-super-mind/skills/generated-client-endpoint/agents/openai.yaml
+  s_750bdbf142f8a3::t_fa5300a1a54a61 1-4
+plugins/kamaal-super-mind/.codex-plugin/plugin.json
+  s_750bdbf142f8a3::t_2c2deb0f9d771c 1-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "d2eb6720c99507fa1915ab6c9b6c4b79a8d9661f",
+  "prompts": {},
+  "sessions": {
+    "s_69f453c3c863af": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f7700-a35a-76a0-adde-ede7ce009919",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": null
+    },
+    "s_750bdbf142f8a3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f76d3-a469-7673-9e97-7a2ee04c4b09",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": null
+    }
+  }
+}
