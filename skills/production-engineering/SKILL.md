@@ -28,6 +28,7 @@ Load the relevant plugin skill instead of recreating its workflow:
 
 - `software-testing` for any test change or verification strategy, including Swift and TypeScript testing
 - `api-integration-tests` for endpoint integration coverage
+- `swift-snapshot-tests` for SwiftUI screen snapshot coverage
 - `swift-best-practices` for Swift implementation work
 - `typescript-backend` for TypeScript server work
 - `generated-api-client-endpoint` for generated client endpoints
