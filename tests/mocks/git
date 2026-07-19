@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# Mock `git` for tests/test_install.sh. Records every invocation to
+# $MOCK_LOG and fakes just enough behavior for install.sh's update path,
+# controlled entirely through MOCK_GIT_* environment variables so each test
+# can drive a specific scenario (clean update, dirty tree, local commits,
+# force-pushed history, clone failure, ...) without touching real Git state.
+set -uo pipefail
+
+{ printf 'git'; printf ' %q' "$@"; printf '\n'; } >>"$MOCK_LOG"
+
+case "${1:-}" in
+clone)
+  mkdir -p "${3:-}/.git"
+  exit "${MOCK_GIT_CLONE_EXIT:-0}"
+  ;;
+-C)
+  case "${3:-}" in
+  rev-parse)
+    case "${4:-}" in
+    --verify)
+      if [[ -n "${MOCK_GIT_PREV_UPSTREAM+x}" ]]; then
+        printf '%s\n' "$MOCK_GIT_PREV_UPSTREAM"
+        exit 0
+      fi
+      exit 1
+      ;;
+    HEAD)
+      printf '%s\n' "${MOCK_GIT_HEAD:-headsha}"
+      exit 0
+      ;;
+    esac
+    ;;
+  fetch)
+    exit "${MOCK_GIT_FETCH_EXIT:-0}"
+    ;;
+  diff)
+    if [[ "${4:-}" == "--cached" ]]; then
+      exit "${MOCK_GIT_DIFF_CACHED_EXIT:-0}"
+    fi
+    exit "${MOCK_GIT_DIFF_EXIT:-0}"
+    ;;
+  stash)
+    exit "${MOCK_GIT_STASH_EXIT:-0}"
+    ;;
+  merge-base)
+    exit "${MOCK_GIT_MERGE_BASE_EXIT:-0}"
+    ;;
+  reset)
+    exit "${MOCK_GIT_RESET_EXIT:-0}"
+    ;;
+  esac
+  ;;
+esac
+
+exit 0

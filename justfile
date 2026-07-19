@@ -9,6 +9,10 @@ check:
     bash -n install.sh
     bash install.sh --dry-run
 
+# Run install.sh's automated test suite against mocked git/codex/claude/cursor.
+test:
+    bash tests/test_install.sh
+
 # Register this checkout as a local Codex marketplace for manual discovery testing.
 validate-marketplace:
     codex plugin marketplace add .

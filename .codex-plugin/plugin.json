@@ -1,6 +1,6 @@
 {
   "name": "kamaal-super-mind",
-  "version": "0.1.0+codex.20260719103548",
+  "version": "0.1.0+codex.20260719104338",
   "description": "Reusable production engineering guidance for Codex.",
   "author": {
     "name": "Kamaal Farah",
@@ -16,6 +16,7 @@
     "longDescription": "Repository-agnostic guidance for implementing, testing, reviewing, and delivering reliable software changes.",
     "developerName": "Kamaal Farah",
     "category": "Productivity",
+    "logo": "./assets/logo.png",
     "capabilities": [],
     "defaultPrompt": "Use Kamaal Super Mind to implement this change safely and verify it."
   }

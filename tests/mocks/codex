@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Mock `codex` for tests/test_install.sh. See tests/mocks/git for the
+# logging/control convention shared by all mocks in this suite.
+set -uo pipefail
+
+{ printf 'codex'; printf ' %q' "$@"; printf '\n'; } >>"$MOCK_LOG"
+
+case "${1:-} ${2:-} ${3:-}" in
+"plugin marketplace add")
+  exit "${MOCK_CODEX_MARKETPLACE_ADD_EXIT:-0}"
+  ;;
+esac
+
+case "${1:-} ${2:-}" in
+"plugin list")
+  printf '%s\n' "${MOCK_CODEX_PLUGIN_LIST_OUTPUT:-}"
+  exit 0
+  ;;
+"plugin add")
+  exit "${MOCK_CODEX_PLUGIN_ADD_EXIT:-0}"
+  ;;
+esac
+
+exit 0

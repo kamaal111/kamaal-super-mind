@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Mock `claude` for tests/test_install.sh. See tests/mocks/git for the
+# logging/control convention shared by all mocks in this suite.
+set -uo pipefail
+
+{ printf 'claude'; printf ' %q' "$@"; printf '\n'; } >>"$MOCK_LOG"
+
+case "${1:-} ${2:-} ${3:-}" in
+"plugin marketplace add")
+  exit "${MOCK_CLAUDE_MARKETPLACE_ADD_EXIT:-0}"
+  ;;
+"plugin marketplace list")
+  printf '%s\n' "${MOCK_CLAUDE_MARKETPLACE_LIST_JSON:-[]}"
+  exit 0
+  ;;
+"plugin marketplace update")
+  exit "${MOCK_CLAUDE_MARKETPLACE_UPDATE_EXIT:-0}"
+  ;;
+esac
+
+case "${1:-} ${2:-}" in
+"plugin install")
+  exit "${MOCK_CLAUDE_PLUGIN_INSTALL_EXIT:-0}"
+  ;;
+"plugin update")
+  exit "${MOCK_CLAUDE_PLUGIN_UPDATE_EXIT:-0}"
+  ;;
+esac
+
+exit 0
