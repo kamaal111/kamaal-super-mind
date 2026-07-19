@@ -1,0 +1,37 @@
+AGENTS.md
+  s_1de4f7751ee21e::t_56ae8dbd74711a 26-31
+  s_1de4f7751ee21e::t_268001ec2b75b5 9-12
+  s_1de4f7751ee21e::t_ad13b4513a8fac 22
+.agents/plugins/marketplace.json
+  s_1de4f7751ee21e::t_85ccd788c3be28 11
+.codex-plugin/plugin.json
+  s_1de4f7751ee21e::t_9436f7e10d6f5f 6-7,9-10
+.claude-plugin/marketplace.json
+  s_1de4f7751ee21e::t_fbcf2415c9d545 10
+justfile
+  s_1de4f7751ee21e::t_17f290aa371473 24
+.claude-plugin/plugin.json
+  s_1de4f7751ee21e::t_6359e3158097c9 5-6,8-9
+install.sh
+  s_1de4f7751ee21e::t_c2fab8ebcad182 136
+README.md
+  s_1de4f7751ee21e::t_91913094759c84 47
+.cursor-plugin/plugin.json
+  s_1de4f7751ee21e::t_23df31f04e0413 5-6,8-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "b78a40f0cc61523e018b263f88700d0683cabea9",
+  "prompts": {},
+  "sessions": {
+    "s_1de4f7751ee21e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c5c84fa0-9d0a-4f94-bbf8-52433d968f22",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": null
+    }
+  }
+}
