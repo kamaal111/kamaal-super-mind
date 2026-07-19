@@ -1,0 +1,29 @@
+.codex-plugin/plugin.json
+  s_9c4ef283e7cea7::t_a3235def7c9cbd 3
+skills/swift-snapshot-tests/agents/openai.yaml
+  s_9c4ef283e7cea7::t_44685090278813 1-4
+skills/production-engineering/SKILL.md
+  s_9c4ef283e7cea7::t_bec3567216b690 31
+README.md
+  s_9c4ef283e7cea7::t_bf2ef17d506768 59
+skills/swift-snapshot-tests/SKILL.md
+  s_9c4ef283e7cea7::t_5fd198104e146a 16,23
+  s_9c4ef283e7cea7::t_49a5f1752ef596 1-7,9-15,17-22,24-27
+  s_9c4ef283e7cea7::t_66beaffa17e8ca 8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "b83b9b85d4162ed5a9621cb221c7603ba87e420e",
+  "prompts": {},
+  "sessions": {
+    "s_9c4ef283e7cea7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "18fac006-bbb7-42e7-a223-a0fb73501960",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
