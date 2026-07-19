@@ -1,4 +1,0 @@
-interface:
-  display_name: "GitHub Actions Debug"
-  short_description: "Debug failing GitHub Actions checks."
-  default_prompt: "Use $github-actions-debug to investigate this failing GitHub Actions check."

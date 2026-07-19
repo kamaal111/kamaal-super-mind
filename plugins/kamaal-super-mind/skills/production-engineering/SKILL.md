@@ -32,7 +32,6 @@ Load the relevant plugin skill instead of recreating its workflow:
 - `typescript-backend` for TypeScript server work
 - `generated-api-client-endpoint` for generated client endpoints
 - `dependency-upgrades` for dependency work
-- `github-actions-debug` for GitHub Actions failures
 - `git-commit-message` for drafting commit or pull-request text
 - `gitbutler-cli`, `gitbutler-multi-agent`, or `gitbutler-session-commit` for GitButler work
 

@@ -52,7 +52,6 @@ tracks the git commit SHA and treats every commit as a new version.
 - `git-commit-message` — commit and pull-request writing
 - `dependency-upgrades` — safe dependency upgrades
 - `api-integration-tests` — real endpoint and persistence coverage
-- `github-actions-debug` — GitHub Actions failure diagnosis
 - `gitbutler-cli` and `gitbutler-session-commit` — GitButler virtual branches and session commits
 - `gitbutler-multi-agent` — GitButler coordination for parallel agent work
 - `swift-best-practices` and `swift-testing` — Swift implementation and tests
