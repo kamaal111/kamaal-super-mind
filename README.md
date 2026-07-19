@@ -1,8 +1,9 @@
 # Kamaal Super Mind
 
-Personal Codex and Claude Code marketplace with reusable software-engineering
-skills for Swift, TypeScript services, testing, dependency upgrades, GitHub
-Actions, GitButler, and commit messages.
+A personal armory of battle-tested skills for Codex, Claude Code, and Cursor,
+sharpened through real Swift, TypeScript, testing, dependency-upgrade, and
+GitButler work, so every agent shows up already knowing how you like things
+done.
 
 ## Install
 
@@ -12,11 +13,13 @@ Copy and paste this single command into Terminal:
 curl -fsSL https://raw.githubusercontent.com/kamaal111/kamaal-super-mind/main/install.sh | bash
 ```
 
-The installer downloads or updates the plugin in `~/.kamaal-super-mind`,
-registers its marketplace, and installs it in whichever of Codex and Claude
-Code are present on the machine (at least one is required). Then start a new
-Codex task or Claude Code session. The skills are available in every project
-on that Mac. Invoke one explicitly when useful, for example:
+The installer downloads or updates the plugin in `~/.kamaal-super-mind`, then
+installs it in whichever of Codex, Claude Code, and Cursor are present on the
+machine (at least one is required): it registers the marketplace for Codex and
+Claude Code, and symlinks the plugin into Cursor's local plugin directory.
+Then start a new Codex task, Claude Code session, or Cursor Agent chat. The
+skills are available in every project on that Mac. Invoke one explicitly when
+useful, for example:
 
 ```text
 Use $swift-testing to add tests for this change.
@@ -33,7 +36,8 @@ To receive changes pushed to GitHub, run the same command again:
 curl -fsSL https://raw.githubusercontent.com/kamaal111/kamaal-super-mind/main/install.sh | bash
 ```
 
-Start a new Codex task or Claude Code session after updating.
+Start a new Codex task, Claude Code session, or Cursor Agent chat after
+updating.
 
 When changing a skill yourself, refresh the Codex plugin version before
 committing so Codex recognizes the update:

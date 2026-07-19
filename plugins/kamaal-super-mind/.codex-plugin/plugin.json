@@ -5,6 +5,7 @@
   "author": {
     "name": "Kamaal Farah"
   },
+  "license": "MIT",
   "skills": "./skills/",
   "interface": {
     "displayName": "Kamaal Super Mind",

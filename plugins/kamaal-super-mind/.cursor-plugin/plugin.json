@@ -4,5 +4,6 @@
   "author": {
     "name": "Kamaal Farah"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "skills": "./skills/"
 }

@@ -25,9 +25,12 @@ python3 ~/.codex/skills/.system/plugin-creator/scripts/update_plugin_cachebuster
 The helper preserves the base version and replaces only the `+codex.` suffix.
 This only applies to
 `plugins/kamaal-super-mind/.codex-plugin/plugin.json`. The Claude Code
-manifest, `plugins/kamaal-super-mind/.claude-plugin/plugin.json`, omits
-`version` on purpose so Claude Code tracks the git commit SHA instead; leave
-it without a `version` field.
+manifest, `plugins/kamaal-super-mind/.claude-plugin/plugin.json`, and the
+Cursor manifest, `plugins/kamaal-super-mind/.cursor-plugin/plugin.json`, omit
+`version` on purpose: Claude Code tracks the git commit SHA instead, and
+Cursor discovers this plugin through the installer's symlink into
+`~/.cursor/plugins/local`, not a versioned marketplace listing. Leave both
+without a `version` field.
 
 ## Just Recipes
 

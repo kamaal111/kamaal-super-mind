@@ -7,17 +7,18 @@ INSTALL_DIRECTORY="${KAMAAL_SUPER_MIND_DIR:-$HOME/.kamaal-super-mind}"
 PLUGIN_NAME="kamaal-super-mind"
 MARKETPLACE_NAME="kamaal-super-mind"
 
-# Dry runs print the actions without requiring Git, Codex, Claude Code, or
-# changing any files.
+# Dry runs print the actions without requiring Git, Codex, Claude Code,
+# Cursor, or changing any files.
 if [[ "${1:-}" == "--dry-run" ]]; then
   printf 'Would clone or update %s at %s.\n' "$REPOSITORY_URL" "$INSTALL_DIRECTORY"
   printf 'Would register marketplace %s and install %s@%s in Codex and/or Claude Code.\n' \
     "$MARKETPLACE_NAME" "$PLUGIN_NAME" "$MARKETPLACE_NAME"
+  printf 'Would link %s into Cursor'\''s local plugin directory.\n' "$PLUGIN_NAME"
   exit 0
 fi
 
 # The rest of the script needs Git to download the plugin, plus at least one
-# of Codex or Claude Code to install it into.
+# of Codex, Claude Code, or Cursor to install it into.
 if ! command -v git >/dev/null 2>&1; then
   printf 'Error: git must be installed before installing Kamaal Super Mind.\n' >&2
   exit 1
@@ -25,11 +26,13 @@ fi
 
 have_codex=0
 have_claude=0
+have_cursor=0
 command -v codex >/dev/null 2>&1 && have_codex=1
 command -v claude >/dev/null 2>&1 && have_claude=1
+{ command -v cursor >/dev/null 2>&1 || [[ -d "$HOME/.cursor" ]]; } && have_cursor=1
 
-if [[ "$have_codex" -eq 0 && "$have_claude" -eq 0 ]]; then
-  printf 'Error: install Codex or Claude Code before installing Kamaal Super Mind.\n' >&2
+if [[ "$have_codex" -eq 0 && "$have_claude" -eq 0 && "$have_cursor" -eq 0 ]]; then
+  printf 'Error: install Codex, Claude Code, or Cursor before installing Kamaal Super Mind.\n' >&2
   exit 1
 fi
 
@@ -114,4 +117,23 @@ if [[ "$have_claude" -eq 1 ]]; then
   fi
 
   printf 'Kamaal Super Mind is installed for Claude Code. Start a new Claude Code session to use it.\n'
+fi
+
+if [[ "$have_cursor" -eq 1 ]]; then
+  # Cursor discovers plugins placed under ~/.cursor/plugins/local without any
+  # marketplace registration or install command, so a symlink to the checkout
+  # is enough and stays current whenever the checkout is updated.
+  cursor_plugin_link="$HOME/.cursor/plugins/local/$PLUGIN_NAME"
+  mkdir -p "$HOME/.cursor/plugins/local"
+
+  if [[ -L "$cursor_plugin_link" ]]; then
+    rm "$cursor_plugin_link"
+  elif [[ -e "$cursor_plugin_link" ]]; then
+    printf 'Error: %s exists but is not a Kamaal Super Mind symlink.\n' "$cursor_plugin_link" >&2
+    exit 1
+  fi
+
+  ln -s "$INSTALL_DIRECTORY/plugins/$PLUGIN_NAME" "$cursor_plugin_link"
+
+  printf 'Kamaal Super Mind is installed for Cursor. Start a new Cursor Agent chat to use it.\n'
 fi
