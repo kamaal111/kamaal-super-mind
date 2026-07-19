@@ -22,11 +22,11 @@ skills are available in every project on that Mac. Invoke one explicitly when
 useful, for example:
 
 ```text
-Use $swift-testing to add tests for this change.
+Use $software-testing to add tests for this change.
 ```
 
 In Claude Code, plugin skills are namespaced, so invoke them as
-`/kamaal-super-mind:swift-testing` or ask Claude to use the skill by name.
+`/kamaal-super-mind:software-testing` or ask Claude to use the skill by name.
 
 ## Update
 
@@ -58,6 +58,6 @@ tracks the git commit SHA and treats every commit as a new version.
 - `api-integration-tests` — real endpoint and persistence coverage
 - `gitbutler-cli` and `gitbutler-session-commit` — GitButler virtual branches and session commits
 - `gitbutler-multi-agent` — GitButler coordination for parallel agent work
-- `swift-best-practices` and `swift-testing` — Swift implementation and tests
-- `software-testing` — cross-project testing discipline
+- `swift-best-practices` — Swift implementation
+- `software-testing` — cross-project testing discipline, including Swift and TypeScript references
 - `typescript-backend` — secure TypeScript server changes

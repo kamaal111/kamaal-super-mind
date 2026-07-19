@@ -5,31 +5,19 @@ description: Write or refactor API endpoint integration tests through real appli
 
 # Endpoint Integration Tests
 
-Write endpoint tests through the real request path and persistence layer.
+Load the `software-testing` skill first and follow its discovery, boundary, and coverage rules — this skill only adds the endpoint invocation shape and a worked example.
 
-## Discover The Harness
+## Locate The Endpoint
 
-- Find the existing app-construction fixture, database setup, authentication helpers, request helpers, and nearby integration suites first.
-- Reuse the established harness. Extend it only when the endpoint cannot be tested cleanly through its existing surface.
-- Do not start a server process when the project exposes an in-memory request client.
+When invoked with a route or path (e.g. `/app-api/auth/sign-in`), find its handler, existing tests, and request/response contract before writing anything. Use `software-testing`'s "Discover Before Writing" guidance to find the app-construction fixture, database setup, and authentication/request helpers already in use, and reuse that harness rather than building a new one.
 
-## Operating Rules
+## Write The Test
 
-- Use real routing, validation, services, repositories, and persistence. Mock only genuine external I/O.
-- Create prerequisites through real endpoints when practical and keep setup deterministic and minimal.
-- Name tests for observable behavior, not implementation details.
+Apply `software-testing`'s rules directly:
 
-## Coverage
-
-Cover the happy path first, then the contract-defining failures:
-
-- successful status, response, headers, and persisted side effects
-- malformed or incomplete input
-- domain failures such as duplicates and missing prerequisites
-- authentication and ownership, including cross-user denial for user-scoped resources
-- cookies, tokens, pagination, caching, or logs when they are observable behavior
-
-Assert actual framework error contracts rather than assuming every client error has the same shape. Reuse shared assertions and extract helpers only when repetition is real. Run the narrow suite, broader backend checks, then the repository aggregate gate.
+- Keep real routing, validation, services, repositories, and persistence; mock only genuine external I/O.
+- Cover the checklist from `software-testing`'s "API, UI, And Persistence" section: success status/response/headers/persisted side effects, malformed or incomplete input, domain failures, cross-user authorization denial, and cookies/tokens/pagination/caching/logs where observable.
+- Verify in order: the narrow suite, then broader backend checks, then the repository's aggregate gate.
 
 ## Generic Example
 

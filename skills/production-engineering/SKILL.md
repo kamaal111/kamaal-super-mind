@@ -26,9 +26,9 @@ Use this skill as a thin baseline for safe repository work. It deliberately does
 
 Load the relevant plugin skill instead of recreating its workflow:
 
-- `software-testing` for any test change or verification strategy
+- `software-testing` for any test change or verification strategy, including Swift and TypeScript testing
 - `api-integration-tests` for endpoint integration coverage
-- `swift-best-practices` or `swift-testing` for Swift work
+- `swift-best-practices` for Swift implementation work
 - `typescript-backend` for TypeScript server work
 - `generated-api-client-endpoint` for generated client endpoints
 - `dependency-upgrades` for dependency work
