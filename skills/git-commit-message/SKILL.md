@@ -23,21 +23,31 @@ Explain the meaningful product or logic change without narrating routine enginee
 - Describe the behavior or logic changed, not the implementation tools used.
 - Avoid vague titles such as `fix stuff`, `refactor code`, or `update tests`.
 
+## Line Length
+
+- Limit every line in the title, body, and trailers to 72 characters or fewer,
+  unless the repository has a stricter documented limit.
+- Before creating or rewording a commit, verify the exact proposed message with
+  a line-length check. Do not rely on a commit tool to wrap it implicitly.
+- After the commit is created or reworded, inspect the stored message and
+  confirm no line exceeds 72 characters.
+
 ## Body Rules
 
-- Use short sections only when the repository or user asks for structure.
-- Describe the solved problem or delivered outcome first, then the core implementation choices.
-- Do not spend body space on routine test, formatting, or lint work unless it is itself the change.
+- Always use a `**Summary**` section followed by a `**Solution**` section for a commit body.
+- In `**Summary**`, state the task or problem being solved in concise user-facing terms.
+- In `**Solution**`, explain how the commit achieves that task, focusing on the core implementation choices.
+- Keep the sections concise; do not spend body space on routine test, formatting, or lint work unless it is itself the change.
 
 Example:
 
 ```text
 Retry transient upstream import failures
 
-## Summary
+**Summary**
 Imports no longer fail immediately when the upstream service times out.
 
-## Solution
+**Solution**
 The importer retries transient fetch failures with a short backoff and marks
 the job failed only after the final attempt.
 
