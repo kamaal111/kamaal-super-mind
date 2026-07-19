@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "kamaal-super-mind",
-      "source": "./plugins/kamaal-super-mind",
+      "source": "./",
       "description": "Repository-agnostic guidance for implementing, testing, reviewing, and delivering reliable software changes."
     }
   ]

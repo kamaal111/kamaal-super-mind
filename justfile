@@ -21,7 +21,7 @@ validate-claude-marketplace:
 # Symlink this checkout into Cursor's local plugin directory for manual discovery testing.
 validate-cursor-plugin:
     mkdir -p ~/.cursor/plugins/local
-    ln -sfn "$(pwd)/plugins/kamaal-super-mind" ~/.cursor/plugins/local/kamaal-super-mind
+    ln -sfn "$(pwd)" ~/.cursor/plugins/local/kamaal-super-mind
 
 # Open project in zed
 zed:

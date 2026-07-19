@@ -2,8 +2,11 @@
   "name": "kamaal-super-mind",
   "description": "Repository-agnostic guidance for implementing, testing, reviewing, and delivering reliable software changes.",
   "author": {
-    "name": "Kamaal Farah"
+    "name": "Kamaal Farah",
+    "url": "https://github.com/kamaal111"
   },
+  "homepage": "https://github.com/kamaal111/kamaal-super-mind",
+  "repository": "https://github.com/kamaal111/kamaal-super-mind",
   "license": "MIT",
   "skills": "./skills/"
 }

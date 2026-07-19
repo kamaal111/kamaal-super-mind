@@ -8,7 +8,7 @@
       "name": "kamaal-super-mind",
       "source": {
         "source": "local",
-        "path": "./plugins/kamaal-super-mind"
+        "path": "./"
       },
       "policy": {
         "installation": "AVAILABLE",

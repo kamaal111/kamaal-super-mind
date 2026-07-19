@@ -133,7 +133,7 @@ if [[ "$have_cursor" -eq 1 ]]; then
     exit 1
   fi
 
-  ln -s "$INSTALL_DIRECTORY/plugins/$PLUGIN_NAME" "$cursor_plugin_link"
+  ln -s "$INSTALL_DIRECTORY" "$cursor_plugin_link"
 
   printf 'Kamaal Super Mind is installed for Cursor. Start a new Cursor Agent chat to use it.\n'
 fi

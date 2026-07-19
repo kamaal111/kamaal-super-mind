@@ -6,10 +6,10 @@ When a skill is added, renamed, or removed, update `README.md`'s **Included
 Skills** list in the same change. Do not leave the published catalog stale.
 
 The `Use Specialized Skills` list in
-`plugins/kamaal-super-mind/skills/production-engineering/SKILL.md` documents
-the plugin's specialized skills. When a skill is added, removed, renamed, or
-materially changes purpose, update that list and its routing guidance in the
-same change. Do not leave it stale.
+`skills/production-engineering/SKILL.md` documents the plugin's specialized
+skills. When a skill is added, removed, renamed, or materially changes
+purpose, update that list and its routing guidance in the same change. Do not
+leave it stale.
 
 ## Plugin Version Refresh
 
@@ -19,18 +19,16 @@ update:
 
 ```bash
 python3 ~/.codex/skills/.system/plugin-creator/scripts/update_plugin_cachebuster.py \
-  plugins/kamaal-super-mind
+  .
 ```
 
 The helper preserves the base version and replaces only the `+codex.` suffix.
-This only applies to
-`plugins/kamaal-super-mind/.codex-plugin/plugin.json`. The Claude Code
-manifest, `plugins/kamaal-super-mind/.claude-plugin/plugin.json`, and the
-Cursor manifest, `plugins/kamaal-super-mind/.cursor-plugin/plugin.json`, omit
-`version` on purpose: Claude Code tracks the git commit SHA instead, and
-Cursor discovers this plugin through the installer's symlink into
-`~/.cursor/plugins/local`, not a versioned marketplace listing. Leave both
-without a `version` field.
+This only applies to `.codex-plugin/plugin.json`. The Claude Code manifest,
+`.claude-plugin/plugin.json`, and the Cursor manifest,
+`.cursor-plugin/plugin.json`, omit `version` on purpose: Claude Code tracks
+the git commit SHA instead, and Cursor discovers this plugin through the
+installer's symlink into `~/.cursor/plugins/local`, not a versioned
+marketplace listing. Leave both without a `version` field.
 
 ## Just Recipes
 

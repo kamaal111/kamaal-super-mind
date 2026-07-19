@@ -3,8 +3,11 @@
   "version": "0.1.0+codex.20260719100648",
   "description": "Reusable production engineering guidance for Codex.",
   "author": {
-    "name": "Kamaal Farah"
+    "name": "Kamaal Farah",
+    "url": "https://github.com/kamaal111"
   },
+  "homepage": "https://github.com/kamaal111/kamaal-super-mind",
+  "repository": "https://github.com/kamaal111/kamaal-super-mind",
   "license": "MIT",
   "skills": "./skills/",
   "interface": {
