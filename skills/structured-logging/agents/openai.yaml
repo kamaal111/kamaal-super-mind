@@ -1,0 +1,4 @@
+interface:
+  display_name: "Structured Logging"
+  short_description: "Query backend-service logs with ease"
+  default_prompt: "Use $structured-logging to instrument this backend workflow with consistent contextual events."

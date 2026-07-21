@@ -31,6 +31,7 @@ Load the relevant plugin skill instead of recreating its workflow:
 - `swift-snapshot-tests` for SwiftUI screen snapshot coverage
 - `swift-best-practices` for Swift implementation work
 - `typescript-backend` for TypeScript server work
+- `structured-logging` for queryable, context-rich backend-service logs
 - `generated-api-client-endpoint` for generated client endpoints
 - `dependency-upgrades` for dependency work
 - `git-commit-message` for drafting commit or pull-request text
