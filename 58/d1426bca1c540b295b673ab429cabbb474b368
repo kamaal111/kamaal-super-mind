@@ -1,0 +1,32 @@
+skills/structured-logging/agents/openai.yaml
+  s_fb70046571af94::t_fdd77767820195 3-4
+  s_fb70046571af94::t_ce2641c7442108 1-2
+.codex-plugin/plugin.json
+  s_fb70046571af94::t_4539b0a1b8e6ac 3
+README.md
+  s_fb70046571af94::t_c1997ed4fbecab 65
+skills/production-engineering/SKILL.md
+  s_fb70046571af94::t_c1997ed4fbecab 34
+skills/structured-logging/SKILL.md
+  s_fb70046571af94::t_7bed75d001eb0a 18,20,23-24,28,30-32,34,36,38,40-43,45,47,49,51-57,59,61,63,65,67,69,71,73,75-78
+  s_fb70046571af94::t_f79df1806a7bb4 21
+  s_fb70046571af94::t_743e0bbaf56000 22,29,80
+  s_fb70046571af94::t_ce2641c7442108 1-2,4-7,9,19,25,27,33,35,37,39,44,46,48,50,58,60,62,64,66,68,70,72,74,79
+  s_fb70046571af94::t_c1997ed4fbecab 3,8,10-17,26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "58d1426bca1c540b295b673ab429cabbb474b368",
+  "prompts": {},
+  "sessions": {
+    "s_fb70046571af94": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f8603-0eb4-7db3-82a7-26ba1f370940",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
