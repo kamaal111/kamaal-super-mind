@@ -47,9 +47,58 @@ guard let modelContext else { return }
 
 ## Pure Utilities And Dependency Injection
 
+- Do not declare free functions at file scope, including `private` ones. Namespace static helpers inside a holder `struct` or `enum`; make the holder `private` too when it is only needed by that file.
+- Use a holder `enum` when the type exists solely as a namespace and should never be instantiated. Use a holder `struct` when that better communicates the utility's role or it may later construct related state. Keep its namespace helpers `static`.
 - Keep pure utilities stateless and direct. Namespace-style types with `static` functions are often clearer than injected objects with no lifecycle or replaceable behavior.
 - Do not add protocols, stored properties, or initializer parameters merely to mock pure transformations. Test pure utility behavior directly.
 - Reserve dependency injection for side effects, external I/O, environment access, mutable state, or behavior that genuinely varies by implementation.
+
+Prefer:
+
+```swift
+private enum ProfileNameFormatter {
+    static func normalized(_ name: String) -> String {
+        name.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}
+```
+
+Avoid a file-private free function:
+
+```swift
+private func normalizedProfileName(_ name: String) -> String {
+    name.trimmingCharacters(in: .whitespacesAndNewlines)
+}
+```
+
+## Type Extensions
+
+- Do not create an extension for a type defined in the project. Add its functions and computed properties to the type's primary declaration so related behavior has one obvious home and is less likely to be duplicated.
+- Before extending a type from an external dependency or a system framework, search the project for an existing extension that provides the needed behavior. Create a new extension only when none exists.
+- Keep a permitted external-type extension close to its established owner. If more than one feature needs the same extension logic, move it to one central shared extension and reuse it rather than recreating it locally.
+
+Prefer keeping project-owned behavior with its type:
+
+```swift
+struct Profile {
+    let givenName: String
+    let familyName: String
+
+    var displayName: String {
+        "\\(givenName) \\(familyName)"
+    }
+}
+```
+
+Avoid splitting a project-owned type from its behavior:
+
+```swift
+extension Profile {
+    var displayName: String {
+        "\\(givenName) \\(familyName)"
+    }
+}
+```
 
 ## Shared Ownership
 
