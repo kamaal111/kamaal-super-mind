@@ -1,0 +1,21 @@
+.codex-plugin/plugin.json
+  s_96202814cb4dd9::t_276d62bd3561c6 3
+skills/production-engineering/SKILL.md
+  s_96202814cb4dd9::t_5b79e47f06e1e2 44-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "894531d05391bfdc0a021ee643220b5ba95e9898",
+  "prompts": {},
+  "sessions": {
+    "s_96202814cb4dd9": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f92d6-ef97-7dd2-8be2-9efb457a9b63",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
