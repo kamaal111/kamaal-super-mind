@@ -41,4 +41,5 @@ Load the relevant plugin skill instead of recreating its workflow:
 
 - Run the narrowest relevant check while iterating, then the repository-required final aggregate verification for code changes. Do not claim code completion while that required verification fails.
 - For documentation-only or skill-only changes, skip code verification unless the repository or user requires it, and say that it was skipped.
-- State the outcome understood, what changed, every verification command and result, and any doubts, tradeoffs, environment issues, or remaining gaps.
+- In the final response, state how you understood the user's goal, what changed, and every verification command and result.
+- End the final response with a `Doubts / remaining gaps` section. State every doubt, tradeoff, environment issue, or remaining gap there; write `None` explicitly when there are no doubts or gaps.
