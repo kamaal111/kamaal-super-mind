@@ -53,6 +53,7 @@ tracks the git commit SHA and treats every commit as a new version.
 ## Included Skills
 
 - `production-engineering` — shared implementation, verification, and safety guidance
+- `plan-mode` — concise, implementation-ready planning and agent handoffs
 - `git-commit-message` — commit and pull-request writing
 - `dependency-upgrades` — safe dependency upgrades
 - `api-integration-tests` — real endpoint and persistence coverage

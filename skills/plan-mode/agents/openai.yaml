@@ -1,0 +1,4 @@
+interface:
+  display_name: "Plan Mode"
+  short_description: "Write handoff-ready implementation plans."
+  default_prompt: "Use $plan-mode to create an implementation-ready plan for this task."
