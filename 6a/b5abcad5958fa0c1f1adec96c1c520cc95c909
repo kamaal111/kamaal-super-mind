@@ -1,0 +1,25 @@
+skills/swift-best-practices/SKILL.md
+  s_370058a5681a90::t_57c0b0474d639c 144-145,147-149
+  s_370058a5681a90::t_d73b9cf28c83b4 146
+.codex-plugin/plugin.json
+  s_370058a5681a90::t_8d1522ee115401 3
+skills/swift-best-practices/references/documentation-comments.md
+  s_370058a5681a90::t_06a0c324505bb5 1-2,7-25,42-49,58-65,76-87
+  s_370058a5681a90::t_35a18f19c2da24 3-6,26-41,50-57,66-75
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "6ab5abcad5958fa0c1f1adec96c1c520cc95c909",
+  "prompts": {},
+  "sessions": {
+    "s_370058a5681a90": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e46f0b2f-3a8a-424e-8078-0352f0110c72",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
