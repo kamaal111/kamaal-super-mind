@@ -1,0 +1,27 @@
+.codex-plugin/plugin.json
+  s_370058a5681a90::t_6bb41fcdc9a981 3
+skills/swift-best-practices/SKILL.md
+  s_370058a5681a90::t_d73b9cf28c83b4 146
+  s_370058a5681a90::t_57c0b0474d639c 144-145,148-150
+  s_370058a5681a90::t_774cd10e645f50 147
+skills/swift-best-practices/references/documentation-comments.md
+  s_370058a5681a90::t_35a18f19c2da24 3-6,48-63,72-79,88-97
+  s_370058a5681a90::t_06a0c324505bb5 1-2,7,30-47,64-71,80-87,98-109
+  s_370058a5681a90::t_02e8cfb8426b56 8-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "dd5118fc499f60dd80af22b9453ffcdd453e31e5",
+  "prompts": {},
+  "sessions": {
+    "s_370058a5681a90": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e46f0b2f-3a8a-424e-8078-0352f0110c72",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": null
+    }
+  }
+}
