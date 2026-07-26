@@ -106,6 +106,13 @@ extension Profile {
 - Do not copy a helper into a second target merely to make it reachable from another caller.
 - When moving shared code, remove the old implementation unless it intentionally differs. Make any remaining difference explicit through naming, structure, or tests.
 
+## Access Control
+
+- Default every declaration to `private`. Only widen access when there is a concrete need.
+- Widen one step at a time: move from `private` to `internal` only when another type in the same module genuinely needs it, and from `internal` to `public` only when another module genuinely needs it. Never jump straight to `internal` or `public` "just in case."
+- Never widen access solely to make something testable. Use `@testable import` to reach `internal` declarations from tests, and test through the type's existing public or internal surface rather than exposing internals for the test's convenience.
+- Prefer testing behavior through the highest-level method that already exercises the code in question, rather than carving out a narrower internal method just so it can be called directly from a test.
+
 ## Public Error APIs
 
 - Follow local API conventions. When a non-private operation has a meaningful failure domain, prefer an explicit typed failure that callers can handle deliberately.
