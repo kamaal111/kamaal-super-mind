@@ -141,6 +141,13 @@ func importProfile(from image: UIImage) async -> Result<Profile, ProfileImportEr
 - Use the repository's shared logger rather than `print` or ad hoc console output. Do not log passwords, credentials, tokens, cookies, or raw sensitive payloads.
 - Ensure recoverable failures remain recoverable when logged; logging must not turn expected error handling into a crash.
 
+## Documentation Comments
+
+- Write a `///` documentation comment on every public method, initializer, computed and stored property, class, struct, actor, enum, and protocol. Skip non-public declarations unless their behavior is genuinely non-obvious.
+- Read the implementation and its call sites before documenting it. Do not write a comment from the signature or name alone; confirm behavior, return value, thrown errors, and a realistic usage from the actual code first.
+- Every documentation comment must state what the declaration does, what it returns or throws (or what a type represents), and include a worked example of calling it.
+- Read [references/documentation-comments.md](references/documentation-comments.md) for the required structure and examples before writing or reviewing documentation comments.
+
 ## Working Style
 
 - Match nearby naming, formatting, file structure, and concurrency patterns.
