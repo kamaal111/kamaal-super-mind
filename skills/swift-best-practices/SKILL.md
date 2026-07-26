@@ -155,6 +155,37 @@ func importProfile(from image: UIImage) async -> Result<Profile, ProfileImportEr
 - Every documentation comment must state what the declaration does, what it returns or throws (or what a type represents), and include a worked example of calling it.
 - Read [references/documentation-comments.md](references/documentation-comments.md) for the required structure and examples before writing or reviewing documentation comments.
 
+## Multiline String Literals
+
+- When a string spans multiple logical lines or contains embedded quotes (JSON, SQL, HTML, formatted messages, fixtures), write it as a multiline `"""` literal with consistent indentation, not as a single-line string with escaped `\"` quotes.
+- Never build a multiline string by concatenating single-line string literals with `+`. Use one `"""` literal instead; concatenation hides the overall shape of the text and adds noise at every line boundary.
+- Multiline `"""` literals stay readable and diffable, and avoid the escaping noise that makes single-line literals hard to edit or review.
+
+Prefer:
+
+```swift
+let payload = """
+{
+    "id": "42",
+    "name": "Ada Lovelace"
+}
+"""
+
+let message = """
+Hello, \(name).
+Your order #\(orderID) has shipped.
+"""
+```
+
+Avoid:
+
+```swift
+let payload = "{\"id\": \"42\", \"name\": \"Ada Lovelace\"}"
+
+let message = "Hello, \(name).\n"
+    + "Your order #\(orderID) has shipped."
+```
+
 ## Working Style
 
 - Match nearby naming, formatting, file structure, and concurrency patterns.
