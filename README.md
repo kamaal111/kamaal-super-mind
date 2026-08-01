@@ -64,4 +64,5 @@ tracks the git commit SHA and treats every commit as a new version.
 - `typescript-best-practices` — clear, type-safe TypeScript implementation
 - `software-testing` — cross-project testing discipline, including Swift and TypeScript references
 - `backend` — secure backend-service changes in any language or framework
+- `database` — secure, efficient data access and user-resource ownership scoping
 - `structured-logging` — queryable, context-rich backend-service logging

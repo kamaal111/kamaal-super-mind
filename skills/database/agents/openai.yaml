@@ -1,0 +1,4 @@
+interface:
+  display_name: "Database Engineering"
+  short_description: "Build secure, efficient data access."
+  default_prompt: "Use $database to implement this database change safely."

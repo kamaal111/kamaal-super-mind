@@ -48,11 +48,7 @@ Map the concepts to the repository's chosen framework and libraries.
 
 ## Persistence And Performance
 
-- Select only the fields the next layer needs.
-- Check write results explicitly and raise clear domain failures when required rows are missing.
-- Collect equivalent bulk writes before one set-based insert or update.
-- Avoid N+1 reads: fetch related records in sets and resolve them from a map.
-- Resolve an ownership-sensitive parent before child lookups by a client-provided identifier. Filter or join on the authenticated ownership boundary in the same query path.
+- Load `database` for schemas, migrations, queries, repositories, and persistence performance. Apply its authenticated user-resource scoping rule at every data-access boundary.
 
 ## Test And Verify
 

@@ -33,6 +33,7 @@ Load the relevant plugin skill instead of recreating its workflow:
 - `swift-best-practices` for Swift implementation work
 - `typescript-best-practices` for TypeScript implementation work
 - `backend` for backend-service work in any language or framework
+- `database` for schemas, migrations, queries, repositories, and user-scoped persistence
 - `structured-logging` for queryable, context-rich backend-service logs
 - `generated-api-client-endpoint` for generated client endpoints
 - `dependency-upgrades` for dependency work
