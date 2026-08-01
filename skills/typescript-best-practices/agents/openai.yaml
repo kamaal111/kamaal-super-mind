@@ -1,0 +1,4 @@
+interface:
+  display_name: "TypeScript Best Practices"
+  short_description: "Write clear, type-safe TypeScript."
+  default_prompt: "Use $typescript-best-practices to implement this TypeScript change."

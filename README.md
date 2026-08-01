@@ -61,6 +61,7 @@ tracks the git commit SHA and treats every commit as a new version.
 - `gitbutler-cli` and `gitbutler-session-commit` — GitButler virtual branches and session commits
 - `gitbutler-multi-agent` — GitButler coordination for parallel agent work
 - `swift-best-practices` — Swift implementation
+- `typescript-best-practices` — clear, type-safe TypeScript implementation
 - `software-testing` — cross-project testing discipline, including Swift and TypeScript references
-- `typescript-backend` — secure TypeScript server changes
+- `backend` — secure backend-service changes in any language or framework
 - `structured-logging` — queryable, context-rich backend-service logging

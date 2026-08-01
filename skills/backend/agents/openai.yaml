@@ -1,0 +1,4 @@
+interface:
+  display_name: "Backend Engineering"
+  short_description: "Build secure, reliable backend services."
+  default_prompt: "Use $backend to implement this backend change."
