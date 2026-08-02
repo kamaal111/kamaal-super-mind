@@ -27,6 +27,10 @@ branch (also called a stack) that owns it.
 
 ## Core Loop: Create, Assign, Commit
 
+Treat `but commit` and `git stash` as destructive operations. Run either only
+in an isolated worktree or when the user explicitly authorizes that exact
+operation.
+
 Create a focused virtual branch, then route only its changes to that branch:
 
 ```bash
