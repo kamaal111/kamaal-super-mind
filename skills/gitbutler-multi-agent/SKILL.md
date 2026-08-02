@@ -38,7 +38,9 @@ but branch new agent-api-endpoints
 - Give every lane an explicit scope: paths or symbols it owns, its target
   branch, expected output, and any dependencies.
 - Treat unassigned changes and changes staged to another branch as reserved.
-  Do not modify them without a handoff from the owner.
+  Do not modify them without a handoff from the owner. Never revert or
+  overwrite uncommitted changes another agent wrote; leave them in place and
+  report them as a doubt in the handoff instead.
 - Communicate a short handoff/status message through the agent coordination
   channel, not a temporary file: branch, files/hunks, commit IDs, validation,
   and remaining work.

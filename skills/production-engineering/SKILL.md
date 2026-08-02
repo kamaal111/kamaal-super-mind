@@ -21,6 +21,7 @@ Use this skill as a thin baseline for safe repository work. It deliberately does
 - Validate unknown data at boundaries and preserve typed data flow. Do not use casts, type assertions, lint disables, or suppression comments to force an invalid design through.
 - Treat uncertain ownership of user-scoped data as a security issue. Scope reads and writes through the authenticated ownership boundary.
 - Fail clearly when required data is unavailable; do not return misleading success values or placeholder data.
+- Never revert, overwrite, or "clean up" uncommitted changes you did not write yourself, even if they look unrelated, stray, or in-progress. Leave them in place and report them in `Doubts / remaining gaps` instead of touching them.
 
 ## Use Specialized Skills
 
