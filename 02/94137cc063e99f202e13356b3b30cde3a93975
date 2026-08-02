@@ -1,0 +1,21 @@
+skills/gitbutler-cli/SKILL.md
+  s_34cfa4b4f0ba47::t_94e50b3197a012 30-33
+skills/production-engineering/SKILL.md
+  s_34cfa4b4f0ba47::t_94e50b3197a012 25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "0294137cc063e99f202e13356b3b30cde3a93975",
+  "prompts": {},
+  "sessions": {
+    "s_34cfa4b4f0ba47": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fc376-b9bf-7d01-8bf5-44ea89dbb3d4",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
