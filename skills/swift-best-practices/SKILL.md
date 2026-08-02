@@ -214,6 +214,10 @@ let message = "Hello, \(name).\n"
     + "Your order #\(orderID) has shipped."
 ```
 
+## String Catalogs
+
+- Do not make manual changes to `*.xcstrings` files. Manage localized strings through Xcode's String Catalog editor or the repository's established localization workflow so catalog metadata and translations remain consistent.
+
 ## Working Style
 
 - Match nearby naming, formatting, file structure, and concurrency patterns.
