@@ -28,6 +28,39 @@ Follow the repository's established TypeScript style first. Use these rules wher
 - Keep generics constrained and named for the role they play. Do not add generic abstraction when a concrete type is clearer.
 - Avoid `any`. Use `unknown`, a precise union, or a generic constraint and then narrow deliberately.
 
+## Function Parameters
+
+- When a function accepts more than three parameters, collapse them into a single options object parameter instead of a long positional list.
+- Define a named `type` for the object shape so callers and readers have one authoritative contract, and destructure it in the function signature.
+
+Prefer:
+
+```typescript
+type CreateUserParams = {
+  email: string;
+  displayName: string;
+  role: UserRole;
+  isActive: boolean;
+};
+
+function createUser({ email, displayName, role, isActive }: CreateUserParams): User {
+  // ...
+}
+```
+
+Avoid:
+
+```typescript
+function createUser(
+  email: string,
+  displayName: string,
+  role: UserRole,
+  isActive: boolean,
+): User {
+  // ...
+}
+```
+
 ## Test The Contract
 
 - Compile and typecheck while iterating; do not treat a passing runtime test as proof that public type contracts remain sound.

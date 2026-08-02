@@ -113,6 +113,34 @@ extension Profile {
 - Never widen access solely to make something testable. Use `@testable import` to reach `internal` declarations from tests, and test through the type's existing public or internal surface rather than exposing internals for the test's convenience.
 - Prefer testing behavior through the highest-level method that already exercises the code in question, rather than carving out a narrower internal method just so it can be called directly from a test.
 
+## Function Parameters
+
+- When a function accepts more than three parameters, collapse them into a single params `struct` instead of a long positional list.
+- Give the struct a name that reflects the operation's contract and pass it as one argument, so callers and readers have one authoritative shape.
+
+Prefer:
+
+```swift
+struct CreateUserParams {
+    let email: String
+    let displayName: String
+    let role: UserRole
+    let isActive: Bool
+}
+
+func createUser(_ params: CreateUserParams) -> User {
+    // ...
+}
+```
+
+Avoid:
+
+```swift
+func createUser(email: String, displayName: String, role: UserRole, isActive: Bool) -> User {
+    // ...
+}
+```
+
 ## Public Error APIs
 
 - Follow local API conventions. When a non-private operation has a meaningful failure domain, prefer an explicit typed failure that callers can handle deliberately.
