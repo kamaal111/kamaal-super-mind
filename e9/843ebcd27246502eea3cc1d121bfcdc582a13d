@@ -1,0 +1,28 @@
+skills/software-testing/SKILL.md
+  s_b37db439d1c92b::t_b060599965bd94 69
+  s_b37db439d1c92b::t_4294050b5a0779 70
+skills/production-engineering/SKILL.md
+  s_b37db439d1c92b::t_8b1e6a28437c10 31
+skills/software-testing/references/java.md
+  s_b37db439d1c92b::t_bf019d959444e5 1-14
+README.md
+  s_b37db439d1c92b::t_396bfe83e4dc3f 65
+skills/software-testing/references/react-testing-library.md
+  s_b37db439d1c92b::t_c882228435448c 1-238
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "e9843ebcd27246502eea3cc1d121bfcdc582a13d",
+  "prompts": {},
+  "sessions": {
+    "s_b37db439d1c92b": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "fb300548-b94e-4969-bf9a-29c84db86490",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kfarah@box.com>"
+    }
+  }
+}
