@@ -62,7 +62,7 @@ tracks the git commit SHA and treats every commit as a new version.
 - `gitbutler-multi-agent` — GitButler coordination for parallel agent work
 - `swift-best-practices` — Swift implementation
 - `typescript-best-practices` — clear, type-safe TypeScript implementation
-- `software-testing` — cross-project testing discipline, including Swift and TypeScript references
+- `software-testing` — cross-project testing discipline, including Java, Swift, and TypeScript guidance
 - `backend` — secure backend-service changes in any language or framework
 - `database` — secure, efficient data access and user-resource ownership scoping
 - `structured-logging` — queryable, context-rich backend-service logging

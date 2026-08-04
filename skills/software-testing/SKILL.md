@@ -66,6 +66,8 @@ Run the narrow test first, then the broader suite or package, then every require
 
 ## Language References
 
+- For JUnit assertion-message guidance, read [references/java.md](references/java.md).
+- For React component tests using React Testing Library, read [references/react-testing-library.md](references/react-testing-library.md).
 - For TypeScript examples using Vitest-style assertions, read [references/typescript.md](references/typescript.md).
 - For Swift Testing examples with async test doubles, read [references/swift.md](references/swift.md).
 - For SwiftUI snapshot testing with Point-Free SnapshotTesting, read [references/swift-snapshot-testing.md](references/swift-snapshot-testing.md).

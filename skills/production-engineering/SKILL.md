@@ -28,7 +28,7 @@ Use this skill as a thin baseline for safe repository work. It deliberately does
 
 Load the relevant plugin skill instead of recreating its workflow:
 
-- `software-testing` for any test change or verification strategy, including Swift and TypeScript testing
+- `software-testing` for any test change or verification strategy, including Java, Swift, and TypeScript testing
 - `plan-mode` for implementation-ready plans that another agent can execute without prior context
 - `api-integration-tests` for endpoint integration coverage
 - `swift-snapshot-tests` for SwiftUI screen snapshot coverage
