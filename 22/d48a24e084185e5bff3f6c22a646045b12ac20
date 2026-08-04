@@ -1,0 +1,21 @@
+skills/swift-best-practices/SKILL.md
+  s_ee8d11503360a7::t_739ca8c2286262 217-220
+.codex-plugin/plugin.json
+  s_ee8d11503360a7::t_4a686fc2d29d06 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "22d48a24e084185e5bff3f6c22a646045b12ac20",
+  "prompts": {},
+  "sessions": {
+    "s_ee8d11503360a7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fc375-3ccf-71f2-abc1-eef8a1673bcf",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+README.md
+  s_3a7f48b7cf6bb0::t_03af5fa0a38817 25,29
+  s_3a7f48b7cf6bb0::t_991150386cbcc1 61-62
+skills/software-testing/SKILL.md
+  s_3a7f48b7cf6bb0::t_110d2df54d7de6 55
+  s_9c4ef283e7cea7::t_d48809b7621c59 67
+  s_3a7f48b7cf6bb0::t_2424e6c5cec046 12
+  s_0a2147fef9c2dc::t_050f9475c33bbf 23
+  s_0a2147fef9c2dc::t_dc1fda832d878e 24
+  s_3a7f48b7cf6bb0::t_2d3bd7427cea1a 45-48
+skills/software-testing/references/installing-swift-snapshot-testing.md
+  s_9c4ef283e7cea7::t_9e1c22a9d07648 1-54
+.codex-plugin/plugin.json
+  s_9c4ef283e7cea7::t_f67425fb765cf6 3
+skills/software-testing/references/swift-snapshot-testing.md
+  s_9c4ef283e7cea7::t_d655f2f1cec029 5
+  s_9c4ef283e7cea7::t_96a03bf9af9933 1-4,6-128
+skills/production-engineering/SKILL.md
+  s_3a7f48b7cf6bb0::t_389dcd64f4310e 29,31
+skills/software-testing/references/swift.md
+  s_0a2147fef9c2dc::t_cd6ccb6b52a23e 88,90
+  s_0a2147fef9c2dc::t_25ff85a2062c5a 68-87
+  s_0a2147fef9c2dc::t_571a7b6dbc035a 89
+  s_3a7f48b7cf6bb0::t_ae00deee0a3bd5 5-15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "160eb4a0d052ee651c355846973a8fb14e579944",
+  "prompts": {},
+  "sessions": {
+    "s_0a2147fef9c2dc": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2ee7aa7b-ec8a-4877-9755-015cdac7b4e6",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": null
+    },
+    "s_3a7f48b7cf6bb0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7d7fde6f-c6a7-4792-a7bb-ecee0aa03cb0",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": null
+    },
+    "s_9c4ef283e7cea7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "18fac006-bbb7-42e7-a223-a0fb73501960",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": null
+    }
+  }
+}

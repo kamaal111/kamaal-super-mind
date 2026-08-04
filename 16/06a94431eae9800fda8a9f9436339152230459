@@ -1,0 +1,29 @@
+.codex-plugin/plugin.json
+  s_4c8f8d4ea7e40f::t_eae682ffdf2136 3
+CLAUDE.md
+  s_82da231e9b33e0::t_16b5449fe2c413 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "1606a94431eae9800fda8a9f9436339152230459",
+  "prompts": {},
+  "sessions": {
+    "s_4c8f8d4ea7e40f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f79d6-2fe8-73a2-a529-67ff5d330b69",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    },
+    "s_82da231e9b33e0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ff71dd1c-e938-4470-bf48-34125addd607",
+        "model": "unknown"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}

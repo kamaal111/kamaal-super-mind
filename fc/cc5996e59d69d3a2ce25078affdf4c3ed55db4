@@ -1,0 +1,21 @@
+.codex-plugin/plugin.json
+  s_9a06d15be9033f::t_1180455de10fd7 3
+skills/swift-best-practices/SKILL.md
+  s_9a06d15be9033f::t_479095c5af86d3 109-115
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "fccc5996e59d69d3a2ce25078affdf4c3ed55db4",
+  "prompts": {},
+  "sessions": {
+    "s_9a06d15be9033f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1ed57e06-1ff9-4338-b9d2-8bd9b79a0d3b",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}

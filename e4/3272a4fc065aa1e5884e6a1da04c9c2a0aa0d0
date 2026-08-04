@@ -1,0 +1,31 @@
+skills/swift-best-practices/SKILL.md
+  s_727b3ee03c82b7::t_ad3d1716e4c29d 50-51,56-72
+  s_937e34a8ad4dd8::t_ebe4123868239b 73
+  s_727b3ee03c82b7::t_b1ab7e6a6a812b 74-102
+.codex-plugin/plugin.json
+  s_727b3ee03c82b7::t_d4704d3887b642 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "e43272a4fc065aa1e5884e6a1da04c9c2a0aa0d0",
+  "prompts": {},
+  "sessions": {
+    "s_727b3ee03c82b7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f8635-91a0-7cc1-9e80-0041e7fa1ae2",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": null
+    },
+    "s_937e34a8ad4dd8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "35a2f9bc-5180-4991-96e7-3face76aa7f0",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+.codex-plugin/plugin.json
+  s_750bdbf142f8a3::t_15a51b9f98d058 1-18
+skills/commit-message-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_eb0b3c4f83d836 1-4
+skills/dependency-upgrade-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_27ddf383fe7212 1-4
+skills/endpoint-integration-tests/agents/openai.yaml
+  s_750bdbf142f8a3::t_f850e42732dee9 1-4
+skills/generated-client-endpoint/agents/openai.yaml
+  s_750bdbf142f8a3::t_6aa9cb3f146c8b 1-4
+skills/gh-actions-log-debug/agents/openai.yaml
+  s_750bdbf142f8a3::t_918dd617c782a5 1-4
+skills/gitbutler-session-commit/agents/openai.yaml
+  s_750bdbf142f8a3::t_6894976126c8cc 1-4
+skills/gitbutler-workflows/agents/openai.yaml
+  s_750bdbf142f8a3::t_5a3779204a0010 1-4
+skills/production-engineering/agents/openai.yaml
+  s_750bdbf142f8a3::t_f274797c4c7ade 1-4
+skills/swift-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_6976007f63c581 1-4
+skills/swift-testing/agents/openai.yaml
+  s_750bdbf142f8a3::t_7f079161f0be23 1-4
+skills/testing-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_e6b30f6b8c479b 1-4
+skills/typescript-server-best-practices/agents/openai.yaml
+  s_750bdbf142f8a3::t_64772658205893 1-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "d01a204e13fe23240e9bc5b7bf6bc7c11e64bc2a",
+  "prompts": {},
+  "sessions": {
+    "s_750bdbf142f8a3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f76d3-a469-7673-9e97-7a2ee04c4b09",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}

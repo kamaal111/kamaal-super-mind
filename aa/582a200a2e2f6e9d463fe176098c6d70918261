@@ -1,0 +1,19 @@
+skills/software-testing/SKILL.md
+  s_2ded35e400c983::t_7b25173f3c5206 26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "aa582a200a2e2f6e9d463fe176098c6d70918261",
+  "prompts": {},
+  "sessions": {
+    "s_2ded35e400c983": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "553665c2-6be7-445d-84bd-bb77b9a7fa51",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}

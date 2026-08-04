@@ -1,0 +1,43 @@
+AGENTS.md
+  s_d4954c38ef60ac::t_6f5c8de5404c05 39,48-55
+  s_d4954c38ef60ac::t_6c105849002ddb 56
+tests/mocks/cursor
+  s_d4954c38ef60ac::t_7f3a265db5348e 1-5
+.codex-plugin/plugin.json
+  s_1a0b3ed2703797::t_9ba2940580d024 19
+  s_1a0b3ed2703797::t_e32936e0f7fd27 3
+tests/mocks/git
+  s_d4954c38ef60ac::t_045cd8ab566419 1-55
+tests/mocks/codex
+  s_d4954c38ef60ac::t_1385c3e8a50e40 1-24
+tests/test_install.sh
+  s_d4954c38ef60ac::t_99203f77463a3d 1-331
+justfile
+  s_d4954c38ef60ac::t_724c1ee2b1c61e 12-15
+tests/mocks/claude
+  s_d4954c38ef60ac::t_02e24c00a786ea 1-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "e78250bda2e1bb920dd42fbb6b9bca715eb896cd",
+  "prompts": {},
+  "sessions": {
+    "s_1a0b3ed2703797": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f79f3-7e89-7390-9ed0-2d33fb594a12",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": null
+    },
+    "s_d4954c38ef60ac": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "245e541e-537b-4824-bebc-3f542cab1589",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+.claude-plugin/marketplace.json
+  s_180087c42e5a84::t_3fdecf35502807 6
+  s_180087c42e5a84::t_67a18e142fe043 1-5,7-14
+AGENTS.md
+  s_180087c42e5a84::t_86adf8f645eb96 16,26-30
+justfile
+  s_180087c42e5a84::t_775b7597fe5223 12,16-17,19
+  s_180087c42e5a84::t_468c3d083d1ae7 18
+  s_180087c42e5a84::t_ce6245b9fe3788 20
+install.sh
+  s_180087c42e5a84::t_24bbd087aa93e4 78-86,88-92,95-99,101-105,112-114
+  s_180087c42e5a84::t_bb028b3b94095e 100
+  s_180087c42e5a84::t_01b649f1633d6b 10-11,14,19-34
+  s_180087c42e5a84::t_93ec73cdd86b0a 107-111
+plugins/kamaal-super-mind/.claude-plugin/plugin.json
+  s_180087c42e5a84::t_99b3c83d223724 1-7
+README.md
+  s_180087c42e5a84::t_2b5f930f9ada72 3-5,16-19,25-27,36,38-39,46-47
+  s_180087c42e5a84::t_352ade9292127f 48
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "ee4e626894fa4489b0f3490045d42d99b93ce467",
+  "prompts": {},
+  "sessions": {
+    "s_180087c42e5a84": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ad23d25c-0115-4b64-878b-bc3e025cec7d",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}

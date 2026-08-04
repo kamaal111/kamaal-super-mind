@@ -1,0 +1,32 @@
+plugins/kamaal-super-mind/.claude-plugin/plugin.json
+  s_1de4f7751ee21e::t_f21f3ebc58d25c 6-7
+plugins/kamaal-super-mind/.cursor-plugin/plugin.json
+  s_1de4f7751ee21e::t_49c222347f7bc5 1-9
+plugins/kamaal-super-mind/.codex-plugin/plugin.json
+  s_1de4f7751ee21e::t_6a1f6bda709942 8
+justfile
+  s_1de4f7751ee21e::t_6491e391affc6f 21-25
+README.md
+  s_1de4f7751ee21e::t_3d2334c28663ed 3-5,15-21,38-39
+install.sh
+  s_1de4f7751ee21e::t_33f67c6d579541 10-11,16,21,29,32,34-35
+  s_1de4f7751ee21e::t_9dc199980c5f7e 121-139
+AGENTS.md
+  s_1de4f7751ee21e::t_740940ac715719 28-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "efba7741c94e5766324a3af56ac4387b8003bec6",
+  "prompts": {},
+  "sessions": {
+    "s_1de4f7751ee21e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c5c84fa0-9d0a-4f94-bbf8-52433d968f22",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}

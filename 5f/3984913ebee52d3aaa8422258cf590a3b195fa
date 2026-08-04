@@ -1,0 +1,30 @@
+skills/database/agents/openai.yaml
+  s_0e10e3fd808da1::t_472812df58b319 1-4
+README.md
+  s_0e10e3fd808da1::t_6f2f31379719ca 67
+skills/production-engineering/SKILL.md
+  s_0e10e3fd808da1::t_6f2f31379719ca 36
+.codex-plugin/plugin.json
+  s_0e10e3fd808da1::t_b99cf2909d5be2 3
+skills/database/SKILL.md
+  s_0e10e3fd808da1::t_472812df58b319 1-2,4-5,7,9,11,16,18,20,25,27,29,34,36
+  s_0e10e3fd808da1::t_6f2f31379719ca 3,6,8,10,12-15,17,19,21-24,26,28,30-33,35,37-39
+skills/backend/SKILL.md
+  s_0e10e3fd808da1::t_94e392396567aa 51
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "5f3984913ebee52d3aaa8422258cf590a3b195fa",
+  "prompts": {},
+  "sessions": {
+    "s_0e10e3fd808da1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fbd40-0fce-7b52-afe2-70c2d2d6db12",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}

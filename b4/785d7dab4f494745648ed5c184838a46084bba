@@ -1,0 +1,38 @@
+.codex-plugin/plugin.json
+  s_b65b462d7f7129::t_bf970ab5915639 3
+skills/backend/references/api-contract-patterns.md
+  s_b65b462d7f7129::t_a6574de2010e68 1,3-5,9-31,34-35,37,39-41,43-47,49-51,56-68,73-87
+skills/backend/agents/openai.yaml
+  s_b65b462d7f7129::t_fd5771271dd10e 2-4
+README.md
+  s_b65b462d7f7129::t_590e4bcc73736e 64
+  s_b65b462d7f7129::t_086873ecfc15c7 66
+skills/backend/SKILL.md
+  s_b65b462d7f7129::t_a6574de2010e68 37-40
+  s_b65b462d7f7129::t_fd5771271dd10e 2
+  s_b65b462d7f7129::t_086873ecfc15c7 3,6,8,18,27,34-35,41,46-47,51,61
+skills/typescript-best-practices/agents/openai.yaml
+  s_b65b462d7f7129::t_bdc52c0e9dabb0 1-4
+skills/production-engineering/SKILL.md
+  s_b65b462d7f7129::t_590e4bcc73736e 34
+  s_b65b462d7f7129::t_086873ecfc15c7 35
+skills/typescript-best-practices/SKILL.md
+  s_b65b462d7f7129::t_bdc52c0e9dabb0 1-2,4-5,7,9,11,16,18,23,25,30,32
+  s_b65b462d7f7129::t_590e4bcc73736e 3,6,8,10,12-15,17,19-22,24,26-29,31,33-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.19",
+  "base_commit_sha": "b4785d7dab4f494745648ed5c184838a46084bba",
+  "prompts": {},
+  "sessions": {
+    "s_b65b462d7f7129": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fbd2d-a721-7792-8be3-7f96370df4ac",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}

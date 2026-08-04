@@ -1,0 +1,19 @@
+CLAUDE.md
+  s_82da231e9b33e0::t_16b5449fe2c413 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "b515358ac791fb6c8ce433c4e50ca719853c04b2",
+  "prompts": {},
+  "sessions": {
+    "s_82da231e9b33e0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ff71dd1c-e938-4470-bf48-34125addd607",
+        "model": "unknown"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}

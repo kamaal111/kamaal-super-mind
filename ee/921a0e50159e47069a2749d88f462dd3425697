@@ -1,0 +1,19 @@
+plugins/kamaal-super-mind/.codex-plugin/plugin.json
+  s_4c8f8d4ea7e40f::t_eae682ffdf2136 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "ee921a0e50159e47069a2749d88f462dd3425697",
+  "prompts": {},
+  "sessions": {
+    "s_4c8f8d4ea7e40f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f79d6-2fe8-73a2-a529-67ff5d330b69",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
