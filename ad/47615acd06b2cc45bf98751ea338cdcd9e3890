@@ -1,0 +1,25 @@
+skills/java-best-practices/agents/openai.yaml
+  s_c7507bef2dde09::t_ce5e35b7509527 1-4
+README.md
+  s_c7507bef2dde09::t_84c280e0ca03a9 65
+skills/java-best-practices/SKILL.md
+  s_c7507bef2dde09::t_ea12b6f4b695c9 1-25
+skills/production-engineering/SKILL.md
+  s_c7507bef2dde09::t_06e0547d5d2276 37
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "ad47615acd06b2cc45bf98751ea338cdcd9e3890",
+  "prompts": {},
+  "sessions": {
+    "s_c7507bef2dde09": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "b59736fc-dbb5-499b-91e2-983a60c74634",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kfarah@box.com>"
+    }
+  }
+}
