@@ -1,0 +1,24 @@
+.codex-plugin/plugin.json
+  s_742a140a921f8c::t_57726aa13691fa 3
+skills/gitbutler-multi-agent/SKILL.md
+  s_742a140a921f8c::t_548a3c4e4e7e6b 44-47
+  s_742a140a921f8c::t_18c0bd392ef252 48-53
+skills/production-engineering/SKILL.md
+  s_742a140a921f8c::t_4ada3644bbfc69 25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "4b6674b205874f488a09998a5a6b9d0c9cf97d57",
+  "prompts": {},
+  "sessions": {
+    "s_742a140a921f8c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "57761bf9-d16f-491f-b58c-44cf30361965",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
