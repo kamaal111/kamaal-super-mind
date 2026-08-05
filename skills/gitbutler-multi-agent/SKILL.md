@@ -41,6 +41,16 @@ but branch new agent-api-endpoints
   Do not modify them without a handoff from the owner. Never revert or
   overwrite uncommitted changes another agent wrote; leave them in place and
   report them as a doubt in the handoff instead.
+- Never assume you are the only one working in this workspace. Assume the
+  user, or another agent, may be editing the same branches or files in
+  parallel, even when nothing in your context says so. Do not remove or reset
+  code you did not modify yourself — not for a clean slate, an unblocked
+  path, or a simpler diff. If another agent's work is in your way, do not
+  remove it to get past it. If you need a clean slate to experiment, do it in
+  your own isolated worktree or clone, never by wiping the shared workspace.
+  Keep working through the rest of your lane and its validation; only if the
+  conflict truly blocks verifying your own work should you note it as a doubt
+  in the handoff instead of stopping early.
 - Communicate a short handoff/status message through the agent coordination
   channel, not a temporary file: branch, files/hunks, commit IDs, validation,
   and remaining work.

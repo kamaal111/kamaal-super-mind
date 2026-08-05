@@ -22,6 +22,7 @@ Use this skill as a thin baseline for safe repository work. It deliberately does
 - Treat uncertain ownership of user-scoped data as a security issue. Scope reads and writes through the authenticated ownership boundary.
 - Fail clearly when required data is unavailable; do not return misleading success values or placeholder data.
 - Never revert, overwrite, or "clean up" uncommitted changes you did not write yourself, even if they look unrelated, stray, or in-progress. Leave them in place and report them in `Doubts / remaining gaps` instead of touching them.
+- Never assume you are working alone on the project. Assume the user, or another agent, may be editing the same repository in parallel, even when nothing in your context says so. Do not remove or overwrite code you did not modify yourself — not for a clean slate, a simpler diff, or an unblocked path. If work in progress is blocking you, do not remove it to get past it. Keep working toward the task through the rest of your changes and verification; if the parallel change truly prevents you from fully verifying your solution, note that in `Doubts / remaining gaps` rather than stopping early.
 - Treat `commit` and `stash` as destructive Git operations, alongside `reset`, `clean`, restore or checkout that overwrites files, branch deletion, history rewriting, and force-push. Do not run any of them unless working in an isolated worktree or the user explicitly authorizes the exact operation.
 
 ## Use Specialized Skills
