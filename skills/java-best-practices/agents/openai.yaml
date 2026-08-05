@@ -1,0 +1,4 @@
+interface:
+  display_name: "Java Best Practices"
+  short_description: "Write clear Java code."
+  default_prompt: "Use $java-best-practices to implement this Java change."
