@@ -43,8 +43,7 @@ When changing a skill yourself, refresh the Codex plugin version before
 committing so Codex recognizes the update:
 
 ```bash
-python3 ~/.codex/skills/.system/plugin-creator/scripts/update_plugin_cachebuster.py \
-  ~/.kamaal-super-mind
+just update-cachebuster
 ```
 
 Claude Code needs no equivalent step: its `plugin.json` omits `version`, so it

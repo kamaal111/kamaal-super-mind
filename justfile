@@ -13,6 +13,10 @@ check:
 test:
     bash tests/test_install.sh
 
+# Refresh the Codex plugin manifest cache-buster after changing plugin content.
+update-cachebuster:
+    python3 ~/.codex/skills/.system/plugin-creator/scripts/update_plugin_cachebuster.py .
+
 # Register this checkout as a local Codex marketplace for manual discovery testing.
 validate-marketplace:
     codex plugin marketplace add .

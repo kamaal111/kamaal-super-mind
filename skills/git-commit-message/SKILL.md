@@ -34,10 +34,20 @@ Explain the meaningful product or logic change without narrating routine enginee
 
 ## Body Rules
 
-- Always use a `**Summary**` section followed by a `**Solution**` section for a commit body.
-- In `**Summary**`, state the task or problem being solved in concise user-facing terms.
-- In `**Solution**`, explain how the commit achieves that task, focusing on the core implementation choices.
-- Keep the sections concise; do not spend body space on routine test, formatting, or lint work unless it is itself the change.
+- Always use a `**Summary**` section followed by a `**Changes**` section for a commit body.
+- In `**Summary**`, state the user-facing outcome or motivation in concise terms.
+- In `**Changes**`, describe the meaningful behavior, affected boundaries, and
+  implementation decisions—not a file-by-file recap.
+- Include the details needed to assess correctness: changed contracts,
+  validation or error behavior, data flow, compatibility impact, and deliberate
+  tradeoffs when relevant.
+- Be specific: name the primary component or workflow and explain what it now
+  does differently. Aim for one to three concise paragraphs or bullets.
+- When a public interface, schema, configuration, or command contract changes,
+  include a compact code example when it makes the new behavior clearer. Show
+  only the changed shape and state why that shape is needed.
+- Do not mention routine tests, formatting, lint work, or lockfile updates
+  unless they are the purpose of the commit or reveal an important constraint.
 
 Example:
 
@@ -47,12 +57,34 @@ Retry transient upstream import failures
 **Summary**
 Imports no longer fail immediately when the upstream service times out.
 
-**Solution**
+**Changes**
 The importer retries transient fetch failures with a short backoff and marks
 the job failed only after the final attempt.
 
 Signed-off-by: Humpty Dumpty <humpty.dumpty@example.com>
 ```
+
+Interface-change example:
+
+````text
+Add a per-request timeout option
+
+**Summary**
+Callers can override the client timeout for unusually slow operations.
+
+**Changes**
+Accept `timeoutMs` on individual requests, which overrides the client default
+without changing existing callers.
+
+```ts
+client.request({ path: "/reports", timeoutMs: 30_000 });
+```
+
+The per-request option keeps the default conservative while allowing report
+generation to wait longer.
+
+Signed-off-by: Humpty Dumpty <humpty.dumpty@example.com>
+````
 
 ## Scope Discipline
 
