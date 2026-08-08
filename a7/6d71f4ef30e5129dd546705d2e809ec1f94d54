@@ -1,0 +1,38 @@
+skills/git-commit-message/SKILL.md
+  s_07c7240ccd3a66::t_222619d8f544c8 39-45,49-50
+  s_07c7240ccd3a66::t_72d2d71031041e 37-38,60
+  s_07c7240ccd3a66::t_d678453c0a034d 69,87
+  s_07c7240ccd3a66::t_e657b442c70fe5 46-48,67-68,70-84
+  s_07c7240ccd3a66::t_8e04e10aa6571f 85-86
+  s_07c7240ccd3a66::t_92aa8fb58f0c55 88
+.codex-plugin/plugin.json
+  s_c3fa7b3b180352::t_921a1faaac77c7 3
+justfile
+  s_c3fa7b3b180352::t_e2f9ba6e86038b 16-19
+README.md
+  s_c3fa7b3b180352::t_e2f9ba6e86038b 46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "a76d71f4ef30e5129dd546705d2e809ec1f94d54",
+  "prompts": {},
+  "sessions": {
+    "s_07c7240ccd3a66": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fe1b2-956f-7653-a13e-143f43db27bc",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    },
+    "s_c3fa7b3b180352": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fe287-34e0-7ad3-9b96-9f4f582010bc",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
