@@ -42,6 +42,7 @@ Load the relevant plugin skill instead of recreating its workflow:
 - `generated-api-client-endpoint` for generated client endpoints
 - `dependency-upgrades` for dependency work
 - `git-commit-message` for drafting commit or pull-request text
+- `commit` for inspecting and committing pending work with scope and branch safety
 - `gitbutler-cli`, `gitbutler-multi-agent`, or `gitbutler-session-commit` for GitButler work
 
 ## Verify And Report

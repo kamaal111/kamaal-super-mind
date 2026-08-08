@@ -54,6 +54,7 @@ tracks the git commit SHA and treats every commit as a new version.
 - `production-engineering` — shared implementation, verification, and safety guidance
 - `plan-mode` — concise, implementation-ready planning and agent handoffs
 - `git-commit-message` — commit and pull-request writing
+- `commit` — inspect and commit pending work with Git and GitButler routing
 - `dependency-upgrades` — safe dependency upgrades
 - `api-integration-tests` — real endpoint and persistence coverage
 - `swift-snapshot-tests` — SwiftUI snapshot test coverage for a given screen

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Commit"
+  short_description: "Commit pending work with a precise message."
+  default_prompt: "Use $commit to inspect and commit the pending changes."
