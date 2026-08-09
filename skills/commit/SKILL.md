@@ -99,6 +99,13 @@ diff.
    remain uncommitted. Report the commit identifier, branch, scope, message
    summary, and verification result.
 
+After the user has explicitly requested a commit, do not pause to ask for
+approval before completing the authorized commit workflow. Once a commit is
+successfully created, the final response must contain only the exact commit
+title and description used for that commit. Do not append the commit hash,
+branch, verification details, or a request for further approval to that final
+response.
+
 Never push or publish automatically. Push only when the user explicitly asks
 for a push in the current request, and confirm the intended remote/branch when
 the request does not identify them. If there are no eligible pending changes,
