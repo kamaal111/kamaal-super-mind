@@ -5,116 +5,61 @@ description: Inspect and commit pending repository work, including changes made 
 
 # Commit Pending Work
 
-Commit the repository's pending work after understanding the final diff. This
-skill is an execution workflow, not a substitute for implementation: it must
-inspect the worktree even when another agent or the user wrote every change.
+Commit the requested work after inspecting the actual diff. Do not push,
+publish, or include unrelated changes.
 
-## 1. Establish scope and repository mode
+## Workflow
 
-1. Read repository instructions (`AGENTS.md` and equivalent files) before
-   mutating anything.
-2. Inspect the current directory and repository state with read-only commands:
-   `git status --short --branch`, `git diff`, `git diff --cached`, and the
-   relevant recent commit messages. Include untracked files in the review.
-3. Detect GitButler before choosing a mutation command. Run
-   `but status --format=agent` and, when it succeeds as a GitButler workspace,
-   also inspect `but diff` and `but branch list`. Do not use plain Git commit
-   mutations in an active GitButler workspace.
-4. Treat the user's request as authorization to create a commit, but do not
-   infer authorization to push, open a PR, land a branch, rewrite history, or
-   delete work. A request to commit never implies a request to push.
+1. Read repository instructions. Inspect:
+   `git status --short --branch`, `git diff`, `git diff --cached`, recent
+   commits, and untracked files.
 
-## 2. Resolve the commit target
+2. Detect GitButler without invoking `but`: check for the local branch
+   `gitbutler/workspace` with
+   `git show-ref --verify --quiet refs/heads/gitbutler/workspace`.
+   If it is absent, use plain Git. Do not run `but status`, `but setup`, or
+   another setup-triggering command just to detect GitButler.
 
-For plain Git:
+   - **Plain Git:** commit all pending work by default. If the user names
+     files or a subset, commit only that scope. Stop if the scope contains
+     credentials, private keys, generated secrets, or unrelated work.
+   - **GitButler:** after the marker check succeeds, load `gitbutler-cli` and
+     `gitbutler-session-commit`. Use `but branch list` to resolve the target.
+     Follow an explicitly named branch or commit. Otherwise, use the latest
+     real commit on the only applied branch. If multiple branches or possible
+     targets remain, ask the user which one to use. Keep unassigned changes
+     out unless the user clearly includes them.
 
-- By default, commit all pending tracked and untracked work in the repository,
-  because “commit” in this skill means the current uncommitted work unless the
-  user narrows the scope.
-- If the user names files, a feature, or a subset, include only that scope and
-  leave the rest untouched.
-- Never silently include obvious credentials, private keys, generated secrets,
-  or unrelated user data. Stop and report the exact path if such a file is in
-  the requested scope.
+3. Understand the resolved final diff. Check that it is one coherent change
+   and that the tests or checks relevant to it are known. Do not rewrite or
+   discard unrelated work to make a commit possible.
 
-For GitButler:
+4. Load `git-commit-message`. Give it the final diff, the user's intent, and
+   any requested wording. Use its resulting title, body, trailer, and line
+   length rules.
 
-- Before taking any GitButler action, load and follow the existing
-  `gitbutler-cli` skill. Use `gitbutler-session-commit` for the commit flow
-  and its integration with `git-commit-message`. Those skills are the source
-  of truth for `but` commands, staging, branch ownership, and recovery. Do not
-  recreate or override their procedures here.
-- Resolve the target virtual branch before inspecting or mutating its history.
-  If exactly one virtual branch is applied and the user did not name a commit
-  or branch, target that branch's latest real commit by default. Inspect that
-  commit's complete diff and understand what it does before drafting any
-  message. The synthetic `gitbutler/workspace` integration commit is only a
-  workspace projection and must never be selected as the default target just
-  because it is `HEAD`.
-- If the user names a commit, use that exact commit. If the user names a
-  branch, use that branch's latest real commit unless a commit is also named.
-- When more than one virtual branch is applied, or the requested branch or
-  commit cannot be resolved unambiguously, ask which target to use.
-- Treat unassigned changes and changes assigned to another branch as
-  user-owned until the target is clear. If more than one branch fits, or no
-  branch fits, ask which virtual branch should receive the changes.
-- Reuse a clearly matching branch. Otherwise create a concise task-specific
-  virtual branch only when the user's intent clearly identifies the task.
-- After the target is resolved, hand control to those specialized skills for
-  branch creation/reuse, file or hunk staging, staged-diff inspection, and
-  committing. Do not switch branches or use plain Git commit mutations in an
-  active GitButler workspace.
+5. Run the narrowest relevant checks when practical. Stage only the resolved
+   scope, then inspect the staged diff and status again.
 
-## 3. Understand the final diff
+6. Commit through the repository's mode:
 
-Read enough source, tests, configuration, and nearby documentation to explain
-what the pending code actually does. Do not rely on the conversation or on
-which agent authored it. Check for:
+   - Plain Git: use `git add` and `git commit`.
+   - GitButler: use `but stage` and `but commit <branch> --only`.
 
-- the primary behavior or contract change;
-- affected boundaries, error handling, and compatibility impact;
-- tests or verification that materially support the change;
-- unrelated, partial, or conflicting work mixed into the requested scope.
+   In GitButler, never use plain-Git commit, rebase, checkout, reset, or
+   history-rewrite commands.
 
-If the requested scope contains unrelated changes that cannot form one
-coherent commit, ask whether to split them or commit them together. Do not
-rewrite or discard them to make the commit easier.
+7. Verify the created commit and confirm no requested changes remain. Report
+   the commit, branch, scope, message summary, and checks performed.
 
-## 4. Delegate message construction
+## Boundaries
 
-Load and follow the existing `git-commit-message` skill. Give it the final
-staged diff, the relevant user intent, and any requested wording; use its
-result as the commit message. Do not duplicate that skill's title, body,
-trailer, identity, or line-length rules here. If the user supplies an exact
-message, pass it to `git-commit-message` for handling alongside the final
-diff.
-
-## 5. Verify and commit
-
-1. Run the narrowest relevant checks when practical. Do not invent a broad
-   test suite for an unfamiliar repository. If checks are unavailable,
-   expensive, or the user explicitly asks for an immediate commit, proceed
-   and report that verification was skipped.
-2. Reinspect the exact staged diff and status immediately before committing.
-3. For plain Git, stage the requested scope (use `git add -A` only when the
-   resolved scope is the whole worktree), then run `git commit` with the
-   constructed message. Include untracked files intentionally; do not use
-   `git commit -am` as a substitute.
-4. For GitButler, follow `gitbutler-session-commit` and commit through `but`
-   using only the resolved branch and selected change IDs.
-5. Inspect the created commit (`git show --stat --oneline HEAD` for plain Git,
-   or the corresponding `but show` output) and confirm no requested changes
-   remain uncommitted. Report the commit identifier, branch, scope, message
-   summary, and verification result.
-
-After the user has explicitly requested a commit, do not pause to ask for
-approval before completing the authorized commit workflow. Once a commit is
-successfully created, the final response must contain only the exact commit
-title and description used for that commit. Do not append the commit hash,
-branch, verification details, or a request for further approval to that final
-response.
-
-Never push or publish automatically. Push only when the user explicitly asks
-for a push in the current request, and confirm the intended remote/branch when
-the request does not identify them. If there are no eligible pending changes,
-report that no commit was created.
+- A commit request authorizes creating the commit only. Do not push, open a
+  pull request, land a branch, delete work, or rewrite other history.
+- Preserve changes you did not make unless the user explicitly includes them.
+- If the target, scope, ownership, or repository state is ambiguous, ask
+  before mutating anything.
+- If a commit fails or conflicts, preserve the state and report the exact
+  condition; do not improvise a reset.
+- After an explicitly requested commit succeeds, the final response must
+  contain only the exact commit title and description used.

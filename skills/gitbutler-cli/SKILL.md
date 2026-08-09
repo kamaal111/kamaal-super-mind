@@ -11,19 +11,42 @@ branch (also called a stack) that owns it.
 
 ## Start With The Workspace
 
+Do not use `but status` to detect GitButler. GitButler may prompt to set up an
+ordinary Git repository. First check for its workspace marker without invoking
+`but`:
+
+```bash
+git show-ref --verify --quiet refs/heads/gitbutler/workspace
+```
+
+Only if that check succeeds should you run `but status`, `but diff`, or other
+GitButler commands. If it fails, use plain Git and do not run `but setup`.
+Ask the user to set up GitButler separately if they want that workflow.
+
+If a GitButler command reports `GitButler mode exit required`, normal
+GitButler operations are unavailable until the workspace is migrated out of
+that mode. Do not retry the blocked command or use plain-Git history edits.
+Inspect `but teardown --help`, `git status`, and `git branch` first. Explain
+that `but teardown` creates an oplog snapshot, checks out a local branch, and
+preserves dangling workspace commits. Run
+`but teardown --checkout-to <matching-local-branch>` only after the user
+explicitly authorizes leaving GitButler mode. Then verify the checked-out
+branch and workspace status. Resume using plain Git; do not run `but setup`
+unless the user asks to return to GitButler mode.
+
 1. Read repository instructions and inspect the state before changing it:
 
    ```bash
-   but status --format=agent
+   but status
    but diff
    but branch list
    ```
 
 2. Treat unassigned changes and changes assigned to another branch as someone
    else's work until the user confirms otherwise. Never silently discard them.
-3. Prefer `but ... --format=agent` for detailed inspection and `--format=json`
-   when structured output helps. Use `but <command> --help` when flags or
-   behavior are uncertain—the installed GitButler version is authoritative.
+3. Prefer `but status --json` when structured output helps. Use
+   `but <command> --help` when flags or behavior are uncertain—the installed
+   GitButler version is authoritative.
 
 ## Core Loop: Create, Assign, Commit
 
@@ -35,7 +58,7 @@ Create a focused virtual branch, then route only its changes to that branch:
 
 ```bash
 but branch new feature-short-description
-but status --format=agent
+but status
 but stage <file-or-hunk-id> feature-short-description
 but commit feature-short-description --only -m "feat: explain the change"
 ```
@@ -99,7 +122,7 @@ GitButler:
 ```bash
 but pull --check
 but pull
-but status --format=agent
+but status
 but resolve <conflicted-commit>
 # edit the conflict markers
 but resolve status

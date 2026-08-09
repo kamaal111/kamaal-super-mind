@@ -5,7 +5,9 @@ description: Coordinate multiple agents in a shared GitButler workspace using vi
 
 # GitButler Multi-Agent Coordination
 
-Apply `gitbutler-cli` for all GitButler commands. GitButler can keep multiple
+Apply `gitbutler-cli` for all GitButler commands. Confirm the
+`gitbutler/workspace` marker before invoking `but`; never use `but` to detect
+or set up an ordinary Git repository. GitButler can keep multiple
 virtual branches applied in one workspace, making ownership and later
 reorganization explicit. It does not remove the need to coordinate physical
 file edits or serialize conflicting workspace mutations.
@@ -27,7 +29,7 @@ One coordinator should inspect the workspace, create a recovery point, and
 announce ownership before parallel work begins:
 
 ```bash
-but status --format=agent
+but status
 but oplog snapshot --message "Before multi-agent work"
 but branch new agent-auth-session
 but branch new agent-api-endpoints
@@ -60,7 +62,7 @@ but branch new agent-api-endpoints
 Each agent works only in its lane:
 
 ```bash
-but status --format=agent
+but status
 # make changes only in the assigned scope
 but stage <file-or-hunk-id> agent-auth-session
 but commit agent-auth-session --only -m "feat: add session validation"
@@ -73,7 +75,7 @@ all change shared GitButler state; announce the operation and wait for it to
 finish before another agent runs one. Independent source edits may proceed in
 parallel only when their scopes do not overlap.
 
-Before committing, re-run `but status --format=agent`. If another agent's
+Before committing, re-run `but status`. If another agent's
 changes are present, stage only the current lane's IDs and use `--only`.
 
 ## Handoffs And Review

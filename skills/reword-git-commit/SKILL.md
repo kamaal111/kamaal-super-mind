@@ -18,8 +18,12 @@ history, push, or amend unrelated work. Construct the replacement with the
    branch. An explicit commit target takes precedence over the default. An
    explicit branch means the last commit on that branch unless the user also
    names a commit.
-3. Detect GitButler with `but status --format=agent`. If it succeeds, inspect
-   `but branch list` and use GitButler commands for every history mutation.
+3. Detect GitButler without invoking `but`: check for the local branch
+   `gitbutler/workspace` with
+   `git show-ref --verify --quiet refs/heads/gitbutler/workspace`. If it is
+   absent, use plain Git. Do not run `but status` or `but setup` just to detect
+   GitButler. If the marker is present, inspect `but status` and
+   `but branch list`, then use GitButler commands for every history mutation.
 4. When the user supplies no extra message, default to the last commit of the
    resolved branch/current branch. In a GitButler workspace, count the virtual
    branches before choosing that default. If more than one branch exists and
@@ -67,7 +71,7 @@ Use `but reword <target>` for the resolved commit/branch target, following
 `gitbutler-cli` for GitButler safety and the installed command's `--help` when
 needed. Do not use `git commit --amend`, `git rebase`, checkout, reset, or
 other plain-Git history mutations in an active GitButler workspace. Inspect
-`but status --format=agent`, `but show <branch-or-commit>`, and the resulting
+`but status`, `but show <branch-or-commit>`, and the resulting
 commit message after the operation.
 
 If GitButler reports multiple branches and no branch was named for a default
