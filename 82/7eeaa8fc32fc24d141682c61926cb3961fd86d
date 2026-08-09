@@ -1,0 +1,36 @@
+skills/reword-git-commit/agents/openai.yaml
+  s_e969a0a2702ede::t_7f43685d8b7088 1-4
+skills/reword-git-commit/SKILL.md
+  s_e969a0a2702ede::t_7f43685d8b7088 1-2,4-7
+  s_e969a0a2702ede::t_fe5b6e94ed9939 3,8-84
+skills/production-engineering/SKILL.md
+  s_e969a0a2702ede::t_b9a2a22bdc4ffc 45
+skills/commit/SKILL.md
+  s_ca216d12bc2d9e::t_5f19c444a3cbaf 47-57
+README.md
+  s_e969a0a2702ede::t_b9a2a22bdc4ffc 57
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "827eeaa8fc32fc24d141682c61926cb3961fd86d",
+  "prompts": {},
+  "sessions": {
+    "s_ca216d12bc2d9e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fe814-713d-77f0-9328-d815415f6e1b",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": null
+    },
+    "s_e969a0a2702ede": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fe805-80c4-7423-8589-327587864e55",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
