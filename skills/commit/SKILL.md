@@ -44,9 +44,17 @@ For GitButler:
   and its integration with `git-commit-message`. Those skills are the source
   of truth for `but` commands, staging, branch ownership, and recovery. Do not
   recreate or override their procedures here.
-- Identify a virtual branch from the user's wording, a clearly matching
-  applied branch, or an existing branch whose purpose unambiguously matches
-  the diff.
+- Resolve the target virtual branch before inspecting or mutating its history.
+  If exactly one virtual branch is applied and the user did not name a commit
+  or branch, target that branch's latest real commit by default. Inspect that
+  commit's complete diff and understand what it does before drafting any
+  message. The synthetic `gitbutler/workspace` integration commit is only a
+  workspace projection and must never be selected as the default target just
+  because it is `HEAD`.
+- If the user names a commit, use that exact commit. If the user names a
+  branch, use that branch's latest real commit unless a commit is also named.
+- When more than one virtual branch is applied, or the requested branch or
+  commit cannot be resolved unambiguously, ask which target to use.
 - Treat unassigned changes and changes assigned to another branch as
   user-owned until the target is clear. If more than one branch fits, or no
   branch fits, ask which virtual branch should receive the changes.

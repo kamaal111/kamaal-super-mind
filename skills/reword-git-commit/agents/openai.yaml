@@ -1,0 +1,4 @@
+interface:
+  display_name: "Reword Git Commit"
+  short_description: "Safely rewrite a commit message from its diff"
+  default_prompt: "Use $reword-git-commit to reword the target commit from its actual changes."
