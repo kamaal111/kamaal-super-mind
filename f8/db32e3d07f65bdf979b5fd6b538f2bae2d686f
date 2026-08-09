@@ -1,0 +1,33 @@
+skills/gitbutler-cli/SKILL.md
+  s_e969a0a2702ede::t_93d4a186773c7e 29,36-38,50,114
+  s_e969a0a2702ede::t_f4f48c93424846 14-25
+skills/commit/SKILL.md
+  s_e969a0a2702ede::t_de3964a1f4c5c2 8-16,22-25,27-65
+  s_e969a0a2702ede::t_f4f48c93424846 17-21,26
+skills/reword-git-commit/SKILL.md
+  s_e969a0a2702ede::t_f4f48c93424846 21-26
+  s_e969a0a2702ede::t_93d4a186773c7e 74
+.codex-plugin/plugin.json
+  s_e969a0a2702ede::t_ca8b1ee27cd9a2 3
+skills/gitbutler-session-commit/SKILL.md
+  s_e969a0a2702ede::t_f4f48c93424846 10-14
+skills/gitbutler-multi-agent/SKILL.md
+  s_e969a0a2702ede::t_f4f48c93424846 8-10
+  s_e969a0a2702ede::t_93d4a186773c7e 32,65,78
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "f8db32e3d07f65bdf979b5fd6b538f2bae2d686f",
+  "prompts": {},
+  "sessions": {
+    "s_e969a0a2702ede": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fe805-80c4-7423-8589-327587864e55",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
