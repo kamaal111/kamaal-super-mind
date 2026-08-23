@@ -50,5 +50,5 @@ Load the relevant plugin skill instead of recreating its workflow:
 
 - Run the narrowest relevant check while iterating, then the repository-required final aggregate verification for code changes. Do not claim code completion while that required verification fails.
 - For documentation-only or skill-only changes, skip code verification unless the repository or user requires it, and say that it was skipped.
-- In the final response, state how you understood the user's goal, what changed, and every verification command and result.
-- End the final response with a `Doubts / remaining gaps` section. State every doubt, tradeoff, environment issue, or remaining gap there; write `None` explicitly when there are no doubts or gaps.
+- Structure the final response with exactly these headings, in this order: `Understanding`, `Changes`, `Verification`, `Doubts / remaining gaps`. Read [references/final-report-shape.md](references/final-report-shape.md) for the required content of each section and compliant/non-compliant examples.
+- Write `None` explicitly under `Doubts / remaining gaps` when there are no doubts or gaps; never omit the heading.
