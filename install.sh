@@ -2,13 +2,10 @@
 
 set -euo pipefail
 
-REPOSITORY_URL="https://github.com/kamaal111/kamaal-super-mind.git"
-INSTALL_DIRECTORY="${KAMAAL_SUPER_MIND_DIR:-$HOME/.kamaal-super-mind}"
-PLUGIN_NAME="kamaal-super-mind"
-MARKETPLACE_NAME="kamaal-super-mind"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=lib/common.sh
+source "$SCRIPT_DIR/lib/common.sh"
 
-# Dry runs print the actions without requiring Git, Codex, Claude Code,
-# Cursor, or changing any files.
 if [[ "${1:-}" == "--dry-run" ]]; then
   printf 'Would clone or update %s at %s.\n' "$REPOSITORY_URL" "$INSTALL_DIRECTORY"
   printf 'Would register marketplace %s and install %s@%s in Codex and/or Claude Code.\n' \
@@ -18,38 +15,26 @@ if [[ "${1:-}" == "--dry-run" ]]; then
   exit 0
 fi
 
-# The rest of the script needs Git to download the plugin, plus at least one
-# of Codex, Claude Code, or Cursor to install it into.
 if ! command -v git >/dev/null 2>&1; then
   printf 'Error: git must be installed before installing Kamaal Super Mind.\n' >&2
   exit 1
 fi
 
-have_codex=0
-have_claude=0
-have_cursor=0
-command -v codex >/dev/null 2>&1 && have_codex=1
-command -v claude >/dev/null 2>&1 && have_claude=1
-{ command -v cursor >/dev/null 2>&1 || [[ -d "$HOME/.cursor" ]]; } && have_cursor=1
+detect_harnesses
 
 if [[ "$have_codex" -eq 0 && "$have_claude" -eq 0 && "$have_cursor" -eq 0 ]]; then
   printf 'Error: install Codex, Claude Code, or Cursor before installing Kamaal Super Mind.\n' >&2
   exit 1
 fi
 
-if [[ -d "$INSTALL_DIRECTORY/.git" ]]; then
+if is_managed_checkout; then
   printf 'Updating Kamaal Super Mind...\n'
 
-  # Remember the last remote revision before fetching. This lets us distinguish
-  # a normal upstream history rewrite from commits someone made in this checkout.
+  # Distinguishes an upstream force-push (safe to replace) from local commits.
   previous_upstream="$(git -C "$INSTALL_DIRECTORY" rev-parse --verify refs/remotes/origin/main 2>/dev/null || true)"
   git -C "$INSTALL_DIRECTORY" fetch origin main
 
-  # This checkout is installer-managed only; nobody should hand-edit it, but
-  # tooling (for example a Codex cache-buster bump) can leave uncommitted
-  # changes to tracked files behind. Stash those so they are recoverable via
-  # `git stash list` instead of blocking every future update or being
-  # silently discarded by the reset below.
+  # Stash rather than discard, in case tooling left uncommitted changes here.
   if ! git -C "$INSTALL_DIRECTORY" diff --quiet || \
     ! git -C "$INSTALL_DIRECTORY" diff --cached --quiet; then
     printf 'Stashing local changes in %s before updating...\n' "$INSTALL_DIRECTORY"
@@ -57,9 +42,7 @@ if [[ -d "$INSTALL_DIRECTORY/.git" ]]; then
       -m "kamaal-super-mind installer: auto-stashed before update $(date -u +%Y-%m-%dT%H:%M:%SZ)"
   fi
 
-  # Do not discard commits created locally. An older remote revision that merely
-  # became obsolete after a force-push is safe to replace; a newer local commit
-  # is not.
+  # A newer local commit must not be discarded; an obsolete force-pushed one may be.
   if [[ -n "$previous_upstream" ]] && \
     [[ "$previous_upstream" != "$(git -C "$INSTALL_DIRECTORY" rev-parse HEAD)" ]] && \
     git -C "$INSTALL_DIRECTORY" merge-base --is-ancestor "$previous_upstream" HEAD; then
@@ -68,24 +51,18 @@ if [[ -d "$INSTALL_DIRECTORY/.git" ]]; then
     exit 1
   fi
 
-  # Make this managed checkout exactly match the newly fetched main branch.
-  # Unlike `git pull --ff-only`, this also succeeds when upstream was force-pushed.
+  # Unlike `git pull --ff-only`, this also succeeds after an upstream force-push.
   git -C "$INSTALL_DIRECTORY" reset --hard FETCH_HEAD
 elif [[ -e "$INSTALL_DIRECTORY" ]]; then
-  # Avoid treating an unrelated directory as a plugin checkout.
-  printf 'Error: %s exists but is not a Kamaal Super Mind checkout.\n' \
-    "$INSTALL_DIRECTORY" >&2
-  exit 1
+  error_not_managed "$INSTALL_DIRECTORY" "checkout"
 else
-  # This is the first installation, so create the checkout from scratch.
   printf 'Downloading Kamaal Super Mind...\n'
   git clone "$REPOSITORY_URL" "$INSTALL_DIRECTORY"
 fi
 
 if [[ "$have_codex" -eq 1 ]]; then
-  # Register the checkout as a Codex marketplace. Re-registering an existing
-  # marketplace may report an error, so confirm it is already present before
-  # treating that result as a real failure.
+  # Re-registering an existing marketplace may error, so check plugin list
+  # before treating that as a real failure.
   if ! codex plugin marketplace add "$INSTALL_DIRECTORY"; then
     if ! codex plugin list | grep -Fq "Marketplace \`$MARKETPLACE_NAME\`"; then
       printf 'Error: Codex could not register the marketplace.\n' >&2
@@ -93,16 +70,14 @@ if [[ "$have_codex" -eq 1 ]]; then
     fi
   fi
 
-  # Install or update the plugin from the marketplace we just registered.
   codex plugin add "$PLUGIN_NAME@$MARKETPLACE_NAME"
 
   printf 'Kamaal Super Mind is installed for Codex. Start a new Codex task to use it.\n'
 fi
 
 if [[ "$have_claude" -eq 1 ]]; then
-  # Register the checkout as a Claude Code marketplace. Re-registering an
-  # existing marketplace may report an error, so confirm it is already
-  # present before treating that result as a real failure.
+  # Re-registering an existing marketplace may error, so check marketplace
+  # list before treating that as a real failure.
   if ! claude plugin marketplace add "$INSTALL_DIRECTORY"; then
     if ! claude plugin marketplace list --json | grep -Eq "\"name\"[[:space:]]*:[[:space:]]*\"$MARKETPLACE_NAME\""; then
       printf 'Error: Claude Code could not register the marketplace.\n' >&2
@@ -111,8 +86,6 @@ if [[ "$have_claude" -eq 1 ]]; then
     claude plugin marketplace update "$MARKETPLACE_NAME"
   fi
 
-  # Install the plugin from the marketplace we just registered. If it is
-  # already installed, update it to the checkout's latest commit instead.
   if ! claude plugin install "$PLUGIN_NAME@$MARKETPLACE_NAME"; then
     claude plugin update "$PLUGIN_NAME@$MARKETPLACE_NAME"
   fi
@@ -121,26 +94,16 @@ if [[ "$have_claude" -eq 1 ]]; then
 fi
 
 if [[ "$have_cursor" -eq 1 ]]; then
-  # Cursor discovers plugins placed under ~/.cursor/plugins/local without any
-  # marketplace registration or install command, so a symlink to the checkout
-  # is enough and stays current whenever the checkout is updated.
+  # Cursor discovers plugins under ~/.cursor/plugins/local with no
+  # marketplace/install step, so a symlink to the checkout is enough.
   cursor_plugin_link="$HOME/.cursor/plugins/local/$PLUGIN_NAME"
   mkdir -p "$HOME/.cursor/plugins/local"
-
-  if [[ -L "$cursor_plugin_link" ]]; then
-    rm "$cursor_plugin_link"
-  elif [[ -e "$cursor_plugin_link" ]]; then
-    printf 'Error: %s exists but is not a Kamaal Super Mind symlink.\n' "$cursor_plugin_link" >&2
-    exit 1
-  fi
-
+  remove_symlink_if_present "$cursor_plugin_link"
   ln -s "$INSTALL_DIRECTORY" "$cursor_plugin_link"
 
-  # cursor-agent (the CLI) has a known parity gap where it never registers
-  # skills bundled inside a plugin, even though the desktop app does:
+  # Workaround: cursor-agent CLI doesn't register plugin-bundled skills, so
+  # also symlink each skill into ~/.agents/skills directly.
   # https://forum.cursor.com/t/cursor-agent-cli-does-not-register-skills-from-plugins-ide-does-parity-gap/158947
-  # As a workaround, also symlink each skill directly into ~/.agents/skills,
-  # a path some Cursor CLI versions scan independently of the plugin system.
   agents_skills_dir="$HOME/.agents/skills"
   mkdir -p "$agents_skills_dir"
 
@@ -149,14 +112,7 @@ if [[ "$have_cursor" -eq 1 ]]; then
 
     skill_name="$(basename "$skill_dir")"
     skill_link="$agents_skills_dir/$skill_name"
-
-    if [[ -L "$skill_link" ]]; then
-      rm "$skill_link"
-    elif [[ -e "$skill_link" ]]; then
-      printf 'Error: %s exists but is not a Kamaal Super Mind symlink.\n' "$skill_link" >&2
-      exit 1
-    fi
-
+    remove_symlink_if_present "$skill_link"
     ln -s "${skill_dir%/}" "$skill_link"
   done
 

@@ -4,14 +4,18 @@ alias z := zed
 default:
     @just --list
 
-# Check the installer without changing a Codex installation.
+# Check the installer and uninstaller without changing a Codex installation.
 check:
     bash -n install.sh
     bash install.sh --dry-run
+    bash -n uninstall.sh
+    bash uninstall.sh --dry-run
 
-# Run install.sh's automated test suite against mocked git/codex/claude/cursor.
+# Run install.sh's and uninstall.sh's automated test suites against mocked
+# git/codex/claude/cursor.
 test:
     bash tests/test_install.sh
+    bash tests/test_uninstall.sh
 
 # Refresh the Codex plugin manifest cache-buster after changing plugin content.
 update-cachebuster:
