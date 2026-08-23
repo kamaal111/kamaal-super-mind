@@ -1,0 +1,38 @@
+.codex-plugin/plugin.json
+  s_6df5c5f115ad13::t_f0aa394226126e 3
+uninstall.sh
+  s_6df5c5f115ad13::t_e9814f3ec73105 5,12-19,21-23
+  s_6df5c5f115ad13::t_0fd0b163b0170a 6-11
+  s_6df5c5f115ad13::t_85124f47d0a801 20
+install.sh
+  s_6df5c5f115ad13::t_e9814f3ec73105 5,12-19,21-23
+  s_6df5c5f115ad13::t_0fd0b163b0170a 6-11
+  s_6df5c5f115ad13::t_85124f47d0a801 20
+tests/test_install.sh
+  s_6df5c5f115ad13::t_e9814f3ec73105 97-102,114,116-120,122
+  s_6df5c5f115ad13::t_0fd0b163b0170a 115
+  s_6df5c5f115ad13::t_b4f1edf2953c58 121
+  s_6df5c5f115ad13::t_61e67bdd412eb7 123
+tests/mocks/curl
+  s_6df5c5f115ad13::t_e9814f3ec73105 1-13
+tests/test_uninstall.sh
+  s_6df5c5f115ad13::t_0fd0b163b0170a 109
+  s_6df5c5f115ad13::t_92f25478cdd161 80-85,108,110-116
+  s_6df5c5f115ad13::t_6421d8d53d9604 117
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "d8112224f653d075460d11b3d78b7e7f9ef06992",
+  "prompts": {},
+  "sessions": {
+    "s_6df5c5f115ad13": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a02ff4-e4b7-7bc2-81e3-cc854d0ba3c0",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
