@@ -106,7 +106,20 @@ test_dry_run_needs_no_dependencies() {
 }
 
 test_missing_git_fails() {
-  TEST_PATH="$MOCK_BIN:/bin"
+  # /bin is a symlink to /usr/bin on modern Debian/Ubuntu (usr-merge), so
+  # excluding /usr/bin from PATH doesn't actually hide git there. Build a
+  # dir with every real binary symlinked in except git instead.
+  local no_git_bin="$TMP_ROOT/no-git-bin"
+  mkdir -p "$no_git_bin"
+  local real_bin name
+  for real_bin in /usr/bin/* /bin/*; do
+    [[ -x "$real_bin" ]] || continue
+    name="$(basename "$real_bin")"
+    [[ "$name" == git ]] && continue
+    ln -sf "$real_bin" "$no_git_bin/$name" 2>/dev/null
+  done
+
+  TEST_PATH="$MOCK_BIN:$no_git_bin"
   link_mock codex
   run_install
 
