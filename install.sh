@@ -14,6 +14,7 @@ if [[ "${1:-}" == "--dry-run" ]]; then
   printf 'Would register marketplace %s and install %s@%s in Codex and/or Claude Code.\n' \
     "$MARKETPLACE_NAME" "$PLUGIN_NAME" "$MARKETPLACE_NAME"
   printf 'Would link %s into Cursor'\''s local plugin directory.\n' "$PLUGIN_NAME"
+  printf 'Would link each skill into ~/.agents/skills as a cursor-agent CLI workaround.\n'
   exit 0
 fi
 
@@ -134,6 +135,30 @@ if [[ "$have_cursor" -eq 1 ]]; then
   fi
 
   ln -s "$INSTALL_DIRECTORY" "$cursor_plugin_link"
+
+  # cursor-agent (the CLI) has a known parity gap where it never registers
+  # skills bundled inside a plugin, even though the desktop app does:
+  # https://forum.cursor.com/t/cursor-agent-cli-does-not-register-skills-from-plugins-ide-does-parity-gap/158947
+  # As a workaround, also symlink each skill directly into ~/.agents/skills,
+  # a path some Cursor CLI versions scan independently of the plugin system.
+  agents_skills_dir="$HOME/.agents/skills"
+  mkdir -p "$agents_skills_dir"
+
+  for skill_dir in "$INSTALL_DIRECTORY"/skills/*/; do
+    [[ -f "${skill_dir}SKILL.md" ]] || continue
+
+    skill_name="$(basename "$skill_dir")"
+    skill_link="$agents_skills_dir/$skill_name"
+
+    if [[ -L "$skill_link" ]]; then
+      rm "$skill_link"
+    elif [[ -e "$skill_link" ]]; then
+      printf 'Error: %s exists but is not a Kamaal Super Mind symlink.\n' "$skill_link" >&2
+      exit 1
+    fi
+
+    ln -s "${skill_dir%/}" "$skill_link"
+  done
 
   printf 'Kamaal Super Mind is installed for Cursor. Start a new Cursor Agent chat to use it.\n'
 fi
