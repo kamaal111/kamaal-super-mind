@@ -16,6 +16,9 @@ case "${1:-} ${2:-} ${3:-}" in
 "plugin marketplace update")
   exit "${MOCK_CLAUDE_MARKETPLACE_UPDATE_EXIT:-0}"
   ;;
+"plugin marketplace remove")
+  exit "${MOCK_CLAUDE_MARKETPLACE_REMOVE_EXIT:-0}"
+  ;;
 esac
 
 case "${1:-} ${2:-}" in
@@ -24,6 +27,9 @@ case "${1:-} ${2:-}" in
   ;;
 "plugin update")
   exit "${MOCK_CLAUDE_PLUGIN_UPDATE_EXIT:-0}"
+  ;;
+"plugin uninstall")
+  exit "${MOCK_CLAUDE_PLUGIN_UNINSTALL_EXIT:-0}"
   ;;
 esac
 

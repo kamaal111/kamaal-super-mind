@@ -53,6 +53,19 @@ just update-cachebuster
 Claude Code needs no equivalent step: its `plugin.json` omits `version`, so it
 tracks the git commit SHA and treats every commit as a new version.
 
+## Uninstall
+
+To cleanly remove Kamaal Super Mind, run:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/kamaal111/kamaal-super-mind/main/uninstall.sh | bash
+```
+
+This removes the marketplace registration and installed plugin from Codex and
+Claude Code, the Cursor symlink and the `~/.agents/skills` skill symlinks, and
+deletes the `~/.kamaal-super-mind` checkout. It is safe to run even if only
+some of Codex, Claude Code, or Cursor were ever installed.
+
 ## Included Skills
 
 - `production-engineering` — shared implementation, verification, and safety guidance

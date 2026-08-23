@@ -9,6 +9,9 @@ case "${1:-} ${2:-} ${3:-}" in
 "plugin marketplace add")
   exit "${MOCK_CODEX_MARKETPLACE_ADD_EXIT:-0}"
   ;;
+"plugin marketplace remove")
+  exit "${MOCK_CODEX_MARKETPLACE_REMOVE_EXIT:-0}"
+  ;;
 esac
 
 case "${1:-} ${2:-}" in
@@ -18,6 +21,9 @@ case "${1:-} ${2:-}" in
   ;;
 "plugin add")
   exit "${MOCK_CODEX_PLUGIN_ADD_EXIT:-0}"
+  ;;
+"plugin remove")
+  exit "${MOCK_CODEX_PLUGIN_REMOVE_EXIT:-0}"
   ;;
 esac
 
