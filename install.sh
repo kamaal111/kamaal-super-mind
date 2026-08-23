@@ -2,9 +2,25 @@
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck source=lib/common.sh
-source "$SCRIPT_DIR/lib/common.sh"
+SCRIPT_SOURCE="${BASH_SOURCE[0]:-}"
+if [[ "$SCRIPT_SOURCE" == */* ]]; then
+  SCRIPT_DIR="${SCRIPT_SOURCE%/*}"
+else
+  SCRIPT_DIR="."
+fi
+if [[ -n "$SCRIPT_SOURCE" ]] && [[ -f "$SCRIPT_DIR/lib/common.sh" ]]; then
+  # shellcheck source=lib/common.sh
+  source "$SCRIPT_DIR/lib/common.sh"
+else
+  # `curl ... | bash` has no script path, so fetch the shared library
+  # explicitly instead of relying on BASH_SOURCE being set by the caller.
+  BOOTSTRAP_LIBRARY="$(mktemp "${TMPDIR:-/tmp}/kamaal-super-mind-common.XXXXXX")"
+  trap 'rm -f "$BOOTSTRAP_LIBRARY"' EXIT
+  curl --fail --silent --show-error --location \
+    "https://raw.githubusercontent.com/kamaal111/kamaal-super-mind/main/lib/common.sh" >"$BOOTSTRAP_LIBRARY"
+  # shellcheck source=/dev/null
+  source "$BOOTSTRAP_LIBRARY"
+fi
 
 if [[ "${1:-}" == "--dry-run" ]]; then
   printf 'Would clone or update %s at %s.\n' "$REPOSITORY_URL" "$INSTALL_DIRECTORY"

@@ -94,6 +94,12 @@ run_install() {
   EXIT_CODE=$?
 }
 
+run_install_from_stdin() {
+  OUTPUT="$(PATH="$TEST_PATH" HOME="$FAKE_HOME" KAMAAL_SUPER_MIND_DIR="$INSTALL_DIR" \
+    MOCK_CURL_COMMON="$ROOT_DIR/lib/common.sh" bash -s -- "$@" <"$INSTALL_SCRIPT" 2>&1)"
+  EXIT_CODE=$?
+}
+
 test_dry_run_needs_no_dependencies() {
   TEST_PATH="/bin"
   run_install --dry-run
@@ -102,6 +108,16 @@ test_dry_run_needs_no_dependencies() {
   assert_contains "$OUTPUT" "Would clone or update"
   assert_contains "$OUTPUT" "Would register marketplace"
   assert_contains "$OUTPUT" "Would link"
+  [[ ! -e "$INSTALL_DIR" ]] || fail "dry run must not create $INSTALL_DIR"
+}
+
+test_dry_run_from_stdin_loads_the_shared_library() {
+  TEST_PATH="$MOCK_BIN:/usr/bin:/bin"
+  link_mock curl
+  run_install_from_stdin --dry-run
+
+  assert_exit_code 0
+  assert_contains "$OUTPUT" "Would clone or update"
   [[ ! -e "$INSTALL_DIR" ]] || fail "dry run must not create $INSTALL_DIR"
 }
 
