@@ -27,7 +27,7 @@ if [[ "${1:-}" == "--dry-run" ]]; then
   printf 'Would register marketplace %s and install %s@%s in Codex and/or Claude Code.\n' \
     "$MARKETPLACE_NAME" "$PLUGIN_NAME" "$MARKETPLACE_NAME"
   printf 'Would link %s into Cursor'\''s local plugin directory.\n' "$PLUGIN_NAME"
-  printf 'Would link each skill into ~/.agents/skills as a cursor-agent CLI workaround.\n'
+  printf 'Would link each skill into ~/.cursor/skills as a cursor-agent CLI workaround.\n'
   exit 0
 fi
 
@@ -118,19 +118,32 @@ if [[ "$have_cursor" -eq 1 ]]; then
   ln -s "$INSTALL_DIRECTORY" "$cursor_plugin_link"
 
   # Workaround: cursor-agent CLI doesn't register plugin-bundled skills, so
-  # also symlink each skill into ~/.agents/skills directly.
+  # also symlink each skill into Cursor's dedicated skill directory.
   # https://forum.cursor.com/t/cursor-agent-cli-does-not-register-skills-from-plugins-ide-does-parity-gap/158947
-  agents_skills_dir="$HOME/.agents/skills"
-  mkdir -p "$agents_skills_dir"
+  cursor_skills_dir="$HOME/.cursor/skills"
+  mkdir -p "$cursor_skills_dir"
 
   for skill_dir in "$INSTALL_DIRECTORY"/skills/*/; do
     [[ -f "${skill_dir}SKILL.md" ]] || continue
 
     skill_name="$(basename "$skill_dir")"
-    skill_link="$agents_skills_dir/$skill_name"
+    skill_link="$cursor_skills_dir/$skill_name"
     remove_symlink_if_present "$skill_link"
     ln -s "${skill_dir%/}" "$skill_link"
   done
+
+  # Remove links made by releases before the workaround used Cursor's
+  # dedicated directory. Codex also discovers ~/.agents/skills, so retaining
+  # these legacy links would keep skills duplicated after an upgrade.
+  legacy_skills_dir="$HOME/.agents/skills"
+  if [[ -d "$legacy_skills_dir" ]]; then
+    for skill_link in "$legacy_skills_dir"/*; do
+      [[ -L "$skill_link" ]] || continue
+      case "$(readlink "$skill_link")" in
+      "$INSTALL_DIRECTORY/skills/"*) rm "$skill_link" ;;
+      esac
+    done
+  fi
 
   printf 'Kamaal Super Mind is installed for Cursor. Start a new Cursor Agent chat to use it.\n'
 fi

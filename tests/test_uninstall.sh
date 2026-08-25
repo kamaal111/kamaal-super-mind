@@ -84,14 +84,14 @@ run_uninstall_from_stdin() {
 }
 
 # Populates a fake skill directory under INSTALL_DIR/skills, mimicking what a
-# real clone provides, and links it into ~/.agents/skills the way install.sh
+# real clone provides, and links it into ~/.cursor/skills the way install.sh
 # would have.
 seed_installed_skill() {
   local skill_dir="$INSTALL_DIR/skills/$1"
   mkdir -p "$skill_dir"
   printf -- '---\nname: %s\ndescription: fake skill for tests\n---\n' "$1" >"$skill_dir/SKILL.md"
-  mkdir -p "$FAKE_HOME/.agents/skills"
-  ln -s "$skill_dir" "$FAKE_HOME/.agents/skills/$1"
+  mkdir -p "$FAKE_HOME/.cursor/skills"
+  ln -s "$skill_dir" "$FAKE_HOME/.cursor/skills/$1"
 }
 
 test_dry_run_needs_no_dependencies() {
@@ -226,19 +226,19 @@ test_cursor_removes_skill_symlinks() {
   run_uninstall
 
   assert_exit_code 0
-  [[ ! -e "$FAKE_HOME/.agents/skills/commit" ]] || fail "expected commit skill symlink to be removed"
-  [[ ! -e "$FAKE_HOME/.agents/skills/backend" ]] || fail "expected backend skill symlink to be removed"
+  [[ ! -e "$FAKE_HOME/.cursor/skills/commit" ]] || fail "expected commit skill symlink to be removed"
+  [[ ! -e "$FAKE_HOME/.cursor/skills/backend" ]] || fail "expected backend skill symlink to be removed"
 }
 
-test_cursor_leaves_unrelated_agents_skills_entries() {
+test_cursor_leaves_unrelated_cursor_skills_entries() {
   link_mock cursor
   mkdir -p "$INSTALL_DIR/.git"
-  mkdir -p "$FAKE_HOME/.agents/skills"
-  ln -s "/tmp/unrelated-skill" "$FAKE_HOME/.agents/skills/unrelated"
+  mkdir -p "$FAKE_HOME/.cursor/skills"
+  ln -s "/tmp/unrelated-skill" "$FAKE_HOME/.cursor/skills/unrelated"
   run_uninstall
 
   assert_exit_code 0
-  [[ -L "$FAKE_HOME/.agents/skills/unrelated" ]] \
+  [[ -L "$FAKE_HOME/.cursor/skills/unrelated" ]] \
     || fail "expected unrelated symlink to be left alone"
 }
 
@@ -251,8 +251,21 @@ test_cursor_skill_symlinks_removed_even_if_checkout_already_gone() {
   run_uninstall
 
   assert_exit_code 0
-  [[ ! -e "$FAKE_HOME/.agents/skills/commit" ]] \
+  [[ ! -e "$FAKE_HOME/.cursor/skills/commit" ]] \
     || fail "expected commit skill symlink to be removed even without a checkout"
+}
+
+test_cursor_removes_legacy_agents_skills_symlinks() {
+  link_mock cursor
+  mkdir -p "$INSTALL_DIR/.git" "$FAKE_HOME/.agents/skills"
+  local skill_dir="$INSTALL_DIR/skills/commit"
+  mkdir -p "$skill_dir"
+  ln -s "$skill_dir" "$FAKE_HOME/.agents/skills/commit"
+  run_uninstall
+
+  assert_exit_code 0
+  [[ ! -e "$FAKE_HOME/.agents/skills/commit" ]] \
+    || fail "expected legacy agent skill symlink to be removed"
 }
 
 test_removes_checkout_directory() {

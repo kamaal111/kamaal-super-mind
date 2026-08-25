@@ -324,14 +324,14 @@ test_cursor_existing_non_symlink_errors() {
 }
 
 # Populates a fake skill directory under INSTALL_DIR/skills, mimicking what a
-# real clone provides so the ~/.agents/skills workaround has something to link.
+# real clone provides so the ~/.cursor/skills workaround has something to link.
 seed_fake_skill() {
   local skill_dir="$INSTALL_DIR/skills/$1"
   mkdir -p "$skill_dir"
   printf -- '---\nname: %s\ndescription: fake skill for tests\n---\n' "$1" >"$skill_dir/SKILL.md"
 }
 
-test_cursor_links_skills_into_agents_skills_dir() {
+test_cursor_links_skills_into_cursor_skills_dir() {
   link_mock git
   link_mock cursor
   mkdir -p "$INSTALL_DIR/.git"
@@ -340,8 +340,8 @@ test_cursor_links_skills_into_agents_skills_dir() {
   run_install
 
   assert_exit_code 0
-  local commit_link="$FAKE_HOME/.agents/skills/commit"
-  local backend_link="$FAKE_HOME/.agents/skills/backend"
+  local commit_link="$FAKE_HOME/.cursor/skills/commit"
+  local backend_link="$FAKE_HOME/.cursor/skills/backend"
   [[ -L "$commit_link" ]] || fail "expected $commit_link to be a symlink"
   [[ "$(readlink "$commit_link")" == "$INSTALL_DIR/skills/commit" ]] \
     || fail "expected $commit_link to point at $INSTALL_DIR/skills/commit"
@@ -350,27 +350,27 @@ test_cursor_links_skills_into_agents_skills_dir() {
     || fail "expected $backend_link to point at $INSTALL_DIR/skills/backend"
 }
 
-test_cursor_replaces_stale_agents_skills_symlink() {
+test_cursor_replaces_stale_cursor_skills_symlink() {
   link_mock git
   link_mock cursor
   mkdir -p "$INSTALL_DIR/.git"
   seed_fake_skill commit
-  mkdir -p "$FAKE_HOME/.agents/skills"
-  ln -s "/tmp/stale-target" "$FAKE_HOME/.agents/skills/commit"
+  mkdir -p "$FAKE_HOME/.cursor/skills"
+  ln -s "/tmp/stale-target" "$FAKE_HOME/.cursor/skills/commit"
   run_install
 
   assert_exit_code 0
-  local commit_link="$FAKE_HOME/.agents/skills/commit"
+  local commit_link="$FAKE_HOME/.cursor/skills/commit"
   [[ "$(readlink "$commit_link")" == "$INSTALL_DIR/skills/commit" ]] \
     || fail "expected stale symlink to be replaced"
 }
 
-test_cursor_existing_non_symlink_in_agents_skills_errors() {
+test_cursor_existing_non_symlink_in_cursor_skills_errors() {
   link_mock git
   link_mock cursor
   mkdir -p "$INSTALL_DIR/.git"
   seed_fake_skill commit
-  mkdir -p "$FAKE_HOME/.agents/skills/commit"
+  mkdir -p "$FAKE_HOME/.cursor/skills/commit"
   run_install
 
   assert_exit_code 1
@@ -385,8 +385,23 @@ test_cursor_skips_non_skill_directories() {
   run_install
 
   assert_exit_code 0
-  [[ ! -e "$FAKE_HOME/.agents/skills/not-a-skill" ]] \
+  [[ ! -e "$FAKE_HOME/.cursor/skills/not-a-skill" ]] \
     || fail "expected directories without SKILL.md not to be linked"
+}
+
+test_cursor_removes_legacy_agents_skills_symlinks() {
+  link_mock git
+  link_mock cursor
+  mkdir -p "$INSTALL_DIR/.git" "$FAKE_HOME/.agents/skills"
+  seed_fake_skill commit
+  ln -s "$INSTALL_DIR/skills/commit" "$FAKE_HOME/.agents/skills/commit"
+  run_install
+
+  assert_exit_code 0
+  [[ ! -e "$FAKE_HOME/.agents/skills/commit" ]] \
+    || fail "expected legacy agent skill symlink to be removed"
+  [[ -L "$FAKE_HOME/.cursor/skills/commit" ]] \
+    || fail "expected Cursor skill symlink to be created"
 }
 
 test_all_harnesses_installed_together() {

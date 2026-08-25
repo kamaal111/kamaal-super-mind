@@ -17,7 +17,7 @@ The installer downloads or updates the plugin in `~/.kamaal-super-mind`, then
 installs it in whichever of Codex, Claude Code, and Cursor are present on the
 machine (at least one is required): it registers the marketplace for Codex and
 Claude Code, and symlinks the plugin into Cursor's local plugin directory. It
-also symlinks each skill into `~/.agents/skills`, working around a
+also symlinks each skill into `~/.cursor/skills`, working around a
 [known parity gap](https://forum.cursor.com/t/cursor-agent-cli-does-not-register-skills-from-plugins-ide-does-parity-gap/158947)
 where the `cursor-agent` CLI never registers skills bundled inside a plugin,
 even though the Cursor desktop app does.
@@ -62,7 +62,7 @@ curl -fsSL https://raw.githubusercontent.com/kamaal111/kamaal-super-mind/main/un
 ```
 
 This removes the marketplace registration and installed plugin from Codex and
-Claude Code, the Cursor symlink and the `~/.agents/skills` skill symlinks, and
+Claude Code, the Cursor symlink and the `~/.cursor/skills` skill symlinks, and
 deletes the `~/.kamaal-super-mind` checkout. It is safe to run even if only
 some of Codex, Claude Code, or Cursor were ever installed.
 

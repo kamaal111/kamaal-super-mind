@@ -25,7 +25,7 @@ fi
 if [[ "${1:-}" == "--dry-run" ]]; then
   printf 'Would remove the %s marketplace and plugin from Codex and/or Claude Code.\n' "$MARKETPLACE_NAME"
   printf 'Would remove %s from Cursor'\''s local plugin directory.\n' "$PLUGIN_NAME"
-  printf 'Would remove each skill symlink from ~/.agents/skills.\n'
+  printf 'Would remove each skill symlink from ~/.cursor/skills.\n'
   printf 'Would delete %s.\n' "$INSTALL_DIRECTORY"
   exit 0
 fi
@@ -55,15 +55,18 @@ if [[ "$have_cursor" -eq 1 ]]; then
   remove_symlink_if_present "$HOME/.cursor/plugins/local/$PLUGIN_NAME"
 
   # Matched by target path, so this works even if the checkout is already gone.
-  agents_skills_dir="$HOME/.agents/skills"
-  if [[ -d "$agents_skills_dir" ]]; then
-    for skill_link in "$agents_skills_dir"/*; do
-      [[ -L "$skill_link" ]] || continue
-      case "$(readlink "$skill_link")" in
-      "$INSTALL_DIRECTORY/skills/"*) rm "$skill_link" ;;
-      esac
-    done
-  fi
+  # ~/.agents/skills is retained here solely to remove legacy links created
+  # before the workaround moved to Cursor's dedicated skill directory.
+  for skills_dir in "$HOME/.cursor/skills" "$HOME/.agents/skills"; do
+    if [[ -d "$skills_dir" ]]; then
+      for skill_link in "$skills_dir"/*; do
+        [[ -L "$skill_link" ]] || continue
+        case "$(readlink "$skill_link")" in
+        "$INSTALL_DIRECTORY/skills/"*) rm "$skill_link" ;;
+        esac
+      done
+    fi
+  done
 
   printf 'Kamaal Super Mind is uninstalled from Cursor.\n'
 fi
