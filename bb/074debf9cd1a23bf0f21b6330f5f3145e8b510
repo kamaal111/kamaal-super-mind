@@ -1,0 +1,23 @@
+skills/commit/SKILL.md
+  s_59c12bb39f12f6::t_8dc6c47c0af0be 41-44
+.codex-plugin/plugin.json
+  s_59c12bb39f12f6::t_6e888d333f554c 3
+skills/git-commit-message/SKILL.md
+  s_59c12bb39f12f6::t_8dc6c47c0af0be 28-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "bb074debf9cd1a23bf0f21b6330f5f3145e8b510",
+  "prompts": {},
+  "sessions": {
+    "s_59c12bb39f12f6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a03ffe-1884-7cc1-abdd-26cd7239d794",
+        "model": "gpt-5.6-luna"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
