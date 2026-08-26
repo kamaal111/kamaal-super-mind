@@ -25,12 +25,15 @@ Explain the meaningful product or logic change without narrating routine enginee
 
 ## Line Length
 
-- Limit every line in the title, body, and trailers to 72 characters or fewer,
-  unless the repository has a stricter documented limit.
-- Before creating or rewording a commit, verify the exact proposed message with
-  a line-length check. Do not rely on a commit tool to wrap it implicitly.
-- After the commit is created or reworded, inspect the stored message and
-  confirm no line exceeds 72 characters.
+- The 72-character rule is a hard maximum, not a target: every physical line
+  in the title, body, and trailers must contain 72 characters or fewer, unless
+  the repository has a stricter documented limit.
+- Wrap prose manually before creating or rewording the commit. `git commit -m`
+  does not wrap long paragraphs for you.
+- Validate the exact proposed message line by line before applying it, then
+  inspect the stored message afterward and confirm no line exceeds 72
+  characters. Treat any overlong line as a failed check that must be fixed
+  before the commit is reported as complete.
 
 ## Body Rules
 
