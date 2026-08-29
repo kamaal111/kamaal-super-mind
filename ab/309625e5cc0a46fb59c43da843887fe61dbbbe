@@ -1,0 +1,21 @@
+.codex-plugin/plugin.json
+  s_a95fbda5592279::t_668456df9dff40 3
+skills/plan-mode/SKILL.md
+  s_a95fbda5592279::t_bef48b488d32e4 8,12-26,35,45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "ab309625e5cc0a46fb59c43da843887fe61dbbbe",
+  "prompts": {},
+  "sessions": {
+    "s_a95fbda5592279": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a04cea-8649-7f71-a3f7-93ca5931628d",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
