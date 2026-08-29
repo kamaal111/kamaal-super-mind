@@ -1,0 +1,21 @@
+.codex-plugin/plugin.json
+  s_c89ef1fee376be::t_7e8ddebd4bc041 3
+skills/software-testing/SKILL.md
+  s_c89ef1fee376be::t_3a5fc61b9aff67 25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "1d7b8c7f2ceec5809ec5749c0e0fb4560955962d",
+  "prompts": {},
+  "sessions": {
+    "s_c89ef1fee376be": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a04cf9-623a-70d1-b86b-e335a6932aad",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
