@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if [[ $1 == status && $2 == --json ]]; then
+  exit 0
+fi
+
+if [[ $1 == commit && $2 == --help ]]; then
+  echo 'Arguments: [CHANGES]...'
+  exit 0
+fi
+
+if [[ $1 == commit ]]; then
+  [[ $2 == --branch ]]
+  [[ $3 == test-branch ]]
+  [[ $4 == --message ]]
+  [[ $5 == *'**Summary**'* ]]
+  [[ $6 == change-one ]]
+  [[ $# -eq 6 ]]
+  exit 0
+fi
+
+echo "Unexpected mock GitButler invocation: $*" >&2
+exit 1

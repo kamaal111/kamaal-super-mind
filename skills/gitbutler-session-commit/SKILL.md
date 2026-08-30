@@ -10,10 +10,25 @@ Apply `gitbutler-cli`, `git-commit-message`, and relevant testing guidance.
 1. Confirm the GitButler marker first with
    `git show-ref --verify --quiet refs/heads/gitbutler/workspace`. Do not run
    `but` or `but setup` when the marker is absent. When it is present, inspect
-   `but status`, `but diff`, and the Git diff to identify only the intentional
-   session changes.
-2. Do not stage unrelated user work. If scope is ambiguous, stop and ask which files belong in the commit.
-3. Reuse an applied branch that clearly matches the work, or create a concise task-specific virtual branch.
-4. Stage only intended file or hunk IDs with `but stage <id> <branch>`, inspect the staged diff, and write commit text from that final diff.
-5. Commit the staged changes with `but commit <branch> --only -m "..."` rather than plain Git. Push or open a PR only when requested.
-6. Do not claim code ready to commit until relevant verification has passed, unless the user explicitly accepts an unverified commit.
+   `but status -fv`, `but diff`, and the Git diff to identify only the
+   intentional session changes. If `but status` cannot open its database,
+   request `.git` write permission and retry; do not treat that error as an
+   instruction to run `but setup`.
+2. Read `but commit --help` before selecting changes. Use the installed CLI's
+   current interface rather than assuming `but stage` or `--only` exists.
+3. Do not include unrelated user work. If scope is ambiguous, stop and ask
+   which files belong in the commit.
+4. Reuse an applied branch that clearly matches the work, or create a concise
+   task-specific virtual branch. If a matching unapplied branch cannot be
+   applied without overwriting working files, create a separate branch unless
+   the user authorizes a history operation.
+5. Write the proposed message to a temporary file and validate it with
+   the `git-commit-message` skill's `validate-message.sh` helper before any
+   commit mutation.
+6. With the positional-`CHANGES` interface, commit only the intended IDs using
+   `scripts/commit-selected.sh <branch> <message-file> <change-id>...`. If the
+   installed help shows a different interface, follow that help and preserve
+   the same explicit file-or-hunk scope.
+7. Inspect `but status -fv`, the stored commit message, and the resulting diff.
+   Do not claim code ready to commit until relevant verification has passed,
+   unless the user explicitly accepts an unverified commit.

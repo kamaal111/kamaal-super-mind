@@ -16,6 +16,11 @@ check:
 test:
     bash tests/test_install.sh
     bash tests/test_uninstall.sh
+    bash tests/test_gitbutler_helpers.sh
+
+# Verify deterministic GitButler commit helpers against a mocked GitButler CLI.
+test-gitbutler-helpers:
+    bash tests/test_gitbutler_helpers.sh
 
 # Refresh the Codex plugin manifest cache-buster after changing plugin content.
 update-cachebuster:

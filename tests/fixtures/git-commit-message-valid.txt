@@ -1,0 +1,9 @@
+Keep GitButler commits deterministic
+
+**Summary**
+The commit helper validates the message before creating a commit.
+
+**Changes**
+The helper accepts only explicit change IDs from the workspace status.
+
+Signed-off-by: Example Person <example@example.com>

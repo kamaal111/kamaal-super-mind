@@ -12,6 +12,10 @@ virtual branches applied in one workspace, making ownership and later
 reorganization explicit. It does not remove the need to coordinate physical
 file edits or serialize conflicting workspace mutations.
 
+When `but status` fails to open its database in a sandboxed agent, request
+permission to write `.git` and retry. Do not run `but setup` merely because
+GitButler cannot access `.git/gitbutler/but.sqlite`.
+
 ## Choose The Right Shape
 
 Use this workflow when work can be divided into independent files or hunks and
@@ -64,8 +68,9 @@ Each agent works only in its lane:
 ```bash
 but status
 # make changes only in the assigned scope
-but stage <file-or-hunk-id> agent-auth-session
-but commit agent-auth-session --only -m "feat: add session validation"
+but status -fv
+# Use gitbutler-session-commit's commit-selected.sh helper.
+# Pass: agent-auth-session message.txt <change-id>...
 but show agent-auth-session
 ```
 
@@ -76,7 +81,10 @@ finish before another agent runs one. Independent source edits may proceed in
 parallel only when their scopes do not overlap.
 
 Before committing, re-run `but status`. If another agent's
-changes are present, stage only the current lane's IDs and use `--only`.
+changes are present, commit only the current lane's IDs with the installed
+GitButler version's supported selection interface. For the positional
+`CHANGES` interface, use `commit-selected.sh`; do not assume `but stage` or
+`--only` is available.
 
 ## Handoffs And Review
 
@@ -85,7 +93,7 @@ copying patches. A receiving agent can continue on the same branch, or move a
 commit to its own branch when ownership should change:
 
 ```bash
-but rub <commit-id> recipient-follow-up
+but move --branch recipient-follow-up <commit-id>
 ```
 
 For review fixes, keep the fix as a separate, focused commit first. Move or
@@ -97,7 +105,7 @@ If work depends on another lane, make that relationship a GitButler stack:
 ```bash
 but branch new foundation
 # Commit the shared foundation before starting dependent work.
-but branch new api-on-foundation --anchor foundation
+but branch new api-on-foundation --above foundation
 ```
 
 Finish and publish stack branches from foundation to dependents. Refresh the
@@ -106,14 +114,15 @@ workspace with `but pull` after an upstream branch lands.
 ## Resolve Collisions
 
 When two agents need the same file, stop both from staging that file. Choose one
-owner, split non-overlapping hunks with `but stage`, or sequence the work. If
-the branches conflict after `but pull`, let the branch owner resolve it using
-`but resolve`; do not have multiple agents edit conflict markers at once.
+owner, select non-overlapping hunk IDs with the installed commit interface, or
+sequence the work. If the branches conflict after `but pull`, let the branch
+owner resolve it using `but resolve`; do not have multiple agents edit conflict
+markers at once.
 
 If work lands on the wrong branch, inspect first, snapshot if the move is
-non-trivial, then use `but rub <commit> <branch>` or the precise command from
-`but --help`. Recover a mistaken operation with `but undo` or a named oplog
-snapshot rather than discarding source changes.
+non-trivial, then use `but move --branch <branch> <commit>` or the precise
+command from `but move --help`. Recover a mistaken operation with a named
+oplog snapshot rather than discarding source changes.
 
 ## Completion Checklist
 

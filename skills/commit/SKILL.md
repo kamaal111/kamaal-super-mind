@@ -24,7 +24,9 @@ publish, or include unrelated changes.
      files or a subset, commit only that scope. Stop if the scope contains
      credentials, private keys, generated secrets, or unrelated work.
    - **GitButler:** after the marker check succeeds, load `gitbutler-cli` and
-     `gitbutler-session-commit`. Use `but branch list` to resolve the target.
+     `gitbutler-session-commit`. If `but status` cannot open its database,
+     request permission to write `.git` and retry before considering setup.
+     Use `but branch list` to resolve the target.
      Follow an explicitly named branch or commit. Otherwise, use the latest
      real commit on the only applied branch. If multiple branches or possible
      targets remain, ask the user which one to use. Keep unassigned changes
@@ -38,16 +40,19 @@ publish, or include unrelated changes.
    any requested wording. Use its resulting title, body, trailer, and line
    length rules.
 
-5. Validate the complete proposed commit message line by line before applying
-   it; every physical line must be at most 72 characters unless the repository
-   documents a stricter limit. Do not assume `git commit -m` wraps paragraphs.
-   Run the narrowest relevant checks when practical. Stage only the resolved
-   scope, then inspect the staged diff and status again.
+5. Write the complete proposed message to a temporary file and run
+   `git-commit-message/scripts/validate-message.sh <message-file>` before
+   applying it. Every physical line must be at most 72 characters unless the
+   repository documents a stricter limit. Do not assume `git commit -m` wraps
+   paragraphs. Run the narrowest relevant checks when practical.
 
 6. Commit through the repository's mode:
 
    - Plain Git: use `git add` and `git commit`.
-   - GitButler: use `but stage` and `but commit <branch> --only`.
+   - GitButler: check `but commit --help`, then use the installed selection
+     interface. With positional `CHANGES`, invoke
+     `gitbutler-session-commit/scripts/commit-selected.sh <branch>
+     <message-file> <change-id>...` so only the resolved IDs are committed.
 
    In GitButler, never use plain-Git commit, rebase, checkout, reset, or
    history-rewrite commands.

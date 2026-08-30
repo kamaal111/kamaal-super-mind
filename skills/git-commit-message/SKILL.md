@@ -34,6 +34,8 @@ Explain the meaningful product or logic change without narrating routine enginee
   inspect the stored message afterward and confirm no line exceeds 72
   characters. Treat any overlong line as a failed check that must be fixed
   before the commit is reported as complete.
+- Use `scripts/validate-message.sh <message-file>` for both checks. It reports
+  every overlong line and exits nonzero, avoiding manual character counting.
 
 ## Body Rules
 
