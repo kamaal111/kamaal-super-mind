@@ -14,20 +14,19 @@ publish, or include unrelated changes.
    `git status --short --branch`, `git diff`, `git diff --cached`, recent
    commits, and untracked files.
 
-2. Detect GitButler without invoking `but`: run the local-branch check by
-   itself, not after another command and not in a compound command whose
-   earlier failure can obscure its exit status:
+2. Detect GitButler without invoking `but`: run
+   `../gitbutler-cli/scripts/detect-workspace-mode.sh` from this skill's
+   directory. It returns exactly `gitbutler` or `plain-git`, and fails for an
+   indeterminate repository state. Do not substitute a compound shell command
+   or infer this result from another command's exit status:
 
    ```bash
-   git show-ref --verify --quiet refs/heads/gitbutler/workspace
+   ../gitbutler-cli/scripts/detect-workspace-mode.sh
    ```
 
-   Record this command's own exit status before choosing a workflow. A failed
-   repository inspection, missing skill file, or permission error is
+   A failed repository inspection, missing helper, or permission error is
    indeterminate—not evidence that GitButler is absent. Stop and resolve it
-   before any `git add` or `git commit`. Also check `git branch --show-current`;
-   if it prints `gitbutler/workspace`, treat the repository as GitButler even
-   if the ref lookup unexpectedly fails.
+   before any `git add` or `git commit`.
 
    If it is absent, use plain Git. Do not run `but status`, `but setup`, or
    another setup-triggering command just to detect GitButler.

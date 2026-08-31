@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+"$REAL_GIT" "$@"
+
+if [[ $1 == add ]]; then
+  "$REAL_GIT" update-ref refs/heads/gitbutler/workspace HEAD
+fi

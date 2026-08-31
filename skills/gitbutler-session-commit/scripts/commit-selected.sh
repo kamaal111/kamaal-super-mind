@@ -11,12 +11,19 @@ branch=$1
 message_file=$2
 shift 2
 
-if ! git show-ref --verify --quiet refs/heads/gitbutler/workspace; then
+script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
+detector=$script_dir/../../gitbutler-cli/scripts/detect-workspace-mode.sh
+
+if ! mode=$($detector); then
+  echo "Unable to determine whether GitButler manages this repository." >&2
+  exit 2
+fi
+
+if [[ $mode != gitbutler ]]; then
   echo "GitButler workspace marker is absent; use the plain Git workflow." >&2
   exit 2
 fi
 
-script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 message_validator=$script_dir/../../git-commit-message/scripts/validate-message.sh
 
 if ! "$message_validator" "$message_file"; then

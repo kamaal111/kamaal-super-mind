@@ -7,9 +7,10 @@ description: Commit intentional changes from the current work session into a Git
 
 Apply `gitbutler-cli`, `git-commit-message`, and relevant testing guidance.
 
-1. Confirm the GitButler marker first with
-   `git show-ref --verify --quiet refs/heads/gitbutler/workspace`. Do not run
-   `but` or `but setup` when the marker is absent. When it is present, inspect
+1. Confirm the workspace mode first with
+   `../gitbutler-cli/scripts/detect-workspace-mode.sh` from this skill's
+   directory. Do not run `but` or `but setup` unless it returns `gitbutler`.
+   When it does, inspect
    `but status -fv`, `but diff`, and the Git diff to identify only the
    intentional session changes. If `but status` cannot open its database,
    request `.git` write permission and retry; do not treat that error as an
