@@ -1,0 +1,39 @@
+skills/gitbutler-session-commit/SKILL.md
+  s_8b579aa0e5db04::t_0f7ebbdf9d17a0 10-13
+skills/gitbutler-cli/scripts/detect-workspace-mode.sh
+  s_8b579aa0e5db04::t_0f7ebbdf9d17a0 1-25
+tests/test_gitbutler_helpers.sh
+  s_8b579aa0e5db04::t_6642d5064d8797 27-30,72-75
+  s_8b579aa0e5db04::t_0f7ebbdf9d17a0 9,31,50-71
+  s_8b579aa0e5db04::t_6686f6a5d63962 76-92
+skills/commit/scripts/commit-plain-git.sh
+  s_8b579aa0e5db04::t_0f7ebbdf9d17a0 14-18,22-23
+skills/gitbutler-session-commit/scripts/commit-selected.sh
+  s_8b579aa0e5db04::t_0f7ebbdf9d17a0 14-22
+skills/commit/SKILL.md
+  s_8b579aa0e5db04::t_0f7ebbdf9d17a0 17-20,27,29
+  s_8b579aa0e5db04::t_6642d5064d8797 21,24
+tests/mocks/git-creates-gitbutler-marker
+  s_8b579aa0e5db04::t_0f7ebbdf9d17a0 1-9
+skills/gitbutler-cli/SKILL.md
+  s_8b579aa0e5db04::t_0f7ebbdf9d17a0 16-19,29-32
+  s_8b579aa0e5db04::t_6642d5064d8797 22
+.codex-plugin/plugin.json
+  s_8b579aa0e5db04::t_8931c5c5fa0539 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "1e03d9e8a799cd08bd6bf2f2d64967636702c8f6",
+  "prompts": {},
+  "sessions": {
+    "s_8b579aa0e5db04": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0594a-c3bf-7011-aded-cd78258d3641",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
