@@ -5,6 +5,7 @@ set -euo pipefail
 repo_root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 validator=$repo_root/skills/git-commit-message/scripts/validate-message.sh
 commit_selected=$repo_root/skills/gitbutler-session-commit/scripts/commit-selected.sh
+commit_plain_git=$repo_root/skills/commit/scripts/commit-plain-git.sh
 fixtures=$repo_root/tests/fixtures
 
 "$validator" "$fixtures/git-commit-message-valid.txt"
@@ -32,3 +33,11 @@ chmod +x "$mock_bin/but"
   PATH="$mock_bin:$PATH" "$commit_selected" test-branch \
     "$fixtures/git-commit-message-valid.txt" change-one
 )
+
+if (
+  cd "$test_root"
+  "$commit_plain_git" "$fixtures/git-commit-message-valid.txt" .
+); then
+  echo "Expected the plain-Git helper to reject a GitButler workspace." >&2
+  exit 1
+fi

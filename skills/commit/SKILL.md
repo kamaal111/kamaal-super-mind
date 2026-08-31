@@ -14,9 +14,21 @@ publish, or include unrelated changes.
    `git status --short --branch`, `git diff`, `git diff --cached`, recent
    commits, and untracked files.
 
-2. Detect GitButler without invoking `but`: check for the local branch
-   `gitbutler/workspace` with
-   `git show-ref --verify --quiet refs/heads/gitbutler/workspace`.
+2. Detect GitButler without invoking `but`: run the local-branch check by
+   itself, not after another command and not in a compound command whose
+   earlier failure can obscure its exit status:
+
+   ```bash
+   git show-ref --verify --quiet refs/heads/gitbutler/workspace
+   ```
+
+   Record this command's own exit status before choosing a workflow. A failed
+   repository inspection, missing skill file, or permission error is
+   indeterminate—not evidence that GitButler is absent. Stop and resolve it
+   before any `git add` or `git commit`. Also check `git branch --show-current`;
+   if it prints `gitbutler/workspace`, treat the repository as GitButler even
+   if the ref lookup unexpectedly fails.
+
    If it is absent, use plain Git. Do not run `but status`, `but setup`, or
    another setup-triggering command just to detect GitButler.
 
@@ -48,7 +60,9 @@ publish, or include unrelated changes.
 
 6. Commit through the repository's mode:
 
-   - Plain Git: use `git add` and `git commit`.
+   - Plain Git: invoke `scripts/commit-plain-git.sh <message-file> <path>...`.
+     It checks for GitButler both before staging and immediately before the
+     commit. Do not call `git add` or `git commit` directly from this workflow.
    - GitButler: check `but commit --help`, then use the installed selection
      interface. With positional `CHANGES`, invoke
      `gitbutler-session-commit/scripts/commit-selected.sh <branch>

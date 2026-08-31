@@ -13,7 +13,9 @@ branch (also called a stack) that owns it.
 
 Do not use `but status` to detect GitButler. GitButler may prompt to set up an
 ordinary Git repository. First check for its workspace marker without invoking
-`but`:
+`but`. Run this command by itself and interpret only its own exit status; never
+append it after a possibly failing command or infer its result from a compound
+command:
 
 ```bash
 git show-ref --verify --quiet refs/heads/gitbutler/workspace
@@ -22,6 +24,12 @@ git show-ref --verify --quiet refs/heads/gitbutler/workspace
 Only if that check succeeds should you run `but status`, `but diff`, or other
 GitButler commands. If it fails, use plain Git and do not run `but setup`.
 Ask the user to set up GitButler separately if they want that workflow.
+
+A failed inspection, missing file, permission error, or interrupted command is
+not a negative marker result. Resolve the failure before choosing a workflow.
+Before any plain-Git write, also run `git branch --show-current`; if it reports
+`gitbutler/workspace`, stop and use GitButler even when the marker lookup was
+inconclusive.
 
 If the marker exists but `but status` fails with `unable to open database file`
 or `Setup required`, do not run `but setup` reflexively. In sandboxed agent
