@@ -7,6 +7,12 @@ description: Upgrade, pin, or audit dependencies safely. Use when checking outda
 
 Upgrade dependencies in controlled, explainable batches. Prefer deliberate changes over broad blind bumps.
 
+## Default Scope
+
+- When the user requests a dependency upgrade without naming packages or limiting scope, update every direct dependency to the newest stable version that satisfies the repository's release-age policy, then regenerate the full dependency graph through the package manager. Do not stop after the packages shown by an outdated-dependency report.
+- Treat the repository's configured minimum release age as authoritative. If it has none, use a 24-hour minimum release age unless the user explicitly chooses another policy.
+- Transitive versions are controlled by the regenerated lockfile. Do not hand-edit them or force arbitrary transitive overrides; inspect and address them through their direct dependents, overrides, or resolutions when necessary.
+
 ## Discover First
 
 - Read repository instructions, task runners, manifests, and generated-artifact rules before editing.
@@ -19,6 +25,7 @@ Upgrade dependencies in controlled, explainable batches. Prefer deliberate chang
 - Prefer the newest stable release that meets that policy and passes advisory screening.
 - Check authoritative advisories, maintainer notices, registry warnings, and compromise reports when available.
 - Treat a suspected compromise as a blocker: state the package, affected version, evidence, and likely impact instead of quietly upgrading through it.
+- Before completion, audit the finalized dependency graph and explicitly report the security result, including any unresolved advisories, deprecated packages, suspicious release-age or provenance signals, and mitigations.
 
 ## Upgrade Correctly
 
@@ -31,4 +38,5 @@ Upgrade dependencies in controlled, explainable batches. Prefer deliberate chang
 - Run the smallest useful build, lint, typecheck, or test after each batch.
 - Adapt source code, schemas, wrappers, and tests to new public APIs instead of masking failures with casts, suppressions, warning downgrades, or immediate pins.
 - Stop expanding scope when breakage becomes noisy; finish one breakage cluster before starting another.
+- Fix upgrade-caused compatibility failures in source code, schemas, wrappers, and tests; do not leave the requested update incomplete merely because a public API changed.
 - Finish with the repository's aggregate verification command and report upgraded batches, repaired breakages, commands, and any remaining risk.
