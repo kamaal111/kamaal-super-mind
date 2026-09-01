@@ -1,0 +1,24 @@
+skills/gitbutler-cli/SKILL.md
+  s_8327f5c66a8a36::t_68b817eb70b28a 14-25,46-53
+  s_8327f5c66a8a36::t_bc1e52b6de8ddf 62-72
+  s_8327f5c66a8a36::t_b5c6c6bf04b060 54
+skills/reword-git-commit/SKILL.md
+  s_8327f5c66a8a36::t_9e27e1e2d13917 14-22,27-36
+  s_8327f5c66a8a36::t_cab09e347e9d32 80-89
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "063ebb246f40cce865bdf7f8c99e54266f6ce248",
+  "prompts": {},
+  "sessions": {
+    "s_8327f5c66a8a36": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "cc3d80d5-3395-463f-940f-3138024a3cc6",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Kamaal Farah <kfarah@box.com>"
+    }
+  }
+}
