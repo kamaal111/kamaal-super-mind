@@ -11,19 +11,29 @@ history, push, or amend unrelated work. Construct the replacement with the
 
 ## Resolve the target
 
-1. Read repository instructions and inspect the repository root with read-only
-   commands: `git status --short --branch`, `git log --oneline --decorate -n
-   10`, and the relevant diff. Preserve all pre-existing uncommitted changes.
+1. If the request names a project, path, or submodule, `cd` into that exact
+   repository first (or pass `-C <path>` to every subsequent `git`/`but`
+   command). A parent workspace directory that merely bundles the named
+   repository as a submodule or sibling checkout is a different Git
+   repository with unrelated history — do not search or detect anything
+   there. Then read repository instructions and inspect the repository root
+   with read-only commands: `git status --short --branch`,
+   `git log --oneline --decorate -n 10`, and the relevant diff. Preserve all
+   pre-existing uncommitted changes.
 2. Parse the request for an explicit commit identifier, commit range, or
    branch. An explicit commit target takes precedence over the default. An
    explicit branch means the last commit on that branch unless the user also
    names a commit.
-3. Detect GitButler without invoking `but`: check for the local branch
-   `gitbutler/workspace` with
-   `git show-ref --verify --quiet refs/heads/gitbutler/workspace`. If it is
-   absent, use plain Git. Do not run `but status` or `but setup` just to detect
-   GitButler. If the marker is present, inspect `but status` and
-   `but branch list`, then use GitButler commands for every history mutation.
+3. Detect GitButler deterministically with the shared detector instead of
+   reimplementing the check: from inside the resolved repository, run
+   `../gitbutler-cli/scripts/detect-workspace-mode.sh` (relative to this
+   skill's own installed directory). It prints `gitbutler` or `plain-git` and
+   fails closed when it cannot inspect the repository. If it prints
+   `plain-git`, use plain Git. If it prints `gitbutler`, follow the installed
+   `gitbutler-cli` skill for every inspection and history mutation from here
+   on — including its guidance on `but setup` failures and its ban on
+   falling back to raw Git commands, which takes precedence over the Plain
+   Git section below for this target.
 4. When the user supplies no extra message, default to the last commit of the
    resolved branch/current branch. In a GitButler workspace, count the virtual
    branches before choosing that default. If more than one branch exists and
@@ -67,12 +77,16 @@ characters.
 
 ### GitButler
 
-Use `but reword <target>` for the resolved commit/branch target, following
-`gitbutler-cli` for GitButler safety and the installed command's `--help` when
-needed. Do not use `git commit --amend`, `git rebase`, checkout, reset, or
-other plain-Git history mutations in an active GitButler workspace. Inspect
-`but status`, `but show <branch-or-commit>`, and the resulting
-commit message after the operation.
+Use `but reword <target> -m "<message>"` for the resolved commit/branch
+target in a single command — check `but reword --help` first if the flag
+name is uncertain in the installed version. Do not use `git checkout` to
+switch onto the target branch, `git commit --amend`, `git rebase`, `reset`,
+or any other plain-Git history mutation in an active GitButler workspace, even
+after repeated `but` errors: falling back to plain Git desyncs the branch ref
+from GitButler's internal workspace state and can silently unapply the branch
+or leave a stale duplicate commit in the workspace. Inspect `but status`,
+`but show <branch-or-commit>`, and the resulting commit message after the
+operation.
 
 If GitButler reports multiple branches and no branch was named for a default
 request, ask the user which branch to reword before making any change. Do not

@@ -11,6 +11,18 @@ branch (also called a stack) that owns it.
 
 ## Start With The Workspace
 
+Resolve which repository you are operating on before anything else. A
+"workspace" directory that bundles several independent Git checkouts (as
+submodules or sibling clones) is not itself the repository the user means —
+it is a different Git repository with its own, unrelated GitButler state, if
+it has one at all. If the user names a project, path, or submodule, `cd` into
+that exact repository (or pass `-C <path>` to every `git`/`but` command)
+before running the detector or anything else. Never run `but setup` or
+diagnose `but` failures from the outer workspace root as a stand-in for the
+inner repository the user actually asked about — a "no GitButler project
+found" or "uncommitted files would be overwritten" error from the wrong
+directory tells you nothing about the repository you were asked to change.
+
 Do not use `but status` to detect GitButler. GitButler may prompt to set up an
 ordinary Git repository. First check for its workspace marker without invoking
 `but`. Run `scripts/detect-workspace-mode.sh` instead of reimplementing the
@@ -31,12 +43,32 @@ is not a negative marker result. Resolve the failure before choosing a
 workflow. Both commit helpers call this detector immediately before mutating
 the index or history.
 
+No matter how many `but` commands fail, do not substitute raw `git` mutation
+commands (`checkout`, `rebase`, `commit --amend`, `reset`, `clean`, `stash`)
+to route around the failure — even though raw Git is the right tool in this
+workspace's other, non-GitButler projects. A `but` error is information about
+that one command, not license to drop out of GitButler's history model for
+a repository this detector confirmed is GitButler-managed. If every `but`
+avenue is exhausted, stop and report the exact error to the user instead of
+improvising with plain Git.
+
 If the marker exists but `but status` fails with `unable to open database file`
 or `Setup required`, do not run `but setup` reflexively. In sandboxed agent
 environments, GitButler needs write access to `.git/gitbutler/but.sqlite` even
 for workspace inspection. Request permission to write the repository's `.git`
 directory, then retry `but status`. Run `but setup` only when the user asks to
 initialize or repair GitButler after the access issue has been ruled out.
+
+If `but setup` reports `Uncommitted files would be overwritten by checkout:
+<paths>`, stop. This means those paths differ from what GitButler's managed
+branch expects to check out — it does not mean GitButler is broken, and it is
+not authorization to clear the way. Do not run `git stash`, `git clean`,
+`git checkout -- .`, or a submodule-wide checkout to force the setup past
+this error: that discards state you have not inspected, and the listed paths
+may belong to sibling submodules that are not even part of the repository you
+are trying to manage. First re-confirm you are inside the exact repository
+the user named (see the repository-resolution note above). If you are, list
+the affected paths for the user and ask before discarding anything in them.
 
 If a GitButler command reports `GitButler mode exit required`, normal
 GitButler operations are unavailable until the workspace is migrated out of
