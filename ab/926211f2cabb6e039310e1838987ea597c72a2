@@ -1,0 +1,21 @@
+skills/dependency-upgrades/SKILL.md
+  s_a25efedb53cf48::t_07258af2208d90 10-15,28,41
+.codex-plugin/plugin.json
+  s_a25efedb53cf48::t_1c07e2acfdc5cc 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "ab926211f2cabb6e039310e1838987ea597c72a2",
+  "prompts": {},
+  "sessions": {
+    "s_a25efedb53cf48": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a05e25-2d4e-7e30-a0b8-62871ec85be1",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
