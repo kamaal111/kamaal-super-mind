@@ -23,6 +23,7 @@ git -C "$test_root" init --quiet
 git -C "$test_root" -c user.name='Test User' \
   -c user.email='test@example.com' commit --allow-empty --quiet -m test
 git -C "$test_root" update-ref refs/heads/gitbutler/workspace HEAD
+git -C "$test_root" checkout --quiet gitbutler/workspace
 
 (
   cd "$test_root"
@@ -49,29 +50,35 @@ if (
 fi
 
 race_root=$(mktemp -d)
-trap 'rm -rf "$test_root" "$race_root"' EXIT
+linked_root=$(mktemp -d)
+trap 'rm -rf "$test_root" "$race_root" "$linked_root"' EXIT
 
 git -C "$race_root" init --quiet
-git -C "$race_root" -c user.name='Test User' \
-  -c user.email='test@example.com' commit --allow-empty --quiet -m test
+git -C "$race_root" config user.name 'Test User'
+git -C "$race_root" config user.email 'test@example.com'
+git -C "$race_root" commit --allow-empty --quiet -m test
 touch "$race_root/changes.txt"
 
 real_git=$(command -v git)
 cp "$repo_root/tests/mocks/git-creates-gitbutler-marker" "$mock_bin/git"
 chmod +x "$mock_bin/git"
 
-if (
+(
   cd "$race_root"
   PATH="$mock_bin:$PATH" REAL_GIT="$real_git" \
     "$commit_plain_git" "$fixtures/git-commit-message-valid.txt" changes.txt
-); then
-  echo "Expected the plain-Git helper to reject a marker created while staging." >&2
-  exit 1
-fi
+)
 
 (
   cd "$race_root"
-  [[ $($detector) == gitbutler ]]
+  [[ $($detector) == plain-git ]]
+)
+
+git -C "$test_root" worktree add --detach --quiet "$linked_root" HEAD
+
+(
+  cd "$linked_root"
+  [[ $($detector) == plain-git ]]
 )
 
 plain_root=$(mktemp -d)
