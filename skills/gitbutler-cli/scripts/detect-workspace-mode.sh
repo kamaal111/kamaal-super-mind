@@ -18,7 +18,7 @@ if ! current_branch=$(git branch --show-current); then
   exit 2
 fi
 
-if [[ $marker_present == true || $current_branch == gitbutler/workspace ]]; then
+if [[ $marker_present == true && $current_branch == gitbutler/workspace ]]; then
   echo gitbutler
 else
   echo plain-git
