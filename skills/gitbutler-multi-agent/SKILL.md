@@ -1,9 +1,16 @@
 ---
 name: gitbutler-multi-agent
-description: Coordinate multiple agents in a shared GitButler workspace using virtual branches. Use when agents work in parallel, hand work off, transfer commits, review each other's changes, or organize concurrent work with GitButler, virtual branches, or `but`.
+description: Coordinate agents in a confirmed shared GitButler workspace using virtual branches. Use only for explicit GitButler, virtual-branch, or `but` work after the mode detector returns `gitbutler`; not for ordinary parallel work in a Git worktree.
 ---
 
 # GitButler Multi-Agent Coordination
+
+## Mode Gate
+
+This workflow applies only after
+`../gitbutler-cli/scripts/detect-workspace-mode.sh` returns `gitbutler`.
+If it returns `plain-git`, stop without running `but` or creating virtual
+branches; use the ordinary Git coordination workflow instead.
 
 Apply `gitbutler-cli` for all GitButler commands. Confirm the
 `gitbutler/workspace` marker before invoking `but`; never use `but` to detect

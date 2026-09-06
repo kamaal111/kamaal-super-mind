@@ -1,9 +1,19 @@
 ---
 name: gitbutler-cli
-description: Use GitButler's `but` CLI to work in a GitButler-managed repository. Use when inspecting or setting up a GitButler workspace; creating, applying, or stacking virtual branches; assigning changes; committing or reorganizing history; resolving conflicts; recovering with the oplog; pushing, creating pull requests, or landing a branch. Also use when the user says GitButler, virtual branch, virtual branch stack, or `but`.
+description: Use GitButler's `but` CLI only after a repository is confirmed as GitButler-managed. Use for explicit GitButler, virtual-branch, or `but` work; never for generic Git commits, branches, or pull requests in an ordinary Git worktree.
 ---
 
 # GitButler CLI
+
+## Mode Gate
+
+This is not a generic Git workflow. Before any `but` command, run
+`scripts/detect-workspace-mode.sh` from this skill. Until it returns
+`gitbutler`, the detector is the only GitButler-related command permitted.
+
+If it returns `plain-git`, stop using this skill immediately. Do not run
+`but`, including `but status` or `but setup`, and do not load a GitButler
+session or multi-agent workflow. Continue with the ordinary Git workflow.
 
 GitButler keeps all applied virtual branches in one working directory. Do not
 check out between feature branches. Put each intentional change on the virtual

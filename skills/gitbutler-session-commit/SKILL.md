@@ -1,9 +1,17 @@
 ---
 name: gitbutler-session-commit
-description: Commit intentional changes from the current work session into a GitButler virtual branch. Use when the user asks to commit session work, create a GitButler branch, assign changes, or prepare a reviewable GitButler commit.
+description: Commit intentional changes into a GitButler virtual branch only after the mode detector returns `gitbutler`. Use for explicit GitButler branch or `but` requests, or when a parent workflow has confirmed GitButler; never for generic Git commits in an ordinary worktree.
 ---
 
 # GitButler Session Commit
+
+## Mode Gate
+
+This skill is inapplicable until the repository is confirmed as GitButler.
+Run `../gitbutler-cli/scripts/detect-workspace-mode.sh` first unless a parent
+workflow has just reported `gitbutler`. If it returns `plain-git`, stop: do
+not run `but`, do not create a virtual branch, and do not apply this skill's
+remaining workflow. Use the ordinary Git commit workflow instead.
 
 Apply `gitbutler-cli`, `git-commit-message`, and relevant testing guidance.
 
