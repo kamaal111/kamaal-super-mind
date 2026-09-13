@@ -1,0 +1,26 @@
+.claude/settings.json
+  s_b5ff2b81aa71e8::t_11792a29b0a120 1-9
+.cursor/hooks.json
+  s_b5ff2b81aa71e8::t_ecbf052f92c586 1-10
+.codex/rules/no-filesystem-scans.rules
+  s_b5ff2b81aa71e8::t_95faf304193cb3 1-6,8-21,24,26,30,32
+  s_b5ff2b81aa71e8::t_85cce12418e7c8 7,22-23,25,27-29,31,33
+.cursor/hooks/block-filesystem-scans.sh
+  s_b5ff2b81aa71e8::t_4c00c228e5a600 1-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "276142e3c021488659c4d216d533c3a559ba0523",
+  "prompts": {},
+  "sessions": {
+    "s_b5ff2b81aa71e8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "66630d79-e2ba-4b27-a158-5a14fc43c117",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
