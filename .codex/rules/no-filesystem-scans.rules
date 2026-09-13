@@ -1,0 +1,33 @@
+# Codex execpolicy prefix rules only match literal argv tokens (no globs, no
+# env var expansion), so this can only enumerate common absolute root-level
+# directories rather than match "any absolute path" the way the Claude Code
+# deny rule and the Cursor hook do. `find ~ ...` is not listed: the shell
+# expands `~` to $HOME before Codex ever sees the argv, so a literal "~"
+# token never actually appears on the wire.
+
+_root_paths = [
+    "/",
+    "/etc",
+    "/usr",
+    "/var",
+    "/opt",
+    "/root",
+    "/home",
+    "/Users",
+    "/System",
+    "/Library",
+    "/Applications",
+    "/private",
+]
+
+prefix_rule(
+    pattern = ["find", _root_paths],
+    decision = "forbidden",
+    justification = "Filesystem-wide scans from root-level directories are not permitted; scope find to the repository or task-relevant directory.",
+)
+
+prefix_rule(
+    pattern = ["sudo", "find", _root_paths],
+    decision = "forbidden",
+    justification = "Filesystem-wide scans from root-level directories are not permitted; scope find to the repository or task-relevant directory.",
+)

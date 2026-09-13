@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(find /*)",
+      "Bash(find ~*)",
+      "Bash(sudo find /*)"
+    ]
+  }
+}
