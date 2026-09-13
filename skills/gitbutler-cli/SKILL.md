@@ -8,8 +8,15 @@ description: Use GitButler's `but` CLI only after a repository is confirmed as G
 ## Mode Gate
 
 This is not a generic Git workflow. Before any `but` command, run
-`scripts/detect-workspace-mode.sh` from this skill. Until it returns
-`gitbutler`, the detector is the only GitButler-related command permitted.
+`scripts/detect-workspace-mode.sh` from inside the target repository,
+resolving the script's path relative to this skill's own installed
+directory. Never `cd` into this skill's directory to run it — the script
+inspects whatever directory it is run from as the repository to check, so
+running it from the skill's own directory (which normally lives inside a
+different Git repository, such as the plugin's own checkout) silently
+checks the wrong repository and can report `plain-git` for a real
+GitButler workspace. Until it returns `gitbutler`, the detector is the
+only GitButler-related command permitted.
 
 If it returns `plain-git`, stop using this skill immediately. Do not run
 `but`, including `but status` or `but setup`, and do not load a GitButler

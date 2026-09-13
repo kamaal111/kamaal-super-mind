@@ -15,10 +15,16 @@ publish, or include unrelated changes.
    commits, and untracked files.
 
 2. Detect GitButler without invoking `but`: run
-   `../gitbutler-cli/scripts/detect-workspace-mode.sh` from this skill's
-   directory. It returns exactly `gitbutler` or `plain-git`, and fails for an
-   indeterminate repository state. Do not substitute a compound shell command
-   or infer this result from another command's exit status:
+   `../gitbutler-cli/scripts/detect-workspace-mode.sh` from inside the
+   target repository, resolving the path relative to this skill's own
+   installed directory. Never `cd` into this skill's directory to run it —
+   the script checks whatever directory it is run from as the repository to
+   inspect, so running it from the skill's own directory (normally inside a
+   different Git repository, such as the plugin's own checkout) silently
+   checks the wrong repository. It returns exactly `gitbutler` or
+   `plain-git`, and fails for an indeterminate repository state. Do not
+   substitute a compound shell command or infer this result from another
+   command's exit status:
 
    ```bash
    ../gitbutler-cli/scripts/detect-workspace-mode.sh

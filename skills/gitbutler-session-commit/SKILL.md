@@ -9,16 +9,20 @@ description: Commit intentional changes into a GitButler virtual branch only aft
 
 This skill is inapplicable until the repository is confirmed as GitButler.
 Run `../gitbutler-cli/scripts/detect-workspace-mode.sh` first unless a parent
-workflow has just reported `gitbutler`. If it returns `plain-git`, stop: do
+workflow has just reported `gitbutler`. Run it from inside the target
+repository, resolving the path relative to this skill's own installed
+directory — never `cd` into this skill's directory to run it, since the
+script checks whatever directory it is run from and will silently report on
+the wrong repository otherwise. If it returns `plain-git`, stop: do
 not run `but`, do not create a virtual branch, and do not apply this skill's
 remaining workflow. Use the ordinary Git commit workflow instead.
 
 Apply `gitbutler-cli`, `git-commit-message`, and relevant testing guidance.
 
-1. Confirm the workspace mode first with
-   `../gitbutler-cli/scripts/detect-workspace-mode.sh` from this skill's
-   directory. Do not run `but` or `but setup` unless it returns `gitbutler`.
-   When it does, inspect
+1. Confirm the workspace mode first by running
+   `../gitbutler-cli/scripts/detect-workspace-mode.sh` from inside the
+   target repository as described above. Do not run `but` or `but setup`
+   unless it returns `gitbutler`. When it does, inspect
    `but status -fv`, `but diff`, and the Git diff to identify only the
    intentional session changes. If `but status` cannot open its database,
    request `.git` write permission and retry; do not treat that error as an
