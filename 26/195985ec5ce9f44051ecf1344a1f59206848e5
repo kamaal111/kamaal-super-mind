@@ -1,0 +1,23 @@
+skills/commit/SKILL.md
+  s_bb24bf1d439220::t_125f9604c0e594 18-27
+skills/gitbutler-session-commit/SKILL.md
+  s_bb24bf1d439220::t_1c21a22df07519 12-16,22-25
+skills/gitbutler-cli/SKILL.md
+  s_bb24bf1d439220::t_9bb7275cb8c58d 11-19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "26195985ec5ce9f44051ecf1344a1f59206848e5",
+  "prompts": {},
+  "sessions": {
+    "s_bb24bf1d439220": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e5992fbc-d8d0-4f2a-ab32-42c62ff62791",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
