@@ -1,0 +1,21 @@
+skills/swift-best-practices/references/documentation-comments.md
+  s_88d1cbd20ca824::t_a364bdcae1374c 3-46,72,79-81
+skills/swift-best-practices/SKILL.md
+  s_88d1cbd20ca824::t_a364bdcae1374c 181-187
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c853aef2c107db9a4a38c9ae1a5b62f8b292153c",
+  "prompts": {},
+  "sessions": {
+    "s_88d1cbd20ca824": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2f020689-9f0f-4c5e-8502-d6892d0d7ba8",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
