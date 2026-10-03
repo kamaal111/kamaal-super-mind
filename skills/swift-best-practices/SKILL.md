@@ -178,10 +178,13 @@ func importProfile(from image: UIImage) async -> Result<Profile, ProfileImportEr
 
 ## Documentation Comments
 
-- Write a `///` documentation comment on every public method, initializer, computed and stored property, class, struct, actor, enum, and protocol. Skip non-public declarations unless their behavior is genuinely non-obvious.
-- Read the implementation and its call sites before documenting it. Do not write a comment from the signature or name alone; confirm behavior, return value, thrown errors, and a realistic usage from the actual code first.
-- Every documentation comment must state what the declaration does, what it returns or throws (or what a type represents), and include a worked example of calling it.
-- Read [references/documentation-comments.md](references/documentation-comments.md) for the required structure and examples before writing or reviewing documentation comments.
+- A comment must tell the reader something the declaration does not already say. Never restate the name, type, or signature (`/// The user's name.` on `let name: String`, `/// Creates a new instance.` on an `init`).
+- Leave a declaration undocumented when its name and types make it self-explanatory. This covers memberwise or trivial initializers, plain stored properties, simple computed properties, and straightforward conformances. No comment is better than a redundant one.
+- Write a `///` comment on a public declaration only when it carries non-obvious information: behavior or side effects, units or valid ranges, thrown errors, threading or actor requirements, ordering or lifecycle constraints, or the role of a type and how it should be constructed.
+- Skip non-public declarations unless their behavior is genuinely non-obvious. Never add comments that narrate an edit ("added for X", "now handles Y").
+- Read the implementation and its call sites before documenting it. Do not write a comment from the signature or name alone; confirm the behavior first.
+- Include a worked example only when usage is not obvious from the signature.
+- Read [references/documentation-comments.md](references/documentation-comments.md) for structure and examples before writing or reviewing documentation comments.
 
 ## Multiline String Literals
 

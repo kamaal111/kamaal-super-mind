@@ -1,9 +1,49 @@
 # Swift Documentation Comments
 
-Use Swift's `///` documentation markup for every public declaration: methods,
-initializers, computed and stored properties, classes, structs, actors,
-enums, and protocols. Skip `private`, `fileprivate`, and other non-public
-declarations unless their behavior is genuinely non-obvious.
+Use Swift's `///` documentation markup on a public declaration only when the
+comment adds information the name and types do not already convey. Skip
+`private`, `fileprivate`, and other non-public declarations unless their
+behavior is genuinely non-obvious.
+
+## When Not To Comment
+
+Leave these undocumented rather than writing a comment that restates them:
+
+- Memberwise and trivial initializers, and initializers whose parameters match
+  stored properties of the same name.
+- Plain stored properties and simple computed properties whose name and type
+  say everything (`let name: String`, `var isEmpty: Bool`).
+- Protocol conformances and overrides whose behavior matches the base
+  contract.
+- Anything where the only possible summary is the declaration name rephrased
+  as a sentence.
+
+```swift
+// Avoid: every line restates the declaration.
+/// A user.
+struct User {
+    /// The user's name.
+    let name: String
+
+    /// Creates a new user with the given name.
+    init(name: String) { self.name = name }
+}
+
+// Prefer: no comments needed.
+struct User {
+    let name: String
+}
+```
+
+Never write comments that narrate an edit ("added for X", "now handles Y");
+describe the code as it is.
+
+## When To Comment
+
+Document a declaration when a caller could not safely use it from the
+signature alone: non-obvious behavior or side effects, units or valid ranges,
+thrown errors, actor or threading requirements, ordering constraints, or a
+type's intended construction path.
 
 ## Understand Before Documenting
 
@@ -29,15 +69,16 @@ realistic call site are confirmed from the code itself.
 
 ## Required Content
 
-Every documentation comment must cover:
+Every documentation comment that is written must cover:
 
 1. **What it does** — a concise summary line describing the behavior, not a
    restatement of the name.
 2. **What it produces** — for methods and computed properties, describe the
    return value and any thrown errors. For types, describe what the type
    represents and when to use it.
-3. **An example** — a realistic usage snippet under an `- Example:` callout
-   showing how to call it and what to expect back.
+3. **An example** — only when usage is not obvious from the signature, a
+   realistic snippet under an `- Example:` callout showing how to call it and
+   what to expect back.
 
 Use the standard callouts (`- Parameters:`, `- Returns:`, `- Throws:`) so
 Xcode's Quick Help renders them correctly.
