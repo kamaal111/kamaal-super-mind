@@ -108,8 +108,15 @@ extension Profile {
 
 ## Access Control
 
-- Default every declaration to `private`. Only widen access when there is a concrete need.
-- Widen one step at a time: move from `private` to `internal` only when another type in the same module genuinely needs it, and from `internal` to `public` only when another module genuinely needs it. Never jump straight to `internal` or `public` "just in case."
+- Default every declaration to `private`, including methods, properties, initializers, and nested types. Only widen access when there is a concrete need.
+- Widen one step at a time, and only for a caller that exists today:
+  - `private` to `fileprivate` only when another type in the same file needs it.
+  - To `internal` (omit the modifier) only when another file in the same module needs it.
+  - To `package` only when another module in the same Swift package needs it.
+  - To `public` (or `open`) only when a module outside the package needs it.
+- Never jump straight to `internal`, `package`, or `public` "just in case," for symmetry with sibling declarations, or because a method "might be useful later." An unused declaration is `private`; if nothing calls it, delete it.
+- Do not mark a type `public` and then leave its members at default access, or mark every member `public` by habit. Make only the members that outside callers use `public`.
+- Before widening or when refactoring, search for usages to confirm the narrowest level that still compiles. Narrow any declaration that is more visible than its callers require.
 - Never widen access solely to make something testable. Use `@testable import` to reach `internal` declarations from tests, and test through the type's existing public or internal surface rather than exposing internals for the test's convenience.
 - Prefer testing behavior through the highest-level method that already exercises the code in question, rather than carving out a narrower internal method just so it can be called directly from a test.
 

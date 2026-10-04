@@ -14,6 +14,14 @@ Follow the repository's established TypeScript style first. Use these rules wher
 - Define reusable schemas or type guards at the boundary. Infer or derive TypeScript types from that single source of truth where the chosen tooling supports it.
 - Prefer explicit return types at exported or otherwise meaningful boundaries when they clarify the contract; let local implementation details infer naturally.
 
+## Export Only What Is Needed
+
+- Keep every declaration module-private by default. Add `export` only when another file actually imports it today.
+- Do not export helpers, types, constants, or schemas "just in case," for symmetry, or so tests can reach them. An unused export hides what callers depend on and makes the API harder to refactor.
+- Test through the module's existing exported surface rather than exporting internals for the test's convenience.
+- Before exporting, or when refactoring, search for importers. Remove `export` from anything no other file uses, and delete anything with no users.
+- Keep a package's public entry point (`index.ts`, `exports` in `package.json`) limited to what external consumers need; do not re-export entire modules with `export *`.
+
 ## Model Absence And Failure Deliberately
 
 - Represent expected absence and failure in the type system instead of returning misleading placeholder values.
