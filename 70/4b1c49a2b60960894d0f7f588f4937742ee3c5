@@ -1,0 +1,20 @@
+skills/plan-mode/SKILL.md
+  s_7e70fa00705e27::t_42eaa36858b650 18-19,21
+  s_7e70fa00705e27::t_8865826b0fbf79 20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "704b1c49a2b60960894d0f7f588f4937742ee3c5",
+  "prompts": {},
+  "sessions": {
+    "s_7e70fa00705e27": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1af0b911-1cdc-436d-b42b-0767a7ae53e5",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
