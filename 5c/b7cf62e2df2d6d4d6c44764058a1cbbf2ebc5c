@@ -1,0 +1,21 @@
+skills/typescript-best-practices/SKILL.md
+  s_2fe200652c005e::t_182a6814505004 17-24
+skills/swift-best-practices/SKILL.md
+  s_2fe200652c005e::t_182a6814505004 111-119
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5cb7cf62e2df2d6d4d6c44764058a1cbbf2ebc5c",
+  "prompts": {},
+  "sessions": {
+    "s_2fe200652c005e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1a71fe77-52cb-4d47-abff-75df69637360",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
