@@ -15,6 +15,10 @@ Produce a plan that is complete in the information an implementer needs and econ
 4. Resolve material uncertainty through repository evidence. Record an assumption only when it remains necessary for implementation.
 5. Do not write an implementation plan until each step can name its target and intended result.
 
+## No Computer Use
+
+Planning is read-only investigation. Do not use computer use, desktop or browser automation, screenshots, or GUI control, and do not launch or drive the app to observe it. Learn the current behavior from the code, tests, configuration, logs, and read-only commands instead. If a question can only be answered by running or looking at the live app, record it as a manual check in `Validation` or `Handoff notes` for the implementer rather than performing it during planning.
+
 ## Scope Discipline
 
 Research verifies the boundary of the requested work; it does not expand that boundary.
