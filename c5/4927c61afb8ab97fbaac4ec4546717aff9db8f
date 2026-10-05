@@ -1,0 +1,19 @@
+skills/plan-mode/SKILL.md
+  s_341207c2598680::t_f48941dfce4428 37,39,42-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "c54927c61afb8ab97fbaac4ec4546717aff9db8f",
+  "prompts": {},
+  "sessions": {
+    "s_341207c2598680": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "433d09b4-aa58-43d6-875f-e4bd78f96be7",
+        "model": "unknown"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
