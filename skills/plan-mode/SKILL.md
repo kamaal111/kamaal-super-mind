@@ -34,9 +34,24 @@ Research verifies the boundary of the requested work; it does not expand that bo
 Start with a one-sentence outcome. Then use the following sections when applicable:
 
 - **Scope and decisions**: State the required behavior, explicit non-goals, and only unresolved assumptions that change implementation.
+- **Examples**: Concrete examples of the behavior the plan will deliver. See `Examples as Requirements`.
 - **Implementation steps**: Order steps by dependency. For every step, name the file path and the specific symbol, route, schema, component, or configuration block to change. State the precise change, the resulting behavior, relevant data/control flow, compatibility or failure handling, and any required follow-on edits. Include rationale only when it selects between plausible implementations.
-- **Validation**: Name the exact tests to add or change, their cases and assertions, relevant existing tests to run, required commands, and any manual checks. Cover success, failure, authorization/ownership, boundary, migration, or compatibility cases when they apply.
+- **Validation**: Derive tests from the `Examples`: each example becomes at least one test case. Name the exact tests to add or change, their cases and assertions, relevant existing tests to run, required commands, and any manual checks. Cover success, failure, authorization/ownership, boundary, migration, or compatibility cases when they apply.
 - **Handoff notes**: List only blockers, prerequisites, out-of-scope adjacent issues, or decisions that the implementer cannot discover from the steps.
+
+## Examples as Requirements
+
+Show what will be built, not only describe it. Examples are the requirements: the implementer writes tests from them first, and the implementation is done when every example passes. Write each example with concrete values, never placeholders like `<value>`, and include the exact expected result.
+
+Include the kinds that apply to the change:
+
+- **Endpoints**: method and path, query parameters, request payload, and the response status and body. Add requests that will be rejected, each with its status and error body (invalid payload, missing or malformed parameters, unauthenticated, forbidden, not found, conflict).
+- **Functions, methods, and components**: signature and example calls with inputs and outputs, including inputs that throw, return an error, or return empty.
+- **CLI commands and configuration**: invocation with arguments or settings and the resulting output, exit code, or effect.
+- **Data and state changes**: a before and after of the record, schema, or file.
+- **Other important cases**: boundaries (empty, maximum, duplicate, unicode, time zones), ordering, idempotency and retries, concurrency, authorization and ownership, backward compatibility, and failure of dependencies. Add any case where a wrong guess would change behavior, even if it is not listed here.
+
+Keep examples few and decisive: one per distinct behavior, not variations of the same one. Mark each example as accepted or rejected so the boundary is explicit. If an example cannot be written concretely, the requirement is not yet understood; investigate further before planning.
 
 ## Detail Standard
 
