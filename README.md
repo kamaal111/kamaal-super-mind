@@ -73,6 +73,7 @@ some of Codex, Claude Code, or Cursor were ever installed.
 - `git-commit-message` — commit and pull-request writing
 - `reword-git-commit` — safely rewrite an existing commit message from its diff
 - `commit` — inspect and commit pending work with Git and GitButler routing
+- `pull-request` — single-commit PRs with titles and descriptions kept in sync
 - `dependency-upgrades` — safe dependency upgrades
 - `api-integration-tests` — real endpoint and persistence coverage
 - `swift-snapshot-tests` — SwiftUI snapshot test coverage for a given screen

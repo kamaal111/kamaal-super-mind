@@ -1,0 +1,3 @@
+interface:
+  display_name: "Pull Request"
+  short_description: "Keep single-commit PRs in sync with commit messages."

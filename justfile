@@ -17,6 +17,11 @@ test:
     bash tests/test_install.sh
     bash tests/test_uninstall.sh
     bash tests/test_gitbutler_helpers.sh
+    python3 -B tests/test_sync_pr.py
+
+# Verify PR message synchronization without accessing GitHub.
+test-pull-request:
+    python3 -B tests/test_sync_pr.py
 
 # Verify deterministic GitButler commit helpers against a mocked GitButler CLI.
 test-gitbutler-helpers:
