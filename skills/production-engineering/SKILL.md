@@ -46,6 +46,7 @@ Load the relevant plugin skill instead of recreating its workflow:
 - `reword-git-commit` for rewriting an existing commit message from its diff
 - `commit` for inspecting and committing pending work with scope and branch safety
 - `pull-request` for opening or updating single-commit PRs and keeping their title and description synchronized with the commit message, excluding sign-off trailers
+- `monitor-pr` only when the user explicitly asks to monitor a PR, repair failing checks, and push fixes; never automatically after PR creation or updates
 - `gitbutler-cli`, `gitbutler-multi-agent`, or `gitbutler-session-commit` for GitButler work
 
 ## Verify And Report

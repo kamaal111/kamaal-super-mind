@@ -1,0 +1,5 @@
+interface:
+  display_name: "Monitor PR"
+  short_description: "Monitor requested PRs and repair failing checks."
+policy:
+  allow_implicit_invocation: false

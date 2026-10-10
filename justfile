@@ -18,6 +18,11 @@ test:
     bash tests/test_uninstall.sh
     bash tests/test_gitbutler_helpers.sh
     python3 -B tests/test_sync_pr.py
+    python3 -B tests/test_pr_status.py
+
+# Verify PR monitoring status classification without accessing GitHub.
+test-monitor-pr:
+    python3 -B tests/test_pr_status.py
 
 # Verify PR message synchronization without accessing GitHub.
 test-pull-request:
