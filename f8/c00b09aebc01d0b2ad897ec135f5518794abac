@@ -1,0 +1,55 @@
+README.md
+  s_6e7f8f343b35b3::t_0d8c9d86b1630d 69-84,89-91
+  s_6e7f8f343b35b3::t_412fbc2a01febd 85-86
+  s_6e7f8f343b35b3::t_17f833fd23900b 87-88
+tests/test_pr_status.py
+  s_6e7f8f343b35b3::t_af252d751c1cd0 12-13,16-27,32-38,42,50-71,75-77,80,83,86,88-89,92-99,102-104,107,110,113,116,119,122-124,127-128,131-136,138,143-148,150,152-164,168-173,176,179
+.codex-plugin/plugin.json
+  s_6e7f8f343b35b3::t_4a3c101051be8a 3
+.gitignore
+  s_6e7f8f343b35b3::t_412fbc2a01febd 4
+  s_6e7f8f343b35b3::t_0d8c9d86b1630d 2-3,5-6
+pyproject.toml
+  s_6e7f8f343b35b3::t_0f9f786197152b 8-11
+  s_6e7f8f343b35b3::t_17f833fd23900b 16-18
+  s_6e7f8f343b35b3::t_0d8c9d86b1630d 1-7,12-15,19-23
+justfile
+  s_6e7f8f343b35b3::t_0d8c9d86b1630d 7-18
+  s_6e7f8f343b35b3::t_412fbc2a01febd 26,31
+.github/workflows/ci.yml
+  s_6e7f8f343b35b3::t_0d8c9d86b1630d 5,18,20-28
+  s_6e7f8f343b35b3::t_654fd88a52c929 19
+tests/test_sync_pr.py
+  s_6e7f8f343b35b3::t_af252d751c1cd0 12-13,16-18,22-28,36-37,42,45-46,49-53,56-59,65-67,77-83,89-92,94,97-100,103-109,112,114,117-123,126
+.python-version
+  s_6e7f8f343b35b3::t_2dd2941b3b1bb4 1
+AGENTS.md
+  s_6e7f8f343b35b3::t_412fbc2a01febd 57-60
+  s_6e7f8f343b35b3::t_781bfbbb3c3962 68
+  s_6e7f8f343b35b3::t_0d8c9d86b1630d 39-42,52-56,61-66
+  s_6e7f8f343b35b3::t_41f687daab93d3 71
+  s_6e7f8f343b35b3::t_654fd88a52c929 69-70
+  s_6e7f8f343b35b3::t_2213e624055c27 67
+skills/pull-request/scripts/sync-pr.py
+  s_6e7f8f343b35b3::t_af252d751c1cd0 14,18,25,29-31,33,37-39,43-46,51-55,58-60,67-79,83-84,87,91
+skills/monitor-pr/scripts/pr-status.py
+  s_6e7f8f343b35b3::t_af252d751c1cd0 11-27,29,31-40,42-43,46,50,52-63,65-66,71-74,77-88,93,96-103
+uv.lock
+  s_6e7f8f343b35b3::t_cd928181cbed38 1-108
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f8c00b09aebc01d0b2ad897ec135f5518794abac",
+  "prompts": {},
+  "sessions": {
+    "s_6e7f8f343b35b3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12c5c-cde2-7782-bfcc-bdc2b0e81a02",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
