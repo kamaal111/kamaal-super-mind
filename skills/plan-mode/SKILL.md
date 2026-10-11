@@ -35,10 +35,17 @@ Start with a one-sentence outcome. Then use the following sections when applicab
 
 - **Scope and decisions**: State the required behavior, explicit non-goals, and confirmed decisions.
 - **Assumptions**: List unresolved assumptions separately from confirmed facts and decisions. See `Make Assumptions Reviewable`.
+- **Before and after**: Required whenever changes are planned. Present the current behavior or state and the proposed behavior or state for each distinct change, using the same concrete input or scenario so the difference is clear. See `Present Before and After`.
 - **Examples**: Concrete examples of the behavior the plan will deliver. See `Examples as Requirements`.
 - **Implementation steps**: Order steps by dependency. For every step, name the file path and the specific symbol, route, schema, component, or configuration block to change. State the precise change, the resulting behavior, relevant data/control flow, compatibility or failure handling, and any required follow-on edits. Include rationale only when it selects between plausible implementations.
 - **Validation**: Derive tests from the `Examples`: each example becomes at least one test case. Name the exact tests to add or change, their cases and assertions, relevant existing tests to run, required commands, and any manual checks. Cover success, failure, authorization/ownership, boundary, migration, or compatibility cases when they apply.
 - **Handoff notes**: List only blockers, prerequisites, out-of-scope adjacent issues, or decisions that the implementer cannot discover from the steps.
+
+## Present Before and After
+
+Whenever the plan proposes changes, include an explicit **Before and after** comparison. Show what happens today and what will happen after implementation for each distinct behavior or state being changed. Use paired examples or a table with clearly labeled `Before` and `After` entries; for a new capability, state that it is currently absent.
+
+Ground the `Before` entry in repository evidence and make the `After` entry concrete enough to verify. If current behavior cannot be confirmed, label that uncertainty and reference its assumption instead of inventing a baseline. Reuse these comparisons in `Examples` where useful, and derive validation cases from the proposed outcomes.
 
 ## Make Assumptions Reviewable
 
