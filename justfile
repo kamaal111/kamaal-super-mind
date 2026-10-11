@@ -4,6 +4,18 @@ alias z := zed
 default:
     @just --list
 
+# Check Python lint and formatting with the locked development tools.
+lint:
+    uv run --locked ruff check .
+    uv run --locked ruff format --check .
+
+# Format Python files with the locked Ruff version.
+format:
+    uv run --locked ruff format .
+
+# Run the same verification gate as CI, stopping at the first failure.
+verify: lint check test
+
 # Check the installer and uninstaller without changing a Codex installation.
 check:
     bash -n install.sh
@@ -11,24 +23,12 @@ check:
     bash -n uninstall.sh
     bash uninstall.sh --dry-run
 
-# Run install.sh's and uninstall.sh's automated test suites against mocked
-# git/codex/claude/cursor.
+# Run the shell integration suites and discover all Python tests with pytest.
 test:
     bash tests/test_install.sh
     bash tests/test_uninstall.sh
     bash tests/test_gitbutler_helpers.sh
-    python3 -B tests/test_sync_pr.py
-    python3 -B tests/test_rebase_before_push.py
-    python3 -B tests/test_pr_status.py
-
-# Verify PR monitoring status classification without accessing GitHub.
-test-monitor-pr:
-    python3 -B tests/test_pr_status.py
-
-# Verify PR message synchronization without accessing GitHub.
-test-pull-request:
-    python3 -B tests/test_sync_pr.py
-    python3 -B tests/test_rebase_before_push.py
+    uv run --locked pytest tests
 
 # Verify deterministic GitButler commit helpers against a mocked GitButler CLI.
 test-gitbutler-helpers:

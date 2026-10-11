@@ -66,6 +66,29 @@ Claude Code, the Cursor symlink and the `~/.cursor/skills` skill symlinks, and
 deletes the `~/.kamaal-super-mind` checkout. It is safe to run even if only
 some of Codex, Claude Code, or Cursor were ever installed.
 
+## Development
+
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and
+[just](https://just.systems/man/en/), then run from the repository root:
+
+```bash
+uv sync --locked
+just verify
+```
+
+uv creates `.venv` using the Python version in `.python-version` and the
+development tools in `uv.lock`. Standalone plugin scripts and installation
+do not require uv or Ruff.
+
+`just lint` checks all Python files with Ruff, including import ordering,
+explicit subprocess checks, and formatting. Use `just format` to format
+Python files. `just test` runs the shell suites and discovers Python tests
+with pytest. To run only the Python tests, use `uv run --locked pytest tests`.
+`just check` checks installer and uninstaller syntax and dry-run behavior.
+`just verify` runs
+all three checks and is the same command used by CI on pushes and pull
+requests. Agents must follow the verification requirements in `AGENTS.md`.
+
 ## Included Skills
 
 - `production-engineering` — shared implementation, verification, and safety guidance
