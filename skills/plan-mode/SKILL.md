@@ -12,7 +12,7 @@ Produce a plan that is complete in the information an implementer needs and econ
 1. Establish the requested outcome and explicit non-goals before investigating. Use them to decide what is relevant.
 2. Read the repository instructions and inspect the current implementation, callers, tests, configuration, and task-runner commands relevant to the request.
 3. Identify the behavior owner and the observable contract: inputs, outputs, state changes, error behavior, compatibility requirements, and affected consumers.
-4. Resolve material uncertainty through repository evidence. Record an assumption only when it remains necessary for implementation.
+4. Resolve material uncertainty through repository evidence. List any remaining assumptions that affect scope, behavior, implementation, or validation explicitly so the user can review and correct them.
 5. Do not write an implementation plan until each step can name its target and intended result.
 
 ## No Computer Use
@@ -33,11 +33,22 @@ Research verifies the boundary of the requested work; it does not expand that bo
 
 Start with a one-sentence outcome. Then use the following sections when applicable:
 
-- **Scope and decisions**: State the required behavior, explicit non-goals, and only unresolved assumptions that change implementation.
+- **Scope and decisions**: State the required behavior, explicit non-goals, and confirmed decisions.
+- **Assumptions**: List unresolved assumptions separately from confirmed facts and decisions. See `Make Assumptions Reviewable`.
 - **Examples**: Concrete examples of the behavior the plan will deliver. See `Examples as Requirements`.
 - **Implementation steps**: Order steps by dependency. For every step, name the file path and the specific symbol, route, schema, component, or configuration block to change. State the precise change, the resulting behavior, relevant data/control flow, compatibility or failure handling, and any required follow-on edits. Include rationale only when it selects between plausible implementations.
 - **Validation**: Derive tests from the `Examples`: each example becomes at least one test case. Name the exact tests to add or change, their cases and assertions, relevant existing tests to run, required commands, and any manual checks. Cover success, failure, authorization/ownership, boundary, migration, or compatibility cases when they apply.
 - **Handoff notes**: List only blockers, prerequisites, out-of-scope adjacent issues, or decisions that the implementer cannot discover from the steps.
+
+## Make Assumptions Reviewable
+
+Do not bury assumptions in implementation steps or present them as established requirements. Give each material assumption a stable label such as `A1` so the user can correct it directly. For each one, state:
+
+- What is assumed, in concrete terms.
+- Why the assumption is needed and what evidence or missing information it rests on.
+- Which decisions, examples, implementation steps, or validation cases depend on it, and what would change if it were wrong.
+
+Reference the label where the plan relies on the assumption. When the user corrects one, revise the assumption and every dependent part of the plan. If there are no material assumptions, say so briefly. An assumption does not resolve a blocker: ask for missing information when a wrong guess would prevent a usable plan.
 
 ## Examples as Requirements
 
