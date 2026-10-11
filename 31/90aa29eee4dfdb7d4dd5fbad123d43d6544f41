@@ -1,0 +1,21 @@
+skills/pull-request/SKILL.md
+  s_6e7f8f343b35b3::t_071bda7c502d76 12-17
+.codex-plugin/plugin.json
+  s_6e7f8f343b35b3::t_019c84cd07ccf6 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "3190aa29eee4dfdb7d4dd5fbad123d43d6544f41",
+  "prompts": {},
+  "sessions": {
+    "s_6e7f8f343b35b3": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12c5c-cde2-7782-bfcc-bdc2b0e81a02",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
