@@ -9,6 +9,12 @@ description: Create or update single-commit PRs whose title and description matc
   for its message and [commit](../commit/SKILL.md) for the initial commit.
 - Amend fixes into that commit and update its message from the complete diff.
   Use the repository's Git or GitButler workflow; preserve unrelated work.
+- Before every requested PR push, fetch the latest remote `main` and rebase
+  the PR branch onto it, including pushes after an amend or reword. In
+  GitButler, use its base-update workflow instead of raw `git rebase` and
+  verify that the branch includes the latest remote `main`. Resolve conflicts
+  and rerun relevant checks before pushing; if the update cannot be completed,
+  report the blocker and do not push.
 - Push and open the requested PR. After every amend or reword, publish the
   updated commit (with lease protection when replacing published history).
 - Run `python3 scripts/sync-pr.py <pr> --commit <commit>` from the target
