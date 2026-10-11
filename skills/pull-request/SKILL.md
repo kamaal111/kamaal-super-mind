@@ -9,12 +9,22 @@ description: Create or update single-commit PRs whose title and description matc
   for its message and [commit](../commit/SKILL.md) for the initial commit.
 - Amend fixes into that commit and update its message from the complete diff.
   Use the repository's Git or GitButler workflow; preserve unrelated work.
-- Before every requested PR push, fetch the latest remote `main` and rebase
-  the PR branch onto it, including pushes after an amend or reword. In
-  GitButler, use its base-update workflow instead of raw `git rebase` and
-  verify that the branch includes the latest remote `main`. Resolve conflicts
-  and rerun relevant checks before pushing; if the update cannot be completed,
-  report the blocker and do not push.
+- Before every requested PR push, including after an amend or reword, run
+  `python3 scripts/rebase-before-push.py --branch <branch>`
+  from the target repository, resolving the script relative to this skill.
+  The script selects the branch's configured remote, or the sole remote when
+  the branch has none, and queries that remote's advertised default branch.
+  Use `--remote <remote>` or `--base-branch <base>` when discovery is ambiguous
+  or the PR targets a different repository or branch. It never guesses names.
+  The script requires a clean, checked-out PR branch, fetches the base branch,
+  rebases onto its exact fetched SHA, and verifies ancestry. It prints the
+  new head SHA and never pushes, stashes, or switches branches. On conflicts,
+  preserve the state, resolve them, continue the rebase, then rerun the script.
+  In GitButler, the script stops before mutation: use
+  [gitbutler-cli](../gitbutler-cli/SKILL.md)'s base-update workflow and verify
+  the virtual branch includes the latest remote default branch (or explicit
+  PR base). Rerun relevant checks
+  after updating. If the update fails, report the blocker and do not push.
 - Push and open the requested PR. After every amend or reword, publish the
   updated commit (with lease protection when replacing published history).
 - Run `python3 scripts/sync-pr.py <pr> --commit <commit>` from the target

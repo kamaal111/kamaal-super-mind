@@ -18,6 +18,7 @@ test:
     bash tests/test_uninstall.sh
     bash tests/test_gitbutler_helpers.sh
     python3 -B tests/test_sync_pr.py
+    python3 -B tests/test_rebase_before_push.py
     python3 -B tests/test_pr_status.py
 
 # Verify PR monitoring status classification without accessing GitHub.
@@ -27,6 +28,7 @@ test-monitor-pr:
 # Verify PR message synchronization without accessing GitHub.
 test-pull-request:
     python3 -B tests/test_sync_pr.py
+    python3 -B tests/test_rebase_before_push.py
 
 # Verify deterministic GitButler commit helpers against a mocked GitButler CLI.
 test-gitbutler-helpers:
