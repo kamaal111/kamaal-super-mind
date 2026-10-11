@@ -1,0 +1,22 @@
+skills/plan-mode/SKILL.md
+  s_91b444254ee500::t_919e9e8aedd3de 38,44-48
+  s_91b444254ee500::t_2bde1c707b5499 49
+.codex-plugin/plugin.json
+  s_91b444254ee500::t_3fddb0d458bbfc 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "75d1a560f680843ebf67c43bf02dc9057b59a5cd",
+  "prompts": {},
+  "sessions": {
+    "s_91b444254ee500": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a12bce-1b5f-7fa0-8a64-cec54dcd4915",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
