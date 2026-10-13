@@ -1,0 +1,29 @@
+skills/production-engineering/SKILL.md
+  s_a02e1533d8d886::t_76167b252ed9ab 42
+.codex-plugin/plugin.json
+  s_a02e1533d8d886::t_e96d1b95227eff 3
+README.md
+  s_a02e1533d8d886::t_76167b252ed9ab 113
+skills/logging/agents/openai.yaml
+  s_a02e1533d8d886::t_76167b252ed9ab 1-4
+skills/logging/references/structured-logging.md
+  s_a02e1533d8d886::t_76167b252ed9ab 1-75
+skills/logging/SKILL.md
+  s_a02e1533d8d886::t_76167b252ed9ab 1-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c63064f7099e8199b893e743f83508e46f317b6a",
+  "prompts": {},
+  "sessions": {
+    "s_a02e1533d8d886": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a136dc-c302-7190-bd06-59dc6add85f5",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Kamaal Farah <kamaal.f1@gmail.com>"
+    }
+  }
+}
