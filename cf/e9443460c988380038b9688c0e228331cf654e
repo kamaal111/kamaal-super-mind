@@ -1,0 +1,31 @@
+skills/resolve-merge-conflicts/scripts/conflicts.py
+  s_5660a6aecc9524::t_69577ddd31eb6f 1-79,83-218,232-255,263-287,291-298,306-351,355-400,407-416,422-442,446-467,471-489
+  s_5660a6aecc9524::t_f08ef9b49ee829 80-82,219-231,256-262,288-290,299-305,352-354,401-406,417-421,443-445,468-470
+README.md
+  s_5660a6aecc9524::t_f08ef9b49ee829 99
+skills/production-engineering/SKILL.md
+  s_5660a6aecc9524::t_f08ef9b49ee829 47
+skills/resolve-merge-conflicts/SKILL.md
+  s_5660a6aecc9524::t_b03663c41032de 1-2,4-7
+  s_5660a6aecc9524::t_12011f7a2a5a0b 3,8-39
+skills/resolve-merge-conflicts/agents/openai.yaml
+  s_5660a6aecc9524::t_3dfe1c8acd34ba 1-4
+tests/test_conflicts.py
+  s_5660a6aecc9524::t_0a0ec82c62d5ba 1-205
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cfe9443460c988380038b9688c0e228331cf654e",
+  "prompts": {},
+  "sessions": {
+    "s_5660a6aecc9524": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a2efe8af-1c40-41bb-a50a-17fd3ae477e0",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Kamaal Farah <kfarah@box.com>"
+    }
+  }
+}
