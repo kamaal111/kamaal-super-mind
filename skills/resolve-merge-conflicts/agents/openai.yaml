@@ -1,0 +1,4 @@
+interface:
+  display_name: "Resolve Merge Conflicts"
+  short_description: "Resolve conflicts in place without destructive Git commands."
+  default_prompt: "Use $resolve-merge-conflicts to resolve the conflicts and leave them for my review."

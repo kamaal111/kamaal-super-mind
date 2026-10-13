@@ -96,6 +96,7 @@ requests. Agents must follow the verification requirements in `AGENTS.md`.
 - `git-commit-message` — commit and pull-request writing
 - `reword-git-commit` — safely rewrite an existing commit message from its diff
 - `commit` — inspect and commit pending work with Git and GitButler routing
+- `resolve-merge-conflicts` — resolve merge/rebase conflicts in place, non-destructively, for user review
 - `pull-request` — single-commit PRs with titles and descriptions kept in sync
 - `monitor-pr` — explicitly requested PR monitoring, failure fixes, and pushes until checks pass
 - `dependency-upgrades` — safe dependency upgrades
