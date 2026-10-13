@@ -39,7 +39,7 @@ Load the relevant plugin skill instead of recreating its workflow:
 - `java-best-practices` for Java implementation work
 - `backend` for backend-service work in any language or framework
 - `database` for schemas, migrations, queries, repositories, and user-scoped persistence
-- `structured-logging` for queryable, context-rich backend-service logs
+- `logging` for successes, failures, and workflow milestones; its structured-logging reference covers queryable backend events and context propagation
 - `generated-api-client-endpoint` for generated client endpoints
 - `dependency-upgrades` for dependency work
 - `git-commit-message` for drafting commit or pull-request text

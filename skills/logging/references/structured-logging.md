@@ -1,11 +1,6 @@
----
-name: structured-logging
-description: Design, add, or review structured logging for backend services that makes production behavior easy to understand and filter. Use when instrumenting server requests, jobs, consumers, persistence, dependencies, errors, or observability; when diagnosing missing or unexpected events; or when replacing ad hoc server logs. Do not use for webpages or mobile apps.
----
-
 # Structured Logging
 
-Apply this skill only to backend services. Do not use it to instrument webpages, browser clients, or mobile apps. Treat server logs as a queryable record of what happened, not a debugging diary. Make it possible to answer, from the logs alone: what was attempted, which entity or correlation was involved, what outcome occurred, and why.
+Use this reference only for backend services. Do not use it to instrument webpages, browser clients, or mobile apps. Treat server logs as a queryable record of what happened, not a debugging diary. Make it possible to answer, from the logs alone: what was attempted, which entity or correlation was involved, what outcome occurred, and why.
 
 ## Propagate Log Context Automatically
 
@@ -23,7 +18,7 @@ Use the shared logger/context API as the single owner of field propagation. This
 4. Include the correlation and entity identifiers that let an investigator move through the workflow: for example `request_id`, `trace_id`, `operation_id`, `job_id`, `user_id`, `order_id`, and `attempt`.
 5. Record an explicit terminal `outcome`: `success`, `failure`, `rejected`, `cancelled`, `skipped`, or another domain-specific state. Include `duration_ms` where work takes time.
 
-Build one context-rich completion event for each important unit of work. Enrich the scoped context during processing and emit it even when the unit throws or returns early. Add lifecycle events only when they answer a distinct question—for example a queued job never began, a retry is scheduled, or a long-running operation needs live progress.
+Build one context-rich completion event for each important unit of work. Enrich the scoped context during processing and emit it even when the unit throws or returns early. Also log every meaningful workflow milestone as it succeeds, so a later failure leaves a record of the last completed stage. For example, distinguish validation completed, data persisted, and notification sent. Add start or retry events when they help explain work that never completed.
 
 ```text
 event=card.sync_completed message="Card sync completed" outcome=success

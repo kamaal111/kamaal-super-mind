@@ -110,4 +110,4 @@ requests. Agents must follow the verification requirements in `AGENTS.md`.
 - `software-testing` — cross-project testing discipline, including Java, Swift, and TypeScript guidance
 - `backend` — secure backend-service changes in any language or framework
 - `database` — secure, efficient data access and user-resource ownership scoping
-- `structured-logging` — queryable, context-rich backend-service logging
+- `logging` — successes, failures, and workflow milestones, with structured backend logging guidance

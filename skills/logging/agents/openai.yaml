@@ -1,0 +1,4 @@
+interface:
+  display_name: "Logging"
+  short_description: "Trace successes, failures, and workflow milestones"
+  default_prompt: "Use $logging to record successes, failures, and milestones in this workflow."
