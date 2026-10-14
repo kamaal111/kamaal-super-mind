@@ -98,6 +98,7 @@ requests. Agents must follow the verification requirements in `AGENTS.md`.
 - `commit` — inspect and commit pending work with Git and GitButler routing
 - `resolve-merge-conflicts` — resolve merge/rebase conflicts in place, non-destructively, for user review
 - `pull-request` — single-commit PRs with titles and descriptions kept in sync
+- `refactor-pr-duplication` — check PR logic across the codebase and consolidate duplicates into shared implementations
 - `monitor-pr` — explicitly requested PR monitoring, failure fixes, and pushes until checks pass
 - `dependency-upgrades` — safe dependency upgrades
 - `api-integration-tests` — real endpoint and persistence coverage

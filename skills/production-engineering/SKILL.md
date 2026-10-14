@@ -47,6 +47,7 @@ Load the relevant plugin skill instead of recreating its workflow:
 - `resolve-merge-conflicts` for resolving merge, rebase, or cherry-pick conflicts in place without destructive Git commands
 - `commit` for inspecting and committing pending work with scope and branch safety
 - `pull-request` for opening or updating single-commit PRs and keeping their title and description synchronized with the commit message, excluding sign-off trailers
+- `refactor-pr-duplication` for checking a just-created or user-specified PR against the codebase and refactoring duplicated logic into existing or newly extracted shared implementations
 - `monitor-pr` only when the user explicitly asks to monitor a PR, repair failing checks, and push fixes; never automatically after PR creation or updates
 - `gitbutler-cli`, `gitbutler-multi-agent`, or `gitbutler-session-commit` for GitButler work
 
