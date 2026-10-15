@@ -35,7 +35,9 @@ Apply `gitbutler-cli`, `git-commit-message`, and relevant testing guidance.
    task-specific virtual branch. If a matching unapplied branch cannot be
    applied without overwriting working files, create a separate branch unless
    the user authorizes a history operation.
-5. Write the proposed message to a temporary file and validate it with
+5. Draft a Conventional Commit message through `git-commit-message`, reviewing
+   its type, scope, and breaking-change markers against the selected diff.
+   Write the proposed message to a temporary file and validate it with
    the `git-commit-message` skill's `validate-message.sh` helper before any
    commit mutation.
 6. With the positional-`CHANGES` interface, commit only the intended IDs using

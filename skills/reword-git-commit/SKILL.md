@@ -50,10 +50,14 @@ history, push, or amend unrelated work. Construct the replacement with the
    - GitButler: use the corresponding `but show`/`but diff` inspection, and
      follow the installed GitButler skill if command syntax is uncertain.
 2. Load and follow `git-commit-message`. Give it the target diff, relevant
-   user intent, and any message supplied by the user. Preserve the repository's
-   title/body format, 72-character line limit, and configured Signed-off-by
-   trailer requirements. A supplied message is input to that skill, not a
-   reason to skip diff analysis or validation.
+   user intent, and any message supplied by the user. Use a Conventional
+   Commit title even when the old title lacks a type prefix. Follow the
+   repository's type/scope rules when available, otherwise use the skill's
+   defaults without requiring a configuration search. Preserve the body
+   format, 72-character line limit, and configured Signed-off-by trailer
+   requirements. A supplied
+   message is input to that skill, not a reason to skip diff analysis or
+   validation.
 3. Check the proposed message line by line before applying it. Do not alter
    author, committer, files, parents, or other commit metadata unless the
    selected tool necessarily does so and the user explicitly requested it.

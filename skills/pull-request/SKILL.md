@@ -6,7 +6,8 @@ description: Create or update single-commit PRs whose title and description matc
 # Pull Request
 
 - Keep one commit per PR. Use [git-commit-message](../git-commit-message/SKILL.md)
-  for its message and [commit](../commit/SKILL.md) for the initial commit.
+  for its Conventional Commit message and [commit](../commit/SKILL.md) for
+  the initial commit. Keep the conventional prefix in the PR title.
 - Amend fixes into that commit and update its message from the complete diff.
   Use the repository's Git or GitButler workflow; preserve unrelated work.
 - Before every requested PR push, including after an amend or reword, run

@@ -42,8 +42,8 @@ Load the relevant plugin skill instead of recreating its workflow:
 - `logging` for successes, failures, and workflow milestones; its structured-logging reference covers queryable backend events and context propagation
 - `generated-api-client-endpoint` for generated client endpoints
 - `dependency-upgrades` for dependency work
-- `git-commit-message` for drafting commit or pull-request text
-- `reword-git-commit` for rewriting an existing commit message from its diff
+- `git-commit-message` for drafting Conventional Commit messages or pull-request text
+- `reword-git-commit` for rewriting an existing commit message as a Conventional Commit from its diff
 - `resolve-merge-conflicts` for resolving merge, rebase, or cherry-pick conflicts in place without destructive Git commands
 - `commit` for inspecting and committing pending work with scope and branch safety
 - `pull-request` for opening or updating single-commit PRs and keeping their title and description synchronized with the commit message, excluding sign-off trailers

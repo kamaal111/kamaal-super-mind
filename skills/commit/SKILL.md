@@ -54,8 +54,9 @@ publish, or include unrelated changes.
    discard unrelated work to make a commit possible.
 
 4. Load `git-commit-message`. Give it the final diff, the user's intent, and
-   any requested wording. Use its resulting title, body, trailer, and line
-   length rules.
+   any requested wording. Use its Conventional Commit title, body, trailer,
+   and line length rules. Review type, scope, and breaking-change markers
+   against the diff before committing.
 
 5. Write the complete proposed message to a temporary file and run
    `git-commit-message/scripts/validate-message.sh <message-file>` before

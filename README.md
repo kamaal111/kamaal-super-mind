@@ -93,8 +93,8 @@ requests. Agents must follow the verification requirements in `AGENTS.md`.
 
 - `production-engineering` — shared implementation, verification, and safety guidance
 - `plan-mode` — concise, implementation-ready planning and agent handoffs
-- `git-commit-message` — commit and pull-request writing
-- `reword-git-commit` — safely rewrite an existing commit message from its diff
+- `git-commit-message` — Conventional Commit and pull-request writing
+- `reword-git-commit` — safely rewrite a commit message as a Conventional Commit from its diff
 - `commit` — inspect and commit pending work with Git and GitButler routing
 - `resolve-merge-conflicts` — resolve merge/rebase conflicts in place, non-destructively, for user review
 - `pull-request` — single-commit PRs with titles and descriptions kept in sync
