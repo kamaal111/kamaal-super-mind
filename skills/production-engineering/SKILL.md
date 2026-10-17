@@ -12,7 +12,14 @@ Use this skill as a thin baseline for safe repository work. It deliberately does
 1. Read repository instructions, task-runner commands, manifests, nearby implementation, and nearby tests before editing.
 2. Work from the repository root unless the project directs otherwise. Do not search, read, or crawl outside it without explicit user direction—for example, never run `find /`, scan a home directory, or crawl unrelated local paths.
 3. Prefer repository-provided commands and the project's selected package managers. Do not start long-running services or background processes unless the user explicitly asks and the repository provides an approved workflow.
-4. Match nearby naming, structure, validation, error handling, and test style unless there is a concrete reason to introduce a new pattern.
+4. Identify the established patterns in nearby code and comparable features before choosing an implementation. Follow the guidance below when extending them.
+
+## Follow Existing Codebase Patterns
+
+- Prefer the codebase's established patterns over your own stylistic or architectural preferences. Match naming, file organization, abstraction level, dependency usage, data flow, validation, error handling, logging, and test style in the area being changed.
+- Use nearby implementations and comparable features as concrete examples. Reuse existing helpers and extension points before introducing another abstraction, dependency, or parallel approach to the same problem.
+- Keep changes focused on the requested behavior. Do not redesign surrounding code, introduce a preferred architecture, or restyle unrelated code merely because another approach seems cleaner or more familiar.
+- When conventions differ across the repository, follow the relevant maintained code in the affected area and explicit repository instructions. Do not copy a known defect or unsafe behavior for consistency. Depart from an established pattern only when the task, correctness, security, or a demonstrated limitation requires it; keep the departure narrow and explain the reason in the completion report.
 
 ## Prefer Pure Functions And Immutable Data
 
