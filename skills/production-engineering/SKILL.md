@@ -19,6 +19,7 @@ Use this skill as a thin baseline for safe repository work. It deliberately does
 - Identify the contract and owner of the behavior before changing it.
 - Search for a shared owner before copying non-trivial logic. Move reusable behavior to the lowest suitable layer and remove the old copy unless the difference is intentional and explicit.
 - Validate unknown data at boundaries and preserve typed data flow. Do not use casts, type assertions, lint disables, or suppression comments to force an invalid design through.
+- Prefer compile-time guarantees over runtime crash paths in every language. Use the language's type system, exhaustive pattern matching, total typed mappings, or construction rules to make invalid states unrepresentable and missing cases fail compilation or typechecking. Do not replace compiler-checkable completeness with assertions, panics, traps, forced unwraps, or catch-all exceptions merely to shorten an implementation. Where the language cannot express the guarantee, validate explicitly and handle real failures deliberately; external input still needs runtime validation.
 - Treat uncertain ownership of user-scoped data as a security issue. Scope reads and writes through the authenticated ownership boundary.
 - Fail clearly when required data is unavailable; do not return misleading success values or placeholder data.
 - Never revert, overwrite, or "clean up" uncommitted changes you did not write yourself, even if they look unrelated, stray, or in-progress. Leave them in place and report them in `Doubts / remaining gaps` instead of touching them.
@@ -34,9 +35,9 @@ Load the relevant plugin skill instead of recreating its workflow:
 - `plan-mode` for implementation-ready plans that another agent can execute without prior context
 - `api-integration-tests` for endpoint integration coverage
 - `swift-snapshot-tests` for SwiftUI screen snapshot coverage
-- `swift-best-practices` for Swift implementation work
-- `typescript-best-practices` for TypeScript implementation work
-- `java-best-practices` for Java implementation work
+- `swift-best-practices` for Swift implementation work, including exhaustive enum mappings and compile-time invariants
+- `typescript-best-practices` for TypeScript implementation work, including `never` exhaustiveness checks and total typed mappings
+- `java-best-practices` for Java optional values, sealed state or result hierarchies, and exhaustive switches
 - `backend` for backend-service work in any language or framework
 - `database` for schemas, migrations, queries, repositories, and user-scoped persistence
 - `logging` for successes, failures, and workflow milestones; its structured-logging reference covers queryable backend events and context propagation

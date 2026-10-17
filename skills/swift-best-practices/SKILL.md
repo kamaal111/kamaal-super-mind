@@ -27,13 +27,43 @@ Avoid merging unrelated checks solely to make the code shorter:
 guard let session, session.isActive else { return .invalidSession }
 ```
 
+## Compile-Time Checks And Exhaustive Mapping
+
+- Prefer making invalid states unrepresentable and enforcing invariants at compile time before adding runtime checks or traps.
+- Map between known enum types with concrete, exhaustive `switch` statements that name every case. Avoid `default` or wildcard branches for closed enums so adding a case requires updating the mapping at compile time.
+- Do not bridge public and generated enums through generic `RawRepresentable` conversions followed by `preconditionFailure`, `fatalError`, or force unwraps. Matching raw strings are a runtime assumption; concrete case-to-case mappings let the compiler check coverage and destination cases.
+- When both conversion directions are needed, implement each exhaustively. A switch checks its source enum's coverage; it does not prove that every destination case is represented or that two mappings are inverses.
+- For non-frozen external enums that require handling future cases, use `@unknown default` with deliberate failure or recovery handling appropriate to the API. Do not claim compile-time coverage of cases unavailable to the compiler, or crash merely because an external value is unknown.
+
+Prefer concrete mappings inside a suitable owner (assuming `Currency` and `GeneratedCurrency` each define `.eur` and `.usd`):
+
+```swift
+private enum CurrencyMapper {
+    static func makeCurrency(_ currency: GeneratedCurrency) -> Currency {
+        switch currency {
+        case .eur: return .eur
+        case .usd: return .usd
+        }
+    }
+
+    static func generatedCurrency(_ currency: Currency) -> GeneratedCurrency {
+        switch currency {
+        case .eur: return .eur
+        case .usd: return .usd
+        }
+    }
+}
+```
+
+Adding a case to either enum now makes its source mapping non-exhaustive. Keep runtime validation for raw strings from external input; return an optional, typed failure, or thrown error when an unknown value is a real possibility.
+
 ## Invariants And Optionals
 
 - When a value must exist for the application to function correctly, surface an impossible `nil` or invalid state at the first visible point rather than hiding it behind a permissive `guard`, `??`, or placeholder default.
-- Use `preconditionFailure`, `assertionFailure`, `fatalError`, or a force unwrap only for genuine invariants; use intentional optional handling for real recovery paths that improve the user experience.
+- Use `preconditionFailure`, `assertionFailure`, `fatalError`, or a force unwrap only for genuine invariants that cannot reasonably be enforced through types, exhaustive handling, or construction. Labeling an assumption an invariant does not justify a trap when the compiler could check it. Use intentional optional handling for real recovery paths that improve the user experience.
 - Do not invent fallback configuration or placeholder data simply to keep execution moving when it leaves the application in an unknown or misleading state.
 
-Prefer:
+For a required runtime dependency that cannot reasonably be guaranteed at construction, surface the configuration failure at its boundary:
 
 ```swift
 guard let modelContext else { preconditionFailure("A model context must be configured before use.") }

@@ -171,7 +171,7 @@ exercise the hook commands and JSON protocols without opening live chats.
 - `gitbutler-multi-agent` — GitButler coordination for parallel agent work
 - `swift-best-practices` — Swift implementation
 - `typescript-best-practices` — clear, type-safe TypeScript implementation
-- `java-best-practices` — Java implementation
+- `java-best-practices` — Java optional values, sealed hierarchies, and exhaustive switches
 - `software-testing` — cross-project testing discipline, including Java, Swift, and TypeScript guidance
 - `backend` — secure backend-service changes in any language or framework
 - `database` — secure, efficient data access and user-resource ownership scoping

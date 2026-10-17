@@ -27,7 +27,36 @@ Follow the repository's established TypeScript style first. Use these rules wher
 - Represent expected absence and failure in the type system instead of returning misleading placeholder values.
 - Narrow optional values at the point their presence becomes required. Do not defer an unsafe assumption to a distant caller.
 - Use discriminated unions for finite state or result domains when callers need to handle each case explicitly.
-- Use `never`-checked exhaustive branches when a union represents closed application state.
+
+## Compile-Time Checks And Exhaustive Mapping
+
+- Prefer enforcing invariants through types and compiler checks over runtime exceptions for omissions the compiler can detect. Do not use casts, non-null assertions, or a throwing catch-all to avoid implementing a complete mapping.
+- For a closed union or discriminated union, handle every member explicitly in a `switch` and check that the remainder is `never`. A plain `default: throw new Error(...)` does not enforce exhaustiveness; an existing `assertNever` helper must accept `never`, without assertions or `any` bypassing the check.
+- For direct value mappings, use `SCREAMING_SNAKE_CASE` constant names and preserve literal keys and values with `as const`. When the map owns the domain, derive types from it instead of maintaining parallel unions. Do not add `satisfies` mechanically; prefer a direct type annotation when a value needs to conform to an existing contract. A const assertion preserves literal information; do not use type assertions to bypass validation.
+- If both conversion directions are required, derive the reverse map's type from the forward constant using a mapped type with key remapping, then annotate the reverse constant with that type so missing keys and mismatched pairs fail typechecking. A true inverse requires unique forward values; represent many-to-one mappings deliberately instead of arbitrarily choosing a reverse value.
+- When domain types exist independently, such as generated API enums, retain completeness checks against those types through exhaustive switches or explicitly typed coverage checks. A map inferred in isolation cannot detect new upstream members; checking its reverse alone does not prove coverage of an independent domain.
+- Keep runtime validation at external boundaries: TypeScript types are erased, so a compile-time exhaustive check does not validate JSON, JavaScript callers, or other unknown data.
+
+Example where the forward map is the source of truth:
+
+```typescript
+const PUBLIC_CURRENCY_BY_GENERATED = {
+  eur: "EUR",
+  usd: "USD",
+} as const;
+
+type PublicCurrencyByGenerated = typeof PUBLIC_CURRENCY_BY_GENERATED;
+type GeneratedCurrencyByPublic = {
+  [Key in keyof PublicCurrencyByGenerated as PublicCurrencyByGenerated[Key]]: Key;
+};
+
+const GENERATED_CURRENCY_BY_PUBLIC: GeneratedCurrencyByPublic = {
+  EUR: "eur",
+  USD: "usd",
+};
+```
+
+The derived type requires `EUR: "eur"` and `USD: "usd"`; swapping those values or omitting a key fails typechecking. Adding a new pair to the forward map requires updating the reverse map. Run the project's typecheck command; transpilation alone may not check exhaustiveness.
 
 ## Keep Types Maintainable
 
