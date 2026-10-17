@@ -96,7 +96,8 @@ run_install() {
 
 run_install_from_stdin() {
   OUTPUT="$(PATH="$TEST_PATH" HOME="$FAKE_HOME" KAMAAL_SUPER_MIND_DIR="$INSTALL_DIR" \
-    MOCK_CURL_COMMON="$ROOT_DIR/lib/common.sh" bash -s -- "$@" <"$INSTALL_SCRIPT" 2>&1)"
+    MOCK_CURL_COMMON="$ROOT_DIR/lib/common.sh" MOCK_CURL_CURSOR_HOOKS="$ROOT_DIR/lib/cursor_hooks.py" \
+    bash -s -- "$@" <"$INSTALL_SCRIPT" 2>&1)"
   EXIT_CODE=$?
 }
 
@@ -299,6 +300,68 @@ test_cursor_creates_fresh_symlink() {
   [[ -L "$link" ]] || fail "expected $link to be a symlink"
   [[ "$(readlink "$link")" == "$INSTALL_DIR" ]] || fail "expected $link to point at $INSTALL_DIR"
   assert_contains "$OUTPUT" "installed for Cursor"
+}
+
+test_cursor_agent_cli_alone_is_detected_and_receives_native_hooks() {
+  link_mock git
+  ln -s "$MOCKS_DIR/cursor" "$MOCK_BIN/cursor-agent"
+  run_install
+
+  assert_exit_code 0
+  assert_contains "$(cat "$FAKE_HOME/.cursor/hooks.json")" 'beforeSubmitPrompt'
+  assert_contains "$(cat "$FAKE_HOME/.cursor/hooks.json")" 'duplication_review.py'
+  [[ -L "$FAKE_HOME/.cursor/plugins/local/kamaal-super-mind" ]] || fail "expected Cursor plugin symlink"
+}
+
+test_cursor_native_hooks_preserve_existing_hooks_on_reinstall() {
+  link_mock git
+  link_mock cursor
+  mkdir -p "$FAKE_HOME/.cursor"
+  printf '%s\n' '{"version":1,"hooks":{"stop":[{"command":"other-hook"}]}}' >"$FAKE_HOME/.cursor/hooks.json"
+  run_install
+  assert_exit_code 0
+  run_install
+
+  assert_exit_code 0
+  local config
+  config="$(cat "$FAKE_HOME/.cursor/hooks.json")"
+  assert_contains "$config" 'other-hook'
+  [[ "$(python3 -c 'import json,sys; print(len(json.load(open(sys.argv[1]))["hooks"]["stop"]))' "$FAKE_HOME/.cursor/hooks.json")" == 2 ]] \
+    || fail "expected one existing hook and one managed stop hook"
+}
+
+test_cursor_malformed_hooks_configuration_is_not_overwritten() {
+  link_mock git
+  link_mock cursor
+  mkdir -p "$FAKE_HOME/.cursor"
+  printf '%s\n' '{invalid' >"$FAKE_HOME/.cursor/hooks.json"
+  run_install
+
+  assert_exit_code 1
+  assert_contains "$OUTPUT" 'Cursor hooks configuration was not changed'
+  [[ "$(cat "$FAKE_HOME/.cursor/hooks.json")" == '{invalid' ]] || fail "expected original configuration"
+}
+
+test_cursor_stdin_install_loads_native_hook_helper() {
+  link_mock git
+  link_mock cursor
+  link_mock curl
+  run_install_from_stdin
+
+  assert_exit_code 0
+  assert_contains "$(cat "$FAKE_HOME/.cursor/hooks.json")" 'duplication_review.py'
+}
+
+test_missing_python_fails_before_cloning() {
+  link_mock git
+  link_mock codex
+  ln -s /bin/bash "$MOCK_BIN/bash"
+  TEST_PATH="$MOCK_BIN"
+  run_install
+
+  assert_exit_code 1
+  assert_contains "$OUTPUT" 'Python 3.9 or newer'
+  assert_log_not_contains 'git clone'
 }
 
 test_cursor_replaces_existing_symlink() {

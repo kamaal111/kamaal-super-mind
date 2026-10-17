@@ -1,4 +1,4 @@
 interface:
-  display_name: "Refactor PR Duplication"
-  short_description: "Find and refactor duplicated logic in a PR"
-  default_prompt: "Use $refactor-pr-duplication to check this PR against the codebase and refactor duplicated logic into shared implementations."
+  display_name: "Refactor Duplication"
+  short_description: "Find and refactor duplicated task or PR logic"
+  default_prompt: "Use $refactor-pr-duplication to review this task's changes or the specified PR against the codebase and refactor duplicated logic into shared implementations."

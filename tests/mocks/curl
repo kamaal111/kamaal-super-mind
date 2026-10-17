@@ -8,6 +8,10 @@ for argument in "$@"; do
     cat "$MOCK_CURL_COMMON"
     exit 0
   fi
+  if [[ "$argument" == "https://raw.githubusercontent.com/kamaal111/kamaal-super-mind/main/lib/cursor_hooks.py" ]]; then
+    cat "$MOCK_CURL_CURSOR_HOOKS"
+    exit 0
+  fi
 done
 
 exit 1

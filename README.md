@@ -7,6 +7,9 @@ done.
 
 ## Install
 
+Local hooks require Git and Python 3.9 or newer on macOS or Linux. Runtime
+scripts use only the Python standard library; uv is for development checks.
+
 Copy and paste this single command into Terminal:
 
 ```bash
@@ -31,6 +34,57 @@ Use $software-testing to add tests for this change.
 
 In Claude Code, plugin skills are namespaced, so invoke them as
 `/kamaal-super-mind:software-testing` or ask Claude to use the skill by name.
+
+## Automatic Duplication Review
+
+The plugin includes a completion hook that asks the current agent to use
+`refactor-pr-duplication` after implementing your request. A skill describes
+how to do the review; a hook decides when to request it. No separate reviewer
+agent is created.
+
+The hook runs when the agent finishes a response cycle, which may include
+many edits, commands, and tests. It compares repository state with a baseline
+captured when you submitted your request. Changed code gets one review that
+searches the codebase for equivalent logic, reuses or extracts shared code
+where worthwhile, and runs the required checks. Local changes work without
+a PR; PR reviews retain their existing workflow. The agent skips the review
+when implementation is incomplete, blocked, awaiting input, or already
+reviewed. Unchanged repositories do not trigger a follow-up. You may see an
+automatic follow-up message before the agent reports its review results.
+
+The hook uses `Stop` in Codex and Claude Code and native `stop` in Cursor.
+These are end-of-turn events; closing an app is not a reliable way to start
+a code review. The review's own changes cannot trigger another review for
+the same request. A new user request starts a new cycle. Automatic review
+does not authorize commits, pushes, or publication.
+
+- **Codex:** hooks are bundled with the plugin. Review and trust their
+  definitions before use (`/hooks` in the CLI); installation alone does not
+  trust them. Changed hook definitions may require another trust review.
+- **Claude Code:** hooks are bundled with the plugin. Start a new session
+  after installing or updating.
+- **Cursor desktop and `cursor-agent`:** the installer merges native entries
+  into `~/.cursor/hooks.json`, preserving other hooks and settings. It does
+  not also register plugin hooks, avoiding duplicate registration and the
+  CLI's plugin discovery gap. Invalid or symlinked hook configuration is
+  preserved and reported as an error for manual management.
+
+Hooks are enabled by default in local sessions. To disable this review,
+launch your tool with `KAMAAL_SUPER_MIND_DUPLICATION_REVIEW=0` in its
+environment, or disable its entries through the tool's hook controls.
+Start a new request after enabling hooks so a baseline can be captured.
+Missing baselines, hook errors, and interruptions do not force a review.
+Local state stores hashes, commit IDs, and path names under
+`${XDG_CACHE_HOME:-~/.cache}/kamaal-super-mind/hooks`; it stores no file
+contents and can be deleted when the tools are closed.
+
+This integration targets local desktop and CLI sessions. Hosted agents are
+not covered. Codex currently requires manual/local distribution for plugins
+with lifecycle hooks; they are not eligible for its public plugin directory.
+See the official [Codex hooks](https://learn.chatgpt.com/docs/hooks),
+[Codex plugin packaging](https://developers.openai.com/plugins/build/plugins),
+[Claude Code hooks](https://code.claude.com/docs/en/hooks), and
+[Cursor hooks](https://cursor.com/docs/hooks) documentation.
 
 ## Update
 
@@ -63,8 +117,9 @@ curl -fsSL https://raw.githubusercontent.com/kamaal111/kamaal-super-mind/main/un
 
 This removes the marketplace registration and installed plugin from Codex and
 Claude Code, the Cursor symlink and the `~/.cursor/skills` skill symlinks, and
-deletes the `~/.kamaal-super-mind` checkout. It is safe to run even if only
-some of Codex, Claude Code, or Cursor were ever installed.
+the native Cursor hook entries owned by this installation, then deletes the
+`~/.kamaal-super-mind` checkout. Other Cursor hooks are preserved. It is safe
+to run even if only some of Codex, Claude Code, or Cursor were ever installed.
 
 ## Development
 
@@ -89,6 +144,15 @@ with pytest. To run only the Python tests, use `uv run --locked pytest tests`.
 all three checks and is the same command used by CI on pushes and pull
 requests. Agents must follow the verification requirements in `AGENTS.md`.
 
+For release smoke tests, use a scratch repository and a new conversation in
+Codex desktop and CLI, Claude Code, Cursor desktop, and `cursor-agent`.
+Record each tested version. Request an implementation that duplicates an
+existing helper: expect one review follow-up, consolidation, and verification.
+Ask a question afterward: expect no review follow-up. Request another code
+change: expect one new review. Trust Codex hooks before testing and confirm
+the review's own edits do not produce another follow-up. Automated tests
+exercise the hook commands and JSON protocols without opening live chats.
+
 ## Included Skills
 
 - `production-engineering` — shared implementation, verification, and safety guidance
@@ -98,7 +162,7 @@ requests. Agents must follow the verification requirements in `AGENTS.md`.
 - `commit` — inspect and commit pending work with Git and GitButler routing
 - `resolve-merge-conflicts` — resolve merge/rebase conflicts in place, non-destructively, for user review
 - `pull-request` — single-commit PRs with titles and descriptions kept in sync
-- `refactor-pr-duplication` — check PR logic across the codebase and consolidate duplicates into shared implementations
+- `refactor-pr-duplication` — review completed local task changes or PR logic and consolidate duplicates into shared implementations
 - `monitor-pr` — explicitly requested PR monitoring, failure fixes, and pushes until checks pass
 - `dependency-upgrades` — safe dependency upgrades
 - `api-integration-tests` — real endpoint and persistence coverage

@@ -28,6 +28,7 @@ if [[ "${1:-}" == "--dry-run" ]]; then
     "$MARKETPLACE_NAME" "$PLUGIN_NAME" "$MARKETPLACE_NAME"
   printf 'Would link %s into Cursor'\''s local plugin directory.\n' "$PLUGIN_NAME"
   printf 'Would link each skill into ~/.cursor/skills as a cursor-agent CLI workaround.\n'
+  printf 'Would merge automatic duplication review hooks into ~/.cursor/hooks.json.\n'
   exit 0
 fi
 
@@ -40,6 +41,11 @@ detect_harnesses
 
 if [[ "$have_codex" -eq 0 && "$have_claude" -eq 0 && "$have_cursor" -eq 0 ]]; then
   printf 'Error: install Codex, Claude Code, or Cursor before installing Kamaal Super Mind.\n' >&2
+  exit 1
+fi
+
+if ! command -v python3 >/dev/null 2>&1 || ! python3 -c 'import sys; sys.exit(sys.version_info < (3, 9))'; then
+  printf 'Error: Python 3.9 or newer is required for the duplication review hooks.\n' >&2
   exit 1
 fi
 
@@ -89,6 +95,7 @@ if [[ "$have_codex" -eq 1 ]]; then
   codex plugin add "$PLUGIN_NAME@$MARKETPLACE_NAME"
 
   printf 'Kamaal Super Mind is installed for Codex. Start a new Codex task to use it.\n'
+  printf 'Review and trust the duplication review hooks in Codex (/hooks in the CLI).\n'
 fi
 
 if [[ "$have_claude" -eq 1 ]]; then
@@ -110,6 +117,8 @@ if [[ "$have_claude" -eq 1 ]]; then
 fi
 
 if [[ "$have_cursor" -eq 1 ]]; then
+  configure_cursor_hooks install
+
   # Cursor discovers plugins under ~/.cursor/plugins/local with no
   # marketplace/install step, so a symlink to the checkout is enough.
   cursor_plugin_link="$HOME/.cursor/plugins/local/$PLUGIN_NAME"

@@ -1,6 +1,6 @@
 {
   "name": "kamaal-super-mind",
-  "version": "0.1.0+codex.20261015193300",
+  "version": "0.1.0+codex.20261017150505",
   "description": "Reusable production engineering guidance for Codex.",
   "author": {
     "name": "Kamaal Farah",
@@ -10,6 +10,7 @@
   "repository": "https://github.com/kamaal111/kamaal-super-mind",
   "license": "MIT",
   "skills": "./skills/",
+  "hooks": "./hooks/codex.json",
   "interface": {
     "displayName": "Kamaal Super Mind",
     "shortDescription": "Build and verify production software safely.",

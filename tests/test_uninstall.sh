@@ -79,7 +79,8 @@ run_uninstall() {
 
 run_uninstall_from_stdin() {
   OUTPUT="$(PATH="$TEST_PATH" HOME="$FAKE_HOME" KAMAAL_SUPER_MIND_DIR="$INSTALL_DIR" \
-    MOCK_CURL_COMMON="$ROOT_DIR/lib/common.sh" bash -s -- "$@" <"$UNINSTALL_SCRIPT" 2>&1)"
+    MOCK_CURL_COMMON="$ROOT_DIR/lib/common.sh" MOCK_CURL_CURSOR_HOOKS="$ROOT_DIR/lib/cursor_hooks.py" \
+    bash -s -- "$@" <"$UNINSTALL_SCRIPT" 2>&1)"
   EXIT_CODE=$?
 }
 
@@ -197,6 +198,41 @@ test_cursor_removes_plugin_symlink() {
   [[ ! -e "$FAKE_HOME/.cursor/plugins/local/kamaal-super-mind" ]] \
     || fail "expected the Cursor plugin symlink to be removed"
   assert_contains "$OUTPUT" "uninstalled from Cursor"
+}
+
+test_cursor_uninstall_removes_only_owned_native_hooks() {
+  link_mock cursor
+  mkdir -p "$INSTALL_DIR/.git" "$FAKE_HOME/.cursor"
+  printf '%s\n' '{"version":1,"hooks":{"stop":[{"command":"other-hook"}]}}' >"$FAKE_HOME/.cursor/hooks.json"
+  HOME="$FAKE_HOME" python3 "$ROOT_DIR/lib/cursor_hooks.py" install "$INSTALL_DIR"
+  run_uninstall
+
+  assert_exit_code 0
+  local config
+  config="$(cat "$FAKE_HOME/.cursor/hooks.json")"
+  assert_contains "$config" 'other-hook'
+  [[ "$config" != *'duplication_review.py'* ]] || fail "expected managed hook to be removed"
+}
+
+test_cursor_invalid_hooks_preserve_checkout_and_configuration() {
+  link_mock cursor
+  mkdir -p "$INSTALL_DIR/.git" "$FAKE_HOME/.cursor"
+  printf '%s\n' '{invalid' >"$FAKE_HOME/.cursor/hooks.json"
+  run_uninstall
+
+  assert_exit_code 1
+  [[ -d "$INSTALL_DIR/.git" ]] || fail "expected checkout to remain after configuration failure"
+  [[ "$(cat "$FAKE_HOME/.cursor/hooks.json")" == '{invalid' ]] || fail "expected original configuration"
+}
+
+test_cursor_stdin_uninstall_removes_hooks_after_checkout_was_deleted() {
+  link_mock cursor
+  link_mock curl
+  HOME="$FAKE_HOME" python3 "$ROOT_DIR/lib/cursor_hooks.py" install "$INSTALL_DIR"
+  run_uninstall_from_stdin
+
+  assert_exit_code 0
+  [[ "$(cat "$FAKE_HOME/.cursor/hooks.json")" != *'duplication_review.py'* ]] || fail "expected managed hook removal"
 }
 
 test_cursor_missing_plugin_symlink_is_a_no_op() {

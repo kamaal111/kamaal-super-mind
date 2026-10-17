@@ -14,7 +14,7 @@ detect_harnesses() {
   have_cursor=0
   command -v codex >/dev/null 2>&1 && have_codex=1
   command -v claude >/dev/null 2>&1 && have_claude=1
-  { command -v cursor >/dev/null 2>&1 || [[ -d "$HOME/.cursor" ]]; } && have_cursor=1
+  { command -v cursor >/dev/null 2>&1 || command -v cursor-agent >/dev/null 2>&1 || [[ -d "$HOME/.cursor" ]]; } && have_cursor=1
   return 0
 }
 
@@ -39,4 +39,34 @@ remove_symlink_if_present() {
     error_not_managed "$path" "symlink"
   fi
   return 0
+}
+
+# The installed helper is also available when these scripts are piped to bash.
+# Recover it for uninstalling native hooks if the checkout was already deleted.
+configure_cursor_hooks() {
+  local action="$1" helper="$INSTALL_DIRECTORY/lib/cursor_hooks.py"
+  local downloaded="" result=0
+  if [[ "$action" == "uninstall" && ! -e "$HOME/.cursor/hooks.json" && ! -L "$HOME/.cursor/hooks.json" ]]; then
+    return 0
+  fi
+  if ! command -v python3 >/dev/null 2>&1; then
+    printf 'Error: python3 is required to manage Cursor hooks; configuration was preserved.\n' >&2
+    return 1
+  fi
+  if [[ ! -f "$helper" && -n "$SCRIPT_SOURCE" && -f "$SCRIPT_DIR/lib/cursor_hooks.py" ]]; then
+    helper="$SCRIPT_DIR/lib/cursor_hooks.py"
+  fi
+  if [[ ! -f "$helper" ]]; then
+    downloaded="$(mktemp "${TMPDIR:-/tmp}/kamaal-super-mind-cursor-hooks.XXXXXX")" || return 1
+    if ! curl --fail --silent --show-error --location \
+      "https://raw.githubusercontent.com/kamaal111/kamaal-super-mind/main/lib/cursor_hooks.py" >"$downloaded"; then
+      rm -f "$downloaded"
+      printf 'Error: could not load the Cursor hooks configuration helper.\n' >&2
+      return 1
+    fi
+    helper="$downloaded"
+  fi
+  python3 "$helper" "$action" "$INSTALL_DIRECTORY" || result=$?
+  [[ -z "$downloaded" ]] || rm -f "$downloaded"
+  return "$result"
 }

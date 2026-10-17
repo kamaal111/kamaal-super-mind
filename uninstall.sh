@@ -26,6 +26,7 @@ if [[ "${1:-}" == "--dry-run" ]]; then
   printf 'Would remove the %s marketplace and plugin from Codex and/or Claude Code.\n' "$MARKETPLACE_NAME"
   printf 'Would remove %s from Cursor'\''s local plugin directory.\n' "$PLUGIN_NAME"
   printf 'Would remove each skill symlink from ~/.cursor/skills.\n'
+  printf "Would remove only this installation's hooks from ~/.cursor/hooks.json.\n"
   printf 'Would delete %s.\n' "$INSTALL_DIRECTORY"
   exit 0
 fi
@@ -52,6 +53,8 @@ if [[ "$have_claude" -eq 1 ]]; then
 fi
 
 if [[ "$have_cursor" -eq 1 ]]; then
+  configure_cursor_hooks uninstall
+
   remove_symlink_if_present "$HOME/.cursor/plugins/local/$PLUGIN_NAME"
 
   # Matched by target path, so this works even if the checkout is already gone.
