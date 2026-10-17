@@ -12,6 +12,7 @@ import sys
 from pathlib import Path
 
 MARKER = "[kamaal-super-mind:duplication-review:v1]"
+REVIEW_NOTICE = "Checking whether an automatic duplication review is needed."
 SKILL = Path(__file__).resolve().parents[1] / "skills/refactor-pr-duplication/SKILL.md"
 
 
@@ -96,6 +97,7 @@ def review_prompt(changed):
         for root, baseline in changed.items()
     }
     return (
+        f"{REVIEW_NOTICE}\n"
         f"{MARKER}\n"
         "Check whether the implementation requested by the user is completed. "
         "If this turn is planning, answering a question, awaiting user input or approval, "
@@ -141,7 +143,11 @@ def handle(payload, host):
     if event not in (prompt_event, stop_event):
         return allowed
     prompt = payload.get("prompt", "")
-    if event == prompt_event and isinstance(prompt, str) and prompt.startswith(MARKER):
+    if (
+        event == prompt_event
+        and isinstance(prompt, str)
+        and prompt.startswith((MARKER, f"{REVIEW_NOTICE}\n{MARKER}"))
+    ):
         return allowed
     if event == stop_event and (
         payload.get("status") in ("aborted", "error")

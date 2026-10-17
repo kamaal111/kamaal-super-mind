@@ -14,6 +14,11 @@ Follow the repository's established Java style first. Use these rules where the 
 - Prefer unmodifiable collection snapshots when ownership requires them, using APIs supported by the project's Java release. An unmodifiable view can still reflect changes to its backing collection, and shallow copies still share mutable elements.
 - Local mutation of newly created, unshared values is acceptable when clearer or more efficient. Do not replace straightforward loops with streams solely for style, or mutate external state from stream callbacks.
 
+## Collection Performance
+
+- Prefer a single stream pipeline such as `items.stream().filter(predicate).map(mapper).toList()` over collecting filtered items and starting another traversal solely to map them, using terminal APIs supported by the project's Java release. Stateless intermediate stages are lazy and can be fused into one traversal; stateful stages such as `sorted` can require buffering.
+- Keep stream callbacks pure and non-interfering. A straightforward loop with a locally owned result is also appropriate; streams are not inherently faster, and parallel streams need workload evidence rather than being a default optimization.
+
 ## Sealed Types And Exhaustive Handling
 
 - Prefer compile-time guarantees over runtime exceptions for missing cases. Use an `enum` for a fixed set of simple values, and a `sealed interface` or abstract `sealed class` with explicit permitted subtypes for a closed domain whose variants carry different data or behavior.

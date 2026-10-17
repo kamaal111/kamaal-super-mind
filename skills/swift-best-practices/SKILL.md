@@ -14,6 +14,11 @@ Follow the repository's established Swift style first. Use these rules where the
 - Keep transformation logic pure: pass inputs explicitly and avoid writes to captured variables, globals, singletons, or shared state. Keep intentional UI, actor, persistence, and other state changes in operations with an explicit owner and contract.
 - Local `var` bindings and mutation of newly created, unshared values are acceptable when they improve clarity or performance. Use `mutating` methods or `inout` when mutation is the deliberate API contract, rather than as a shortcut for returning a transformation.
 
+## Collection Performance
+
+- Prefer `compactMap` when one closure can filter and transform each element, or a `.lazy.filter(...).map(...)` pipeline consumed at the boundary that needs its result, over eager `filter(...).map(...)` that creates an unused intermediate array. A straightforward loop with a locally owned result is also appropriate.
+- Keep transformation closures pure and preserve ordering, error behavior, and evaluation semantics when combining passes or deferring work. Do not assume laziness caches results; repeated traversal can repeat computation. Measure before claiming a speedup or introducing a more complex implementation.
+
 ## Guard Statements
 
 - Prefer one independent condition per `guard`. Separate guards make exit points easier to read, debug, and breakpoint.

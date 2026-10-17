@@ -22,6 +22,14 @@ Use this skill as a thin baseline for safe repository work. It deliberately does
 - Local mutation is acceptable when confined to values created and owned by the function, with no externally observable mutation, and it improves clarity or performance. A local reference to caller-owned data is not local ownership.
 - Prefer straightforward composition over elaborate functional abstractions. Do not force loops into `map` or `reduce`, add an FP library, or copy large structures mechanically merely to appear functional.
 
+## Keep Performance In Mind
+
+- Consider traversal count, intermediate allocations, repeated computation, and algorithmic complexity while writing code. Prefer a clear single-pass transformation over eager filtering followed by mapping when the intermediate collection has no independent use.
+- Judge the actual API's evaluation model, not the number of chained calls. Prefer idiomatic lazy pipelines when they avoid intermediate collections: Rust iterator `filter`/`map` adapters and Java stream `filter`/`map` stages can process elements in one traversal when consumed. Do not collect between stages unnecessarily; operations such as sorting may still require buffering.
+- Where collection operations are eager, use an idiomatic combined operation or a straightforward loop with a locally owned result. Do not force a complicated `reduce`, introduce a dependency, or mutate caller-owned data merely to combine passes.
+- Preserve ordering, short-circuiting, error behavior, and callback semantics. Combining eager passes interleaves predicates and transformations, so only do so when that preserves the contract; keep transformation callbacks pure.
+- Prefer efficient defaults without requiring a benchmark for every loop. Measure representative workloads before claiming a speedup or accepting a more complex optimization; a single pass does not automatically make an implementation faster.
+
 ## Preserve Correctness
 
 - Identify the contract and owner of the behavior before changing it.

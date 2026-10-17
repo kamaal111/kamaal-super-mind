@@ -92,6 +92,10 @@ class DuplicationReviewTests(unittest.TestCase):
         self.source.write_text("value = 4\n")
 
         self.assertEqual(review["decision"], "block")
+        self.assertEqual(
+            review["reason"].splitlines()[0],
+            "Checking whether an automatic duplication review is needed.",
+        )
         self.assertIn("refactor-pr-duplication/SKILL.md", review["reason"])
         self.assertIn("completed", review["reason"])
         self.assertEqual(self.invoke("Stop", stop_hook_active=True), {})
@@ -113,6 +117,18 @@ class DuplicationReviewTests(unittest.TestCase):
         self.source.write_text("value = 3\n")
 
         self.assertEqual(self.invoke("Stop", host="claude"), {})
+
+    def test_legacy_marker_first_review_prompt_preserves_guard(self):
+        self.invoke("UserPromptSubmit")
+        self.source.write_text("value = 2\n")
+        self.invoke("Stop")
+        self.invoke(
+            "UserPromptSubmit",
+            prompt="[kamaal-super-mind:duplication-review:v1]\nReview the changes.",
+        )
+        self.source.write_text("value = 3\n")
+
+        self.assertEqual(self.invoke("Stop"), {})
 
     def test_committed_changes_trigger_review_with_clean_worktree(self):
         initial = self.git("rev-parse", "HEAD")

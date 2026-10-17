@@ -52,6 +52,12 @@ when implementation is incomplete, blocked, awaiting input, or already
 reviewed. Unchanged repositories do not trigger a follow-up. You may see an
 automatic follow-up message before the agent reports its review results.
 
+In Codex, this follow-up may appear under **Blocked by hook**, followed by
+“Checking whether an automatic duplication review is needed.” The label
+means the hook is asking the agent to continue before finishing; it does
+not mean a command was denied or user approval is needed. Codex controls
+that label. The agent can still skip the review when no code changed.
+
 The hook uses `Stop` in Codex and Claude Code and native `stop` in Cursor.
 These are end-of-turn events; closing an app is not a reliable way to start
 a code review. The review's own changes cannot trigger another review for

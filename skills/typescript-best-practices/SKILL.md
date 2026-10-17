@@ -14,6 +14,11 @@ Follow the repository's established TypeScript style first. Use these rules wher
 - Use non-mutating collection operations or copy before sorting or updating, respecting the configured runtime target. A shallow copy still shares nested objects; do not mutate them through the copy.
 - Keep side effects in explicit orchestration or state-owner operations. Local mutation of newly created, unshared values is acceptable when clearer or more efficient; do not force loops into `reduce` or introduce FP abstractions solely for style.
 
+## Collection Performance
+
+- Array `filter` and `map` are eager: `items.filter(predicate).map(mapper)` traverses the filtered items again and allocates an intermediate array. Prefer a clear `for...of` loop that tests each item and appends the transformed matches to a locally owned result when that intermediate array has no independent use.
+- Keep inputs read-only and callbacks pure; combining passes interleaves filtering and mapping, so preserve observable behavior. Do not force an elaborate `reduce` or allocate a temporary array per item merely to express the operation as a chain. Use lazy iterator APIs only when supported by the configured runtime, and materialize the result at the boundary that needs it.
+
 ## Preserve Runtime And Static Type Flow
 
 - Treat external and unknown values as `unknown` until validated with the project's runtime-validation mechanism. Static types do not validate untrusted data at runtime.
