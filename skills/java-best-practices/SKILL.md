@@ -1,11 +1,18 @@
 ---
 name: java-best-practices
-description: Use when writing, editing, or refactoring Java source that models optional values, closed state or result hierarchies, or exhaustive case handling.
+description: Write, edit, or refactor Java source with immutable data, pure transformations, explicit optional values, closed state or result hierarchies, and exhaustive case handling.
 ---
 
 # Java Best Practices
 
 Follow the repository's established Java style first. Use these rules where the local codebase has no stronger convention.
+
+## Prefer Immutable Data And Pure Transformations
+
+- Prefer immutable data and functions that return results rather than modifying arguments, instance fields, captured state, or static shared state. Keep I/O and intentional state changes in operations with an explicit owner and contract.
+- Use records where supported and suitable, and `final` bindings where they clarify ownership. Neither records nor `final` make referenced objects deeply immutable; protect mutable components and do not modify nested caller-owned data.
+- Prefer unmodifiable collection snapshots when ownership requires them, using APIs supported by the project's Java release. An unmodifiable view can still reflect changes to its backing collection, and shallow copies still share mutable elements.
+- Local mutation of newly created, unshared values is acceptable when clearer or more efficient. Do not replace straightforward loops with streams solely for style, or mutate external state from stream callbacks.
 
 ## Sealed Types And Exhaustive Handling
 

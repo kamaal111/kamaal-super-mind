@@ -25,6 +25,7 @@ Keep backend changes aligned with layered API design, explicit contracts, bounda
 - Delegate business orchestration to services and persistence concerns to repositories or equivalent data-access layers.
 - Treat non-trivial response mapping as another validation boundary before returning it.
 - Prefer context-injected dependencies over global singletons.
+- Keep business calculations and transformations pure: accept explicit inputs and return results without mutating request data, caller-owned objects, or shared state. Let orchestration and repository operations own intentional I/O and state changes through explicit contracts.
 
 ## Define Contracts Deliberately
 

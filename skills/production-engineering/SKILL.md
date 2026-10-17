@@ -14,6 +14,14 @@ Use this skill as a thin baseline for safe repository work. It deliberately does
 3. Prefer repository-provided commands and the project's selected package managers. Do not start long-running services or background processes unless the user explicitly asks and the repository provides an approved workflow.
 4. Match nearby naming, structure, validation, error handling, and test style unless there is a concrete reason to introduce a new pattern.
 
+## Prefer Pure Functions And Immutable Data
+
+- Prefer pure functions for calculations, validation, and transformations: take explicit inputs and return results without changing caller-owned data or external state.
+- Treat parameters and their reachable data as read-only. Return new values instead of mutating arguments, including nested objects and collections.
+- Pass dependencies explicitly. Keep I/O and intentional state changes at clear boundaries with an explicit owner and contract; avoid hidden writes to globals, captured variables, or shared state from transformation logic.
+- Local mutation is acceptable when confined to values created and owned by the function, with no externally observable mutation, and it improves clarity or performance. A local reference to caller-owned data is not local ownership.
+- Prefer straightforward composition over elaborate functional abstractions. Do not force loops into `map` or `reduce`, add an FP library, or copy large structures mechanically merely to appear functional.
+
 ## Preserve Correctness
 
 - Identify the contract and owner of the behavior before changing it.
@@ -35,9 +43,9 @@ Load the relevant plugin skill instead of recreating its workflow:
 - `plan-mode` for implementation-ready plans that another agent can execute without prior context
 - `api-integration-tests` for endpoint integration coverage
 - `swift-snapshot-tests` for SwiftUI screen snapshot coverage
-- `swift-best-practices` for Swift implementation work, including exhaustive enum mappings and compile-time invariants
-- `typescript-best-practices` for TypeScript implementation work, including `never` exhaustiveness checks and total typed mappings
-- `java-best-practices` for Java optional values, sealed state or result hierarchies, and exhaustive switches
+- `swift-best-practices` for Swift implementation work, including immutable value transformations, exhaustive enum mappings, and compile-time invariants
+- `typescript-best-practices` for TypeScript implementation work, including read-only inputs, `never` exhaustiveness checks, and total typed mappings
+- `java-best-practices` for Java implementation work, including immutable data, optional values, sealed state or result hierarchies, and exhaustive switches
 - `backend` for backend-service work in any language or framework
 - `database` for schemas, migrations, queries, repositories, and user-scoped persistence
 - `logging` for successes, failures, and workflow milestones; its structured-logging reference covers queryable backend events and context propagation

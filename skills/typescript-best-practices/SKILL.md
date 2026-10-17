@@ -7,6 +7,13 @@ description: Write, edit, or refactor clear, resilient TypeScript source. Use wh
 
 Follow the repository's established TypeScript style first. Use these rules where the local codebase has no stronger convention.
 
+## Prefer Pure Transformations
+
+- Prefer pure functions that return new values. Treat parameters and nested data as read-only; do not mutate caller-owned objects or arrays, or write to captured, global, or shared state from transformation logic.
+- Use `readonly` properties and `ReadonlyArray<T>` or `readonly T[]` for input contracts where appropriate. `const` prevents rebinding but does not make an object immutable; `Readonly<T>` is shallow, so model nested read-only data deliberately.
+- Use non-mutating collection operations or copy before sorting or updating, respecting the configured runtime target. A shallow copy still shares nested objects; do not mutate them through the copy.
+- Keep side effects in explicit orchestration or state-owner operations. Local mutation of newly created, unshared values is acceptable when clearer or more efficient; do not force loops into `reduce` or introduce FP abstractions solely for style.
+
 ## Preserve Runtime And Static Type Flow
 
 - Treat external and unknown values as `unknown` until validated with the project's runtime-validation mechanism. Static types do not validate untrusted data at runtime.

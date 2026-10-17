@@ -7,6 +7,13 @@ description: Write, edit, or refactor clear and resilient Swift source. Use when
 
 Follow the repository's established Swift style first. Use these rules where the local codebase has no stronger convention.
 
+## Prefer Immutable Value Transformations
+
+- Prefer `let` bindings and value types for data. Return transformed values instead of changing caller-owned data with `inout`, reference-type properties, or shared storage.
+- A `let` reference does not make a class instance immutable, and a copied struct can still contain shared references. Do not mutate nested reference objects through an otherwise immutable or copied value.
+- Keep transformation logic pure: pass inputs explicitly and avoid writes to captured variables, globals, singletons, or shared state. Keep intentional UI, actor, persistence, and other state changes in operations with an explicit owner and contract.
+- Local `var` bindings and mutation of newly created, unshared values are acceptable when they improve clarity or performance. Use `mutating` methods or `inout` when mutation is the deliberate API contract, rather than as a shortcut for returning a transformation.
+
 ## Guard Statements
 
 - Prefer one independent condition per `guard`. Separate guards make exit points easier to read, debug, and breakpoint.
