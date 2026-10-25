@@ -106,8 +106,9 @@ unless the user asks to return to GitButler mode.
    but branch list
    ```
 
-2. Treat unassigned changes and changes assigned to another branch as someone
-   else's work until the user confirms otherwise. Never silently discard them.
+2. Preserve unassigned changes and changes assigned to another branch. An
+   explicit request to commit pending work includes coherent unassigned work;
+   ask only when scope or branch ownership is genuinely ambiguous. Never discard it.
 3. Prefer `but status --json` when structured output helps. Use
    `but <command> --help` when flags or behavior are uncertain—the installed
    GitButler version is authoritative.
@@ -122,14 +123,15 @@ unless the user asks to return to GitButler mode.
 
 ## Core Loop: Create, Assign, Commit
 
-Treat `but commit` and `git stash` as destructive operations. Run either only
-in an isolated worktree or when the user explicitly authorizes that exact
-operation.
+A commit request authorizes the resolved commit and creation of a missing
+task branch. Use the protected session-commit helper for positional changes;
+it preserves workspace content and coordinates cooperating commit processes.
+Do not request renewed permission solely because no branch is applied.
 
-Create a focused virtual branch, then route only its changes to that branch:
+Choose a focused virtual branch name, then commit only its selected changes.
+The helper creates the branch when it does not exist:
 
 ```bash
-but branch new feature-short-description
 but status -fv
 scripts/commit-selected.sh feature-short-description message.txt <change-id>...
 ```

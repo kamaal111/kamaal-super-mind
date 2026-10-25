@@ -46,8 +46,10 @@ publish, or include unrelated changes.
      Use `but branch list` to resolve the target.
      Follow an explicitly named branch or commit. Otherwise, use the latest
      real commit on the only applied branch. If multiple branches or possible
-     targets remain, ask the user which one to use. Keep unassigned changes
-     out unless the user clearly includes them.
+     targets remain, ask the user which one to use. If no branch is applied,
+     choose a task-specific name; the protected helper creates it. An explicit
+     request to commit pending work includes coherent unassigned changes.
+     Preserve unrelated changes and ask only when scope is ambiguous.
 
 3. Understand the resolved final diff. Check that it is one coherent change
    and that the tests or checks relevant to it are known. Do not rewrite or
