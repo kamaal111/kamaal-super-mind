@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-HELPER = ROOT / "skills/gitbutler-session-commit/scripts/commit-selected.sh"
+HELPER = ROOT / "skills/commit/scripts/commit-selected.sh"
 
 
 class GuardedCommitTests(unittest.TestCase):

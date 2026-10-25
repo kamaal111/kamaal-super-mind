@@ -76,7 +76,7 @@ Each agent works only in its lane:
 but status
 # make changes only in the assigned scope
 but status -fv
-# Use gitbutler-session-commit's commit-selected.sh helper.
+# Use commit's scripts/commit-selected.sh helper.
 # Pass: agent-auth-session message.txt <change-id>...
 but show agent-auth-session
 ```
@@ -90,8 +90,8 @@ parallel only when their scopes do not overlap.
 Before committing, re-run `but status`. If another agent's
 changes are present, commit only the current lane's IDs with the installed
 GitButler version's supported selection interface. For the positional
-`CHANGES` interface, use `commit-selected.sh`; do not assume `but stage` or
-`--only` is available.
+`CHANGES` interface, use `commit`'s `scripts/commit-selected.sh`; do not
+assume `but stage` or `--only` is available.
 
 ## Handoffs And Review
 

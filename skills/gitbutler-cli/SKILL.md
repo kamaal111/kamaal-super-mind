@@ -118,14 +118,16 @@ unless the user asks to return to GitButler mode.
    flags exist. In versions where `but commit` accepts positional `CHANGES`,
    pass the exact file or hunk IDs from `but status -fv` to make the commit
    scope deterministic. Use
-   `scripts/commit-selected.sh <branch> <message-file> <change-id>...` when
-   this plugin's helper is available.
+   `../commit/scripts/commit-selected.sh <branch> <message-file> <change-id>...`
+   from the `commit` skill, resolving the path relative to this skill's
+   installed directory while staying in the target repository.
 
 ## Core Loop: Create, Assign, Commit
 
 A commit request authorizes the resolved commit and creation of a missing
-task branch. Use the protected session-commit helper for positional changes;
-it preserves workspace content and coordinates cooperating commit processes.
+task branch. Load `commit` for selected commits and its recovery guidance.
+Its protected helper preserves workspace content and coordinates cooperating
+commit processes for positional changes.
 Do not request renewed permission solely because no branch is applied.
 
 Choose a focused virtual branch name, then commit only its selected changes.
@@ -133,14 +135,14 @@ The helper creates the branch when it does not exist:
 
 ```bash
 but status -fv
-scripts/commit-selected.sh feature-short-description message.txt <change-id>...
+../commit/scripts/commit-selected.sh feature-short-description message.txt <change-id>...
 ```
 
 - `but status -fv` exposes short IDs for files or hunks. Pass only those IDs
   to the installed CLI's supported selection interface; never guess paths or
   rely on a stale staging command from another GitButler version.
-- The included `commit-selected.sh` validates the message and uses the current
-  positional-`CHANGES` interface. If `but commit --help` differs from that
+- The `commit` skill's `scripts/commit-selected.sh` validates the message and
+  uses the current positional-`CHANGES` interface. If `but commit --help` differs from that
   interface, stop and follow the installed help instead of adapting the helper
   by guesswork.
 - Inspect `but show <branch>` and `but diff` before committing. Run the

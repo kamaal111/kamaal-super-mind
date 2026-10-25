@@ -170,7 +170,7 @@ exercise the hook commands and JSON protocols without opening live chats.
 - `plan-mode` — concise, implementation-ready planning and agent handoffs
 - `git-commit-message` — Conventional Commit and pull-request writing
 - `reword-git-commit` — safely rewrite a commit message as a Conventional Commit from its diff
-- `commit` — inspect and commit pending work with Git and GitButler routing
+- `commit` — inspect and commit pending work with Git and protected GitButler commits
 - `resolve-merge-conflicts` — resolve merge/rebase conflicts in place, non-destructively, for user review
 - `pull-request` — single-commit PRs with titles and descriptions kept in sync
 - `refactor-pr-duplication` — review completed local task changes or PR logic and consolidate duplicates into shared implementations
@@ -178,7 +178,7 @@ exercise the hook commands and JSON protocols without opening live chats.
 - `dependency-upgrades` — safe dependency upgrades
 - `api-integration-tests` — real endpoint and persistence coverage
 - `swift-snapshot-tests` — SwiftUI snapshot test coverage for a given screen
-- `gitbutler-cli` and `gitbutler-session-commit` — GitButler virtual branches and session commits
+- `gitbutler-cli` — GitButler virtual branches and workspace operations
 - `gitbutler-multi-agent` — GitButler coordination for parallel agent work
 - `swift-best-practices` — Swift implementation
 - `typescript-best-practices` — clear, type-safe TypeScript implementation

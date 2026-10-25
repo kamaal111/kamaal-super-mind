@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Inspect and commit pending repository work, including changes made by another agent, using a precise message derived from the final diff and the user's intent. Use when the user says commit, `$commit`, `/commit`, asks to commit uncommitted changes, or provides commit-message guidance; detect GitButler workspaces and route changes to the correct virtual branch, asking for clarification when branch ownership is ambiguous.
+description: Inspect and commit pending repository work, including changes made by another agent, using a precise message derived from the final diff and the user's intent. Use for Git or GitButler commits, including session changes, when the user says commit, `$commit`, `/commit`, asks to commit uncommitted changes, or provides commit-message guidance; detect GitButler workspaces and route changes to the correct virtual branch, asking for clarification when branch ownership is ambiguous.
 ---
 
 # Commit Pending Work
@@ -40,8 +40,9 @@ publish, or include unrelated changes.
    - **Plain Git:** commit all pending work by default. If the user names
      files or a subset, commit only that scope. Stop if the scope contains
      credentials, private keys, generated secrets, or unrelated work.
-   - **GitButler:** after the marker check succeeds, load `gitbutler-cli` and
-     `gitbutler-session-commit`. If `but status` cannot open its database,
+   - **GitButler:** after the marker check succeeds, load `gitbutler-cli`.
+     Inspect `but status -fv`, `but diff`, and the Git diff to resolve the
+     intended file or hunk IDs. If `but status` cannot open its database,
      request permission to write `.git` and retry before considering setup.
      Use `but branch list` to resolve the target.
      Follow an explicitly named branch or commit. Otherwise, use the latest
@@ -49,7 +50,10 @@ publish, or include unrelated changes.
      targets remain, ask the user which one to use. If no branch is applied,
      choose a task-specific name; the protected helper creates it. An explicit
      request to commit pending work includes coherent unassigned changes.
-     Preserve unrelated changes and ask only when scope is ambiguous.
+     If a matching unapplied branch cannot be applied without overwriting
+     working files, create a separate task branch unless the user authorizes
+     a history operation. Preserve unrelated changes and ask only when scope
+     is ambiguous.
 
 3. Understand the resolved final diff. Check that it is one coherent change
    and that the tests or checks relevant to it are known. Do not rewrite or
@@ -64,7 +68,8 @@ publish, or include unrelated changes.
    `git-commit-message/scripts/validate-message.sh <message-file>` before
    applying it. Every physical line must be at most 72 characters unless the
    repository documents a stricter limit. Do not assume `git commit -m` wraps
-   paragraphs. Run the narrowest relevant checks when practical.
+   paragraphs. Run the relevant checks before committing code unless the
+   user explicitly accepts an unverified commit.
 
 6. Commit through the repository's mode:
 
@@ -73,14 +78,20 @@ publish, or include unrelated changes.
      commit. Do not call `git add` or `git commit` directly from this workflow.
    - GitButler: check `but commit --help`, then use the installed selection
      interface. With positional `CHANGES`, invoke
-     `gitbutler-session-commit/scripts/commit-selected.sh <branch>
-     <message-file> <change-id>...` so only the resolved IDs are committed.
+     `scripts/commit-selected.sh <branch> <message-file> <change-id>...`
+     so only the resolved IDs are committed. Do not bypass this helper for
+     the positional interface: it provides workspace backups and commit
+     coordination. Read [GitButler recovery](references/gitbutler-recovery.md)
+     before invoking it. If the installed CLI exposes a different interface,
+     follow its help while preserving explicit file or hunk scope.
 
    In GitButler, never use plain-Git commit, rebase, checkout, reset, or
    history-rewrite commands.
 
-7. Verify the created commit and confirm no requested changes remain. Report
-   the commit, branch, scope, message summary, and checks performed.
+7. Verify the created commit, stored message, and resulting diff; in
+   GitButler, also inspect `but status -fv`. Confirm no requested changes
+   remain. Report the commit, branch, scope, message summary, and checks
+   performed.
 
 ## Boundaries
 

@@ -4,7 +4,7 @@ set -euo pipefail
 
 repo_root=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 validator=$repo_root/skills/git-commit-message/scripts/validate-message.sh
-commit_selected=$repo_root/skills/gitbutler-session-commit/scripts/commit-selected.sh
+commit_selected=$repo_root/skills/commit/scripts/commit-selected.sh
 commit_plain_git=$repo_root/skills/commit/scripts/commit-plain-git.sh
 detector=$repo_root/skills/gitbutler-cli/scripts/detect-workspace-mode.sh
 fixtures=$repo_root/tests/fixtures
