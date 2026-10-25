@@ -71,7 +71,7 @@ Load the relevant plugin skill instead of recreating its workflow:
 - `resolve-merge-conflicts` for resolving merge, rebase, or cherry-pick conflicts in place without destructive Git commands
 - `commit` for inspecting and committing pending work with scope and branch safety
 - `pull-request` for opening or updating single-commit PRs and keeping their title and description synchronized with the commit message, excluding sign-off trailers
-- `refactor-pr-duplication` for reviewing completed task changes (including local work without a PR) or a specified PR against the codebase and consolidating duplicated logic into shared implementations; automatic completion hooks request this review once after implementation
+- `refactor-pr-duplication` for reviewing completed task changes (including local work without a PR) or a specified PR against the codebase and consolidating duplicated logic into shared implementations; automatic completion hooks request this review once after implementation. Treat it as a checkpoint, then continue any remaining authorized work, including requested PR monitoring; review gaps must not halt unaffected work
 - `monitor-pr` only when the user explicitly asks to monitor a PR, repair failing checks, and push fixes; never automatically after PR creation or updates
 - `gitbutler-cli`, `gitbutler-multi-agent`, or `gitbutler-session-commit` for GitButler work
 

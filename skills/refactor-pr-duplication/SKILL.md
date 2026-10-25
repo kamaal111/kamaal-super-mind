@@ -5,6 +5,16 @@ description: Review completed task changes or a specified PR for duplicated logi
 
 # Refactor Duplication
 
+## Continue The User's Task
+
+An automatic review is a checkpoint within the existing request. After reviewing
+or skipping, continue remaining authorized work, including PR monitoring and
+fixing checks when requested. Do not finish the user's task merely because the
+review is complete or ask again for permission already granted. If scope, tools,
+or verification prevent the review, report the gap and continue unaffected work.
+Keep uncertain changes untouched; a review limitation does not cancel the rest
+of the request.
+
 ## Establish The Scope
 
 - Use a PR the user specifies or the unique PR just created for this task.

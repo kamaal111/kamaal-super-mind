@@ -42,6 +42,11 @@ The plugin includes a completion hook that asks the current agent to use
 how to do the review; a hook decides when to request it. No separate reviewer
 agent is created.
 
+The review is a checkpoint within your request. After reviewing or skipping,
+the agent continues remaining authorized work, including PR monitoring and
+fixing checks when requested. Review limitations are reported without halting
+unaffected work. Completing the review does not complete the whole request.
+
 The hook runs when the agent finishes a response cycle, which may include
 many edits, commands, and tests. It compares repository state with a baseline
 captured when you submitted your request. Changed code gets one review that
